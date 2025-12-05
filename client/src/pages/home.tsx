@@ -47,20 +47,21 @@ export default function Home() {
           >
             <Button 
               size="lg"
-              className="relative group overflow-hidden bg-[#FFE500] text-black hover:bg-[#FFDD00] hover:text-black hover:scale-105 transition-all duration-300 text-lg font-bold px-10 py-7 rounded-none border-none uppercase tracking-wider transform -skew-x-12"
+              className="relative group overflow-visible bg-[#FFE500] text-black hover:bg-[#FFDD00] hover:text-black transition-all duration-300 text-lg font-bold px-10 py-7 rounded-none border-none uppercase tracking-wider transform -skew-x-12 shadow-[0_0_0_0_rgba(255,229,0,0)] hover:shadow-[0_0_30px_rgba(255,229,0,0.6)]"
               style={{ clipPath: "polygon(15% 0, 100% 0, 100% 70%, 85% 100%, 0 100%, 0 30%)" }}
             >
               <span className="relative z-10 transform skew-x-12 inline-block">Launch Terminal</span>
-              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+              <div className="absolute inset-0 bg-white/40 translate-y-full group-hover:translate-y-0 transition-transform duration-300 skew-x-12" />
             </Button>
             
             <Button 
               variant="outline"
               size="lg"
-              className="relative group overflow-hidden border border-[#FFE500]/50 text-[#FFE500] hover:bg-[#FFE500]/10 hover:text-[#FFE500] hover:border-[#FFE500] hover:scale-105 transition-all duration-300 text-lg font-bold px-10 py-7 rounded-none uppercase tracking-wider transform -skew-x-12 bg-transparent backdrop-blur-sm"
+              className="relative group overflow-visible border border-[#FFE500]/50 text-[#FFE500] hover:bg-[#FFE500]/5 hover:text-[#FFE500] hover:border-[#FFE500] transition-all duration-300 text-lg font-bold px-10 py-7 rounded-none uppercase tracking-wider transform -skew-x-12 bg-transparent backdrop-blur-sm shadow-[0_0_0_0_rgba(255,229,0,0)] hover:shadow-[0_0_30px_rgba(255,229,0,0.3)]"
               style={{ clipPath: "polygon(15% 0, 100% 0, 100% 70%, 85% 100%, 0 100%, 0 30%)" }}
             >
               <span className="relative z-10 transform skew-x-12 inline-block">Documentation</span>
+              <div className="absolute inset-0 bg-[#FFE500]/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300 skew-x-12" />
             </Button>
           </motion.div>
         </motion.div>
