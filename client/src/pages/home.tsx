@@ -10,19 +10,6 @@ export default function Home() {
       {/* Background Cursor Effect */}
       <FluxalCursor />
 
-      {/* Top Right Social Icon */}
-      <a 
-        href="https://twitter.com" 
-        target="_blank" 
-        rel="noreferrer"
-        className="absolute top-8 right-8 z-50 w-6 h-6 opacity-60 hover:opacity-100 transition-all duration-300 hover:scale-110 cursor-pointer"
-      >
-        {/* Using SVG for perfect transparency */}
-        <svg viewBox="0 0 24 24" aria-hidden="true" className="w-full h-full fill-white">
-          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-        </svg>
-      </a>
-
       {/* Static Background Glow */}
       <div className="absolute inset-0 pointer-events-none z-0">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#FFE500]/5 rounded-full blur-[120px]" />
@@ -77,6 +64,18 @@ export default function Home() {
             >
               <span className="relative z-10 transform skew-x-12 inline-block">Documentation</span>
             </Button>
+
+            <a 
+              href="https://twitter.com" 
+              target="_blank" 
+              rel="noreferrer"
+              className="relative group overflow-hidden flex items-center justify-center border border-[#FFE500]/50 text-[#FFE500] hover:bg-[#FFE500]/10 hover:text-[#FFE500] hover:border-[#FFE500] hover:scale-105 transition-all duration-300 w-[60px] h-[60px] rounded-none uppercase tracking-wider transform -skew-x-12 bg-transparent backdrop-blur-sm"
+              style={{ clipPath: "polygon(25% 0, 100% 0, 100% 70%, 75% 100%, 0 100%, 0 30%)" }}
+            >
+               <svg viewBox="0 0 24 24" aria-hidden="true" className="w-6 h-6 fill-current relative z-10 transform skew-x-12">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg>
+            </a>
           </motion.div>
         </motion.div>
       </div>
