@@ -25,26 +25,26 @@ export default function FluxalCursor() {
 
         app = TubesCursor(canvasRef.current, {
           tubes: {
-            colors: ["#FFE500", "#FFD700", "#FFA500"], // Electric Yellow, Gold, Orange
-            thickness: 6.0, // Doubled for more pop
-            length: 3.0, // Longer trails
-            velocity: 3.0, // Faster
-            fade: 0.04 // Slower fade for more presence
+            colors: ["#FFE500", "#FF8C00", "#FFFFFF"],
+            thickness: 3.0,
+            length: 2.2,
+            velocity: 2.5,
+            fade: 0.06
           },
           lights: {
-            intensity: 800, // Much brighter
-            colors: ["#FFE500", "#FFD700", "#FFA500"],
-            radius: 3.0
+            intensity: 420,
+            colors: ["#FFE500", "#FF8C00", "#FFFFFF"],
+            radius: 1.8
           },
           bloom: {
-            strength: 4.0, // Intense glow
-            threshold: 0.1, // Bloom on darker colors too
-            radius: 1.5
+            strength: 2.5,
+            threshold: 0.2,
+            radius: 1.1
           }
         });
 
         // Force set colors immediately to ensure no defaults leak through
-        const colors = ["#FFE500", "#FFD700", "#FFA500"];
+        const colors = ["#FFE500", "#FF8C00", "#FFFFFF"];
         app.tubes.setColors(colors);
         app.tubes.setLightsColors(colors);
 
