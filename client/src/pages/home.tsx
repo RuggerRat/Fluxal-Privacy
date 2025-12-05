@@ -2,7 +2,7 @@ import FluxalCursor from "@/components/FluxalCursor";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
-import xLogo from "@assets/image_1764912569035.png";
+import xLogo from "@assets/image_1764912714351.png";
 
 export default function Home() {
   return (
@@ -15,7 +15,7 @@ export default function Home() {
         href="https://twitter.com" 
         target="_blank" 
         rel="noreferrer"
-        className="absolute top-8 right-8 z-50 w-8 h-8 opacity-60 hover:opacity-100 transition-all duration-300 hover:scale-110 cursor-pointer mix-blend-screen"
+        className="absolute top-8 right-8 z-50 w-8 h-8 opacity-60 hover:opacity-100 transition-all duration-300 hover:scale-110 cursor-pointer"
       >
         <img 
           src={xLogo} 
