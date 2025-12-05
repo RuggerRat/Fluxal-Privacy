@@ -44,7 +44,8 @@ export default function FluxalCursor() {
         });
 
         // Force set colors immediately and periodically to override any defaults/glitches
-        const colors = ["#FFE500", "#FF8C00", "#FFFFFF"];
+        // STRICT PALETTE: Yellow and Orange only. No white, no defaults.
+        const colors = ["#FFE500", "#FFE500", "#FF8C00"]; 
         
         const enforceColors = () => {
           if (app && app.tubes) {
