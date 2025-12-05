@@ -43,17 +43,26 @@ export default function FluxalCursor() {
           }
         });
 
-        // Force set colors immediately to ensure no defaults leak through
+        // Force set colors immediately and periodically to override any defaults/glitches
         const colors = ["#FFE500", "#FF8C00", "#FFFFFF"];
-        app.tubes.setColors(colors);
-        app.tubes.setLightsColors(colors);
-
-        // Ensure colors stay Fluxal Yellow/Orange at all times
-        const handleClick = () => {
-          if (app) {
+        
+        const enforceColors = () => {
+          if (app && app.tubes) {
             app.tubes.setColors(colors);
             app.tubes.setLightsColors(colors);
           }
+        };
+
+        // Run immediately
+        enforceColors();
+
+        // Run repeatedly for a second to catch any late initialization
+        const intervalId = setInterval(enforceColors, 100);
+        setTimeout(() => clearInterval(intervalId), 2000);
+
+        // Ensure colors stay Fluxal Yellow/Orange on click
+        const handleClick = () => {
+          enforceColors();
         };
 
         document.body.addEventListener('click', handleClick);
