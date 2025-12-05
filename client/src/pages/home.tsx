@@ -15,13 +15,12 @@ export default function Home() {
         href="https://twitter.com" 
         target="_blank" 
         rel="noreferrer"
-        className="absolute top-8 right-8 z-50 w-8 h-8 opacity-60 hover:opacity-100 transition-all duration-300 hover:scale-110 cursor-pointer"
+        className="absolute top-8 right-8 z-50 w-6 h-6 opacity-60 hover:opacity-100 transition-all duration-300 hover:scale-110 cursor-pointer"
       >
-        <img 
-          src={xLogo} 
-          alt="X (Twitter)" 
-          className="w-full h-full object-contain filter invert" 
-        />
+        {/* Using SVG for perfect transparency */}
+        <svg viewBox="0 0 24 24" aria-hidden="true" className="w-full h-full fill-white">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+        </svg>
       </a>
 
       {/* Static Background Glow */}
