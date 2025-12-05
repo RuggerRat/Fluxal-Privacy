@@ -2,11 +2,27 @@ import FluxalCursor from "@/components/FluxalCursor";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
+import xLogo from "@assets/image_1764912569035.png";
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden relative selection:bg-[#FFE500] selection:text-black">
       {/* Background Cursor Effect */}
       <FluxalCursor />
+
+      {/* Top Right Social Icon */}
+      <a 
+        href="https://twitter.com" 
+        target="_blank" 
+        rel="noreferrer"
+        className="absolute top-8 right-8 z-50 w-10 h-10 opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-110 cursor-pointer"
+      >
+        <img 
+          src={xLogo} 
+          alt="X (Twitter)" 
+          className="w-full h-full object-contain filter invert contrast-200 drop-shadow-[0_0_5px_#FFE500]" 
+        />
+      </a>
 
       {/* Static Background Glow */}
       <div className="absolute inset-0 pointer-events-none z-0">
