@@ -66,7 +66,7 @@ export default function Home() {
             </Button>
 
             <a 
-              href="https://twitter.com" 
+              href="https://x.com/FluxalAI" 
               target="_blank" 
               rel="noreferrer"
               className="relative group overflow-hidden flex items-center justify-center border border-[#FFE500]/50 text-[#FFE500] hover:bg-[#FFE500]/10 hover:text-[#FFE500] hover:border-[#FFE500] hover:scale-105 transition-all duration-300 w-[60px] h-[60px] rounded-none uppercase tracking-wider transform -skew-x-12 bg-transparent backdrop-blur-sm"
