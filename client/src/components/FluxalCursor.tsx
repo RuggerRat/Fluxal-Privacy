@@ -25,7 +25,7 @@ export default function FluxalCursor() {
 
         app = TubesCursor(canvasRef.current, {
           tubes: {
-            colors: ["#FFE500", "#FF8C00", "#FFFFFF"],
+            colors: ["#9945FF", "#14F195", "#FFFFFF"],
             thickness: 3.0,
             length: 2.2,
             velocity: 2.5,
@@ -33,7 +33,7 @@ export default function FluxalCursor() {
           },
           lights: {
             intensity: 420,
-            colors: ["#FFE500", "#FF8C00", "#FFFFFF"],
+            colors: ["#9945FF", "#14F195", "#FFFFFF"],
             radius: 1.8
           },
           bloom: {
@@ -43,10 +43,19 @@ export default function FluxalCursor() {
           }
         });
 
-        // Click handler from original script
+        // Click handler to cycle colors
+        let colorIndex = 0;
+        const palettes = [
+          ["#00F0FF", "#0000FF", "#FFFFFF"], // Cyber Blue
+          ["#FF0055", "#FF0000", "#FFFFFF"], // Neon Red
+          ["#FFE500", "#FF8C00", "#FFFFFF"], // Fluxal Yellow (Original)
+          ["#9945FF", "#14F195", "#FFFFFF"], // Solana Purple/Green
+        ];
+
         const handleClick = () => {
           if (app) {
-            const colors = ["#FFE500", "#FF8C00", "#FFFFFF"];
+            colorIndex = (colorIndex + 1) % palettes.length;
+            const colors = palettes[colorIndex];
             app.tubes.setColors(colors);
             app.tubes.setLightsColors(colors);
           }
