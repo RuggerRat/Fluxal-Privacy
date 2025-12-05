@@ -86,7 +86,7 @@ export default function FluxalCursor() {
   return (
     <canvas 
       ref={canvasRef} 
-      className="fixed inset-0 w-full h-full pointer-events-none z-0 mix-blend-screen"
+      className="fixed inset-0 w-full h-full pointer-events-none z-[5] mix-blend-screen"
       style={{ background: 'transparent' }}
     />
   );
