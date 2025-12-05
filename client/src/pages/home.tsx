@@ -15,12 +15,12 @@ export default function Home() {
         href="https://twitter.com" 
         target="_blank" 
         rel="noreferrer"
-        className="absolute top-8 right-8 z-50 w-10 h-10 opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-110 cursor-pointer"
+        className="absolute top-8 right-8 z-50 w-8 h-8 opacity-60 hover:opacity-100 transition-all duration-300 hover:scale-110 cursor-pointer mix-blend-screen"
       >
         <img 
           src={xLogo} 
           alt="X (Twitter)" 
-          className="w-full h-full object-contain filter invert contrast-200 drop-shadow-[0_0_5px_#FFE500]" 
+          className="w-full h-full object-contain filter invert" 
         />
       </a>
 
