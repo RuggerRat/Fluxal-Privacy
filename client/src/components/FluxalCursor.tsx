@@ -12,61 +12,48 @@ export default function FluxalCursor() {
       if (!canvasRef.current) return;
 
       try {
-        // Note: We are NOT exposing window.THREE here because the CDN bundle likely includes its own 
-        // or manages its dependencies. Explicitly setting it caused "Multiple instances" warnings.
+        // Expose THREE globally as some CDN scripts expect it
+        // @ts-ignore
+        window.THREE = THREE;
 
         // Dynamic import from CDN
-        // @ts-ignore
+        // @ts-ignore - ignore typescript complaining about URL import
         const module = await import(/* @vite-ignore */ "https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js");
-        const TubesCursor = module.default || module;
+        const TubesCursor = module.default;
 
         if (!mounted) return;
-        if (!canvasRef.current) return;
 
-        // Initialize with desired colors
         app = TubesCursor(canvasRef.current, {
           tubes: {
             colors: ["#FFE500", "#FF8C00", "#FFFFFF"],
-            thickness: 5.0,
-            length: 2.5,
-            velocity: 3.0,
+            thickness: 3.0,
+            length: 2.2,
+            velocity: 2.5,
             fade: 0.06
           },
           lights: {
-            intensity: 1200,
+            intensity: 420,
             colors: ["#FFE500", "#FF8C00", "#FFFFFF"],
-            radius: 2.5
+            radius: 1.8
           },
           bloom: {
-            strength: 8.0,
-            threshold: 0.1,
-            radius: 1.8
+            strength: 2.5,
+            threshold: 0.2,
+            radius: 1.1
           }
         });
 
-        // AGGRESSIVE COLOR ENFORCEMENT
-        // The library sometimes defaults to random/neon colors if init is slow.
-        // We force the Fluxal colors repeatedly to ensure they stick.
-        const fluxalColors = ["#FFE500", "#FF8C00", "#FFFFFF"];
-        
-        const enforceColors = () => {
-          if (app && app.tubes) {
-            app.tubes.setColors(fluxalColors);
-            app.tubes.setLightsColors(fluxalColors);
-          }
-        };
+        // Force set colors immediately to ensure no defaults leak through
+        const colors = ["#FFE500", "#FF8C00", "#FFFFFF"];
+        app.tubes.setColors(colors);
+        app.tubes.setLightsColors(colors);
 
-        // Enforce immediately
-        enforceColors();
-
-        // Enforce again after short delays to catch any lazy initialization
-        setTimeout(enforceColors, 100);
-        setTimeout(enforceColors, 500);
-        setTimeout(enforceColors, 1000);
-
-        // Re-enforce on click to be absolutely sure
+        // Ensure colors stay Fluxal Yellow/Orange at all times
         const handleClick = () => {
-           enforceColors();
+          if (app) {
+            app.tubes.setColors(colors);
+            app.tubes.setLightsColors(colors);
+          }
         };
 
         document.body.addEventListener('click', handleClick);
@@ -87,17 +74,19 @@ export default function FluxalCursor() {
 
     return () => {
       mounted = false;
-      // Attempt to cleanup if possible (though the lib might not expose a clean destroy)
-      if (app && typeof app.dispose === 'function') {
-        app.dispose(); 
+      if (typeof cleanupPromise === 'function') {
+        // @ts-ignore
+        cleanupPromise();
       }
+      // Clean up global THREE if we want to be polite, but might break other things if they rely on it.
+      // delete window.THREE; 
     };
   }, []);
 
   return (
     <canvas 
       ref={canvasRef} 
-      className="fixed inset-0 w-full h-full pointer-events-none z-0"
+      className="fixed inset-0 w-full h-full pointer-events-none z-0 mix-blend-screen"
       style={{ background: 'transparent' }}
     />
   );
