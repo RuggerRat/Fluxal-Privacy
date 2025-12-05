@@ -25,7 +25,7 @@ export default function FluxalCursor() {
 
         app = TubesCursor(canvasRef.current, {
           tubes: {
-            colors: ["#FFE500", "#FF8C00", "#FFFFFF"],
+            colors: ["#FFE500", "#FFE500", "#FF8C00"],
             thickness: 3.0,
             length: 2.2,
             velocity: 2.5,
@@ -33,7 +33,7 @@ export default function FluxalCursor() {
           },
           lights: {
             intensity: 420,
-            colors: ["#FFE500", "#FF8C00", "#FFFFFF"],
+            colors: ["#FFE500", "#FF8C00", "#FFE500", "#FF8C00"],
             radius: 1.8
           },
           bloom: {
@@ -45,12 +45,13 @@ export default function FluxalCursor() {
 
         // Force set colors immediately and periodically to override any defaults/glitches
         // STRICT PALETTE: Yellow and Orange only. No white, no defaults.
-        const colors = ["#FFE500", "#FFE500", "#FF8C00"]; 
+        const tubeColors = ["#FFE500", "#FFE500", "#FF8C00"];
+        const lightColors = ["#FFE500", "#FF8C00", "#FFE500", "#FF8C00"];
         
         const enforceColors = () => {
           if (app && app.tubes) {
-            app.tubes.setColors(colors);
-            app.tubes.setLightsColors(colors);
+            app.tubes.setColors(tubeColors);
+            app.tubes.setLightsColors(lightColors);
           }
         };
 
