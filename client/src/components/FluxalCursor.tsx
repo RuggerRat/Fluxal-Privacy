@@ -43,10 +43,14 @@ export default function FluxalCursor() {
           }
         });
 
+        // Force set colors immediately to ensure no defaults leak through
+        const colors = ["#FFE500", "#FF8C00", "#FFFFFF"];
+        app.tubes.setColors(colors);
+        app.tubes.setLightsColors(colors);
+
         // Ensure colors stay Fluxal Yellow/Orange at all times
         const handleClick = () => {
           if (app) {
-            const colors = ["#FFE500", "#FF8C00", "#FFFFFF"];
             app.tubes.setColors(colors);
             app.tubes.setLightsColors(colors);
           }
