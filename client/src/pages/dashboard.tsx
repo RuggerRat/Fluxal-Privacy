@@ -3,7 +3,7 @@ import FluxalCursor from "@/components/FluxalCursor";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { Copy, MoveRight, WifiOff, Shield, Link, Lock, Ban, Zap } from "lucide-react";
+import { Copy, MoveRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import fluxalTitle from "@assets/Untitled_design__62_-removebg-preview_1765006354328.png";
 
@@ -146,91 +146,12 @@ export default function Dashboard() {
 
       </div>
 
-      {/* Features Section */}
-      <div className="relative z-20 w-full bg-black/90 py-20 px-8 md:px-20 border-t border-[#FFE500]/20">
-        <div className="max-w-7xl mx-auto">
-          {/* Section Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-neue font-bold text-white mb-4 uppercase tracking-wide">
-              THE <span className="text-[#FFE500]">NEW ERA</span> OF DIGITAL CASH
-            </h2>
-            <div className="w-24 h-0.5 bg-[#FFE500]/50 mx-auto mb-6" />
-            <p className="text-gray-400 text-sm md:text-base max-w-2xl mx-auto uppercase tracking-widest">
-              Experience the perfect blend of physical cash privacy with digital convenience
-            </p>
-          </div>
-
-          {/* Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            
-            {/* Feature 1 */}
-            <div className="group p-8 rounded-2xl border border-white/10 bg-white/5 hover:border-[#FFE500]/50 hover:bg-[#FFE500]/5 transition-all duration-300">
-              <div className="flex items-center gap-3 mb-4">
-                <WifiOff className="w-5 h-5 text-[#FFE500]" />
-                <h3 className="font-bold font-neue text-white uppercase tracking-wider text-sm">TRUE OFFLINE PAYMENTS</h3>
-              </div>
-              <p className="text-gray-400 text-xs leading-relaxed font-neue">
-                Complete device-to-device transactions with zero internet connectivity. Tap-to-pay using NFC, Bluetooth, or QR codes.
-              </p>
-            </div>
-
-            {/* Feature 2 */}
-            <div className="group p-8 rounded-2xl border border-white/10 bg-white/5 hover:border-[#FFE500]/50 hover:bg-[#FFE500]/5 transition-all duration-300">
-              <div className="flex items-center gap-3 mb-4">
-                <Shield className="w-5 h-5 text-[#FFE500]" />
-                <h3 className="font-bold font-neue text-white uppercase tracking-wider text-sm">CRYPTOGRAPHIC PRIVACY</h3>
-              </div>
-              <p className="text-gray-400 text-xs leading-relaxed font-neue">
-                Zero-knowledge proofs and Pedersen commitments ensure mathematical privacy guarantees. Perfect anonymity.
-              </p>
-            </div>
-
-            {/* Feature 3 */}
-            <div className="group p-8 rounded-2xl border border-white/10 bg-white/5 hover:border-[#FFE500]/50 hover:bg-[#FFE500]/5 transition-all duration-300">
-              <div className="flex items-center gap-3 mb-4">
-                <Link className="w-5 h-5 text-[#FFE500]" />
-                <h3 className="font-bold font-neue text-white uppercase tracking-wider text-sm">PERFECT DIVISIBILITY</h3>
-              </div>
-              <p className="text-gray-400 text-xs leading-relaxed font-neue">
-                Spend exact amounts with automatic cryptographic change creation. No minimum amounts or rounding errors.
-              </p>
-            </div>
-
-            {/* Feature 4 */}
-            <div className="group p-8 rounded-2xl border border-white/10 bg-white/5 hover:border-[#FFE500]/50 hover:bg-[#FFE500]/5 transition-all duration-300">
-              <div className="flex items-center gap-3 mb-4">
-                <Lock className="w-5 h-5 text-[#FFE500]" />
-                <h3 className="font-bold font-neue text-white uppercase tracking-wider text-sm">SECURE ENCLAVES</h3>
-              </div>
-              <p className="text-gray-400 text-xs leading-relaxed font-neue">
-                Private keys stored in tamper-resistant hardware. Biometric authentication for high-value transactions.
-              </p>
-            </div>
-
-            {/* Feature 5 */}
-            <div className="group p-8 rounded-2xl border border-white/10 bg-white/5 hover:border-[#FFE500]/50 hover:bg-[#FFE500]/5 transition-all duration-300">
-              <div className="flex items-center gap-3 mb-4">
-                <Ban className="w-5 h-5 text-[#FFE500]" />
-                <h3 className="font-bold font-neue text-white uppercase tracking-wider text-sm">ANTI-DOUBLE SPENDING</h3>
-              </div>
-              <p className="text-gray-400 text-xs leading-relaxed font-neue">
-                Nullifiers prevent double-spending while maintaining complete anonymity. Cryptographic stamps ensure validity.
-              </p>
-            </div>
-
-            {/* Feature 6 */}
-            <div className="group p-8 rounded-2xl border border-white/10 bg-white/5 hover:border-[#FFE500]/50 hover:bg-[#FFE500]/5 transition-all duration-300">
-              <div className="flex items-center gap-3 mb-4">
-                <Zap className="w-5 h-5 text-[#FFE500]" />
-                <h3 className="font-bold font-neue text-white uppercase tracking-wider text-sm">SOLANA SPEED</h3>
-              </div>
-              <p className="text-gray-400 text-xs leading-relaxed font-neue">
-                Built on Solana for lightning-fast, low-cost USDC settlement when syncing online. High throughput meets privacy.
-              </p>
-            </div>
-
-          </div>
-        </div>
+      {/* Bottom Banner */}
+      <div className="absolute bottom-8 w-full text-center pointer-events-none">
+        <h2 className="text-xl md:text-2xl font-neue font-bold tracking-widest text-white uppercase">
+          THE <span className="text-[#FFE500]">NEW ERA</span> OF DIGITAL CASH
+        </h2>
+        <div className="w-16 h-0.5 bg-[#FFE500] mx-auto mt-2" />
       </div>
 
     </div>
