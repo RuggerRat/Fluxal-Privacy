@@ -24,13 +24,13 @@ export default function Dashboard() {
       <FluxalCursor />
 
       {/* Top Navigation Bar */}
-      <nav className="fixed top-0 w-full z-50 flex items-center justify-between px-8 py-6 bg-black/50 backdrop-blur-sm border-b border-white/10">
+      <nav className="fixed top-0 w-full z-50 flex items-center justify-between px-8 py-6 bg-black/50 backdrop-blur-sm border-b border-[#FFE500]/30">
         <div className="flex items-center">
-           <img src={fluxalTitle} alt="FLUXAL" className="h-10 w-auto object-contain" />
+           <img src={fluxalTitle} alt="FLUXAL" className="h-16 w-auto object-contain" />
         </div>
 
         <div className="flex items-center gap-8">
-          <div className="hidden md:flex items-center gap-8 font-neue text-xs text-gray-400 tracking-widest font-medium">
+          <div className="hidden md:flex items-center gap-8 font-neue text-xs text-gray-400 tracking-widest font-bold">
             <a href="#" className="hover:text-[#FFE500] transition-colors">HOME</a>
             <a href="#" className="hover:text-[#FFE500] transition-colors">FEATURES</a>
             <a href="#" className="hover:text-[#FFE500] transition-colors">PRODUCTS</a>
@@ -40,7 +40,7 @@ export default function Dashboard() {
           </div>
 
           <Button 
-            className="bg-[#FFE500] border border-[#FFE500] text-black hover:bg-[#FF8C00] hover:text-black font-bold rounded-full px-6 py-1 h-auto font-neue tracking-wide text-xs"
+            className="bg-[#FFE500] border border-[#FFE500] text-black hover:bg-[#FF8C00] hover:text-black font-bold rounded-full px-6 py-1 h-auto font-neue tracking-wide text-xs uppercase"
           >
             WALLET
           </Button>
