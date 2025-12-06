@@ -1,4 +1,5 @@
 import FluxalLoader from "@/components/FluxalLoader";
+import FluxalCursor from "@/components/FluxalCursor";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
@@ -20,6 +21,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden relative font-neue selection:bg-[#FFE500] selection:text-black">
+      <FluxalCursor />
 
       {/* Top Navigation Bar */}
       <nav className="fixed top-0 w-full z-50 flex items-center justify-between px-8 py-6 bg-black/50 backdrop-blur-sm border-b border-white/10">
