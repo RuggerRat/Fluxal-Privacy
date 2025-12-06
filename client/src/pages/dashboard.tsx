@@ -25,8 +25,8 @@ export default function Dashboard() {
       {/* Top Navigation Bar */}
       <nav className="fixed top-0 w-full z-50 flex items-center justify-between px-8 py-6 bg-black/50 backdrop-blur-sm border-b border-white/10">
         <div className="flex items-center gap-2">
-          <img src={fluxalLogo} alt="Fluxal Logo" className="h-8 w-auto object-contain" />
-          <img src={fluxalText} alt="FLUXAL" className="h-6 w-auto object-contain" />
+          <img src={fluxalLogo} alt="Fluxal Logo" className="h-24 w-auto object-contain" />
+          <img src={fluxalText} alt="FLUXAL" className="h-20 w-auto object-contain" />
         </div>
 
         <div className="hidden md:flex items-center gap-8 font-neue text-sm text-gray-400 tracking-widest font-medium">
