@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Copy, MoveRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import fluxalText from "@assets/Untitled_design_(61)_1765005676350.png";
+import fluxalText from "@assets/image_1765006114990.png";
 import fluxalLogo from "@assets/image-removebg-preview_(1)_1765005724882.png";
 
 export default function Dashboard() {
