@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { useLocation } from "wouter";
+import fluxalTitle from "@assets/Untitled_design__62_-removebg-preview_1765006354328.png";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
@@ -53,9 +54,13 @@ export default function Home() {
           className="text-center relative"
         >
           {/* Main Title */}
-          <h1 className="text-7xl md:text-9xl font-black tracking-tighter font-orbitron bg-clip-text text-transparent bg-gradient-to-b from-white via-[#FFE500] to-[#FF8C00] drop-shadow-[0_0_35px_rgba(255,229,0,0.6)] select-none italic transform -skew-x-12">
-            FLUXAL
-          </h1>
+          <div className="flex justify-center mb-8">
+            <img 
+              src={fluxalTitle} 
+              alt="FLUXAL" 
+              className="h-48 md:h-64 w-auto object-contain drop-shadow-[0_0_35px_rgba(255,229,0,0.6)]" 
+            />
+          </div>
           
           {/* Subtitle */}
           <motion.p 
