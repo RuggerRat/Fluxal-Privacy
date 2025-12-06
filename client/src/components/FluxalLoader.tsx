@@ -114,31 +114,6 @@ export default function FluxalLoader({ duration = 3000 }: { duration?: number })
         className="whitespace-pre font-mono text-[10px] leading-none select-none pointer-events-none"
         style={{ fontFamily: "'Source Code Pro', monospace" }}
       />
-      
-      {/* Overlay Text */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
-        <h2 className="text-4xl font-orbitron font-bold text-white tracking-widest animate-pulse drop-shadow-[0_0_10px_#FFE500]">
-          INITIALIZING
-        </h2>
-        <div className="mt-4 w-64 h-1 bg-[#333] overflow-hidden">
-            <div 
-              ref={progressBarRef}
-              className="h-full bg-[#FFE500]" 
-              style={{ width: '0%' }}
-            />
-        </div>
-      </div>
-
-      <style>{`
-        @keyframes progress-indeterminate {
-            0% { width: 0%; margin-left: 0%; }
-            50% { width: 100%; margin-left: 0%; }
-            100% { width: 0%; margin-left: 100%; }
-        }
-        .animate-progress-indeterminate {
-            animation: progress-indeterminate 1.5s infinite ease-in-out;
-        }
-      `}</style>
     </div>
   );
 }
