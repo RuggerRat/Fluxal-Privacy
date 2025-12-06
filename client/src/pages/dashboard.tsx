@@ -48,9 +48,9 @@ export default function Dashboard() {
       </nav>
 
       {/* Ticker Bar */}
-      <div className="fixed top-24 w-full z-40 bg-black border-b border-[#FFE500]/20 py-2 px-4 overflow-hidden h-9 flex items-center">
-        <div className="flex items-center gap-4 text-[10px] md:text-xs font-neue text-gray-400 tracking-widest whitespace-nowrap animate-marquee">
-          <span className="font-bold text-white">Quick User Updates</span>
+      <div className="fixed top-24 w-full z-40 bg-[#FFE500]/5 border-b border-[#FFE500]/20 py-2 px-4 overflow-hidden h-9 flex items-center">
+        <div className="flex items-center gap-4 text-[10px] md:text-xs font-neue text-[#FFE500] tracking-widest whitespace-nowrap animate-marquee">
+          <span className="font-bold">Quick User Updates</span>
           <span>—</span>
           <span>User feedback updates:</span>
           <span>-</span>
@@ -61,9 +61,9 @@ export default function Dashboard() {
       </div>
 
       {/* Beta Notification Bar */}
-      <div className="fixed top-[132px] w-full z-40 bg-black border-b border-[#FFE500]/20 py-2 px-4 flex justify-center items-center gap-4 h-10">
-        <p className="text-[10px] md:text-xs font-neue tracking-wider text-gray-400 truncate">
-          <span className="font-bold text-white">Dashboard Beta is live</span> — The FLUXAL dashboard beta (in demo mode) is now live on Solana mainnet.
+      <div className="fixed top-[132px] w-full z-40 bg-[#FFE500]/5 border-b border-[#FFE500]/20 py-2 px-4 flex justify-center items-center gap-4 h-10">
+        <p className="text-[10px] md:text-xs font-neue tracking-wider text-[#FFE500] truncate">
+          <span className="font-bold">Dashboard Beta is live</span> — The FLUXAL dashboard beta (in demo mode) is now live on Solana mainnet.
         </p>
         <Button 
           variant="outline" 
