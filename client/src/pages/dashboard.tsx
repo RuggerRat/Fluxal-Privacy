@@ -25,24 +25,26 @@ export default function Dashboard() {
 
       {/* Top Navigation Bar */}
       <nav className="fixed top-0 w-full z-50 flex items-center justify-between px-8 py-6 bg-black/50 backdrop-blur-sm border-b border-white/10">
-        <div className="flex items-center gap-2">
-           <img src={fluxalTitle} alt="FLUXAL" className="h-32 w-auto object-contain" />
+        <div className="flex items-center">
+           <img src={fluxalTitle} alt="FLUXAL" className="h-10 w-auto object-contain" />
         </div>
 
-        <div className="hidden md:flex items-center gap-8 font-neue text-sm text-gray-400 tracking-widest font-medium">
-          <a href="#" className="hover:text-[#FFE500] transition-colors">HOME</a>
-          <a href="#" className="hover:text-[#FFE500] transition-colors">FEATURES</a>
-          <a href="#" className="hover:text-[#FFE500] transition-colors">PRODUCTS</a>
-          <a href="#" className="hover:text-[#FFE500] transition-colors">NEWS</a>
-          <a href="#" className="hover:text-[#FFE500] transition-colors">DOCS</a>
-          <a href="#" className="hover:text-[#FFE500] transition-colors">FAQ</a>
-        </div>
+        <div className="flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-8 font-neue text-xs text-gray-400 tracking-widest font-medium">
+            <a href="#" className="hover:text-[#FFE500] transition-colors">HOME</a>
+            <a href="#" className="hover:text-[#FFE500] transition-colors">FEATURES</a>
+            <a href="#" className="hover:text-[#FFE500] transition-colors">PRODUCTS</a>
+            <a href="#" className="hover:text-[#FFE500] transition-colors">NEWS</a>
+            <a href="#" className="hover:text-[#FFE500] transition-colors">DOCS</a>
+            <a href="#" className="hover:text-[#FFE500] transition-colors">FAQ</a>
+          </div>
 
-        <Button 
-          className="bg-[#FFE500] border border-[#FFE500] text-black hover:bg-[#FF8C00] hover:text-black font-bold rounded-full px-6 font-neue tracking-wide"
-        >
-          WALLET
-        </Button>
+          <Button 
+            className="bg-[#FFE500] border border-[#FFE500] text-black hover:bg-[#FF8C00] hover:text-black font-bold rounded-full px-6 py-1 h-auto font-neue tracking-wide text-xs"
+          >
+            WALLET
+          </Button>
+        </div>
       </nav>
 
       {/* Ticker Bar */}
