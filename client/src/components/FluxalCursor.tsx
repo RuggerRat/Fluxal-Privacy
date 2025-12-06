@@ -37,9 +37,9 @@ export default function FluxalCursor() {
             radius: 1.8
           },
           bloom: {
-            strength: 2.5,
+            strength: 0.8,
             threshold: 0.2,
-            radius: 1.1
+            radius: 0.5
           }
         });
 
@@ -81,16 +81,15 @@ export default function FluxalCursor() {
       }
     };
 
-    const cleanupPromise = initCursor();
+    const setupPromise = initCursor();
 
     return () => {
       mounted = false;
-      if (typeof cleanupPromise === 'function') {
-        // @ts-ignore
-        cleanupPromise();
-      }
-      // Clean up global THREE if we want to be polite, but might break other things if they rely on it.
-      // delete window.THREE; 
+      setupPromise.then(cleanup => {
+        if (typeof cleanup === 'function') {
+            cleanup();
+        }
+      });
     };
   }, []);
 
