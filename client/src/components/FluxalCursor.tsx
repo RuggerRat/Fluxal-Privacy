@@ -72,9 +72,7 @@ export default function FluxalCursor() {
         // Trigger a resize to ensure context is ready
         window.dispatchEvent(new Event('resize'));
 
-        return () => {
-          document.body.removeEventListener('click', handleClick);
-        };
+        return app;
 
       } catch (error) {
         console.error("Failed to load TubesCursor:", error);
@@ -85,9 +83,16 @@ export default function FluxalCursor() {
 
     return () => {
       mounted = false;
-      setupPromise.then(cleanup => {
-        if (typeof cleanup === 'function') {
-            cleanup();
+      setupPromise.then(instance => {
+        if (instance) {
+            // Try common cleanup patterns
+            if (typeof instance.destroy === 'function') {
+                instance.destroy();
+            } else if (typeof instance.dispose === 'function') {
+                instance.dispose();
+            } else if (typeof instance === 'function') {
+                instance();
+            }
         }
       });
     };
