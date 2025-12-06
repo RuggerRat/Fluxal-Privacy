@@ -146,13 +146,179 @@ export default function Dashboard() {
 
       </div>
 
-      {/* Bottom Banner */}
-      <div className="absolute bottom-8 w-full text-center pointer-events-none">
-        <h2 className="text-xl md:text-2xl font-neue font-bold tracking-widest text-white uppercase">
-          THE <span className="text-[#FFE500]">NEW ERA</span> OF DIGITAL CASH
-        </h2>
-        <div className="w-16 h-0.5 bg-[#FFE500] mx-auto mt-2" />
-      </div>
+      {/* Bottom Banner - Replaced by new sections */}
+      
+      {/* Features Section */}
+      <section className="relative z-10 py-32 px-8 md:px-20 bg-black border-t border-[#FFE500]/10">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-24">
+            <h2 className="text-4xl md:text-5xl font-neue font-bold text-white uppercase tracking-tight mb-4">
+              THE <span className="text-[#FFE500]">NEW ERA</span> OF DIGITAL CASH
+            </h2>
+            <div className="w-24 h-1 bg-[#FFE500] mx-auto mb-8" />
+            <p className="text-gray-400 font-neue tracking-widest text-sm md:text-base max-w-2xl mx-auto uppercase">
+              EXPERIENCE THE PERFECT BLEND OF PHYSICAL CASH PRIVACY WITH DIGITAL CONVENIENCE
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "TRUE OFFLINE PAYMENTS",
+                desc: "Complete device-to-device transactions with zero internet connectivity. Tap-to-pay using NFC, Bluetooth, or QR codes.",
+                icon: "⚡"
+              },
+              {
+                title: "CRYPTOGRAPHIC PRIVACY",
+                desc: "Zero-knowledge proofs and Pedersen commitments ensure mathematical privacy guarantees. Perfect anonymity.",
+                icon: "🛡️"
+              },
+              {
+                title: "PERFECT DIVISIBILITY",
+                desc: "Spend exact amounts with automatic cryptographic change creation. No minimum amounts or rounding errors.",
+                icon: "↔️"
+              },
+              {
+                title: "SECURE ENCLAVES",
+                desc: "Private keys stored in tamper-resistant hardware. Biometric authentication for high-value transactions.",
+                icon: "🔒"
+              },
+              {
+                title: "ANTI-DOUBLE SPENDING",
+                desc: "Nullifiers prevent double-spending while maintaining complete anonymity. Cryptographic stamps ensure validity.",
+                icon: "🚫"
+              },
+              {
+                title: "SOLANA SPEED",
+                desc: "Built on Solana for lightning-fast, low-cost USDC settlement when syncing online. High throughput meets privacy.",
+                icon: "⚡"
+              }
+            ].map((feature, i) => (
+              <div key={i} className="border border-[#FFE500]/20 rounded-2xl p-8 bg-[#FFE500]/5 hover:bg-[#FFE500]/10 transition-colors group">
+                <div className="text-[#FFE500] mb-4 text-xl">{feature.icon} <span className="font-bold ml-2 tracking-wider uppercase">{feature.title}</span></div>
+                <p className="text-gray-400 text-sm leading-relaxed font-neue">
+                  {feature.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Ecosystem Section */}
+      <section className="relative z-10 py-32 px-8 md:px-20 bg-black border-t border-[#FFE500]/10">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-neue font-bold text-white uppercase tracking-tight mb-2">
+              <span className="text-[#FFE500]">FLUXAL</span> ECOSYSTEM
+            </h2>
+            <p className="text-gray-500 font-neue tracking-[0.2em] text-sm uppercase">
+              LAYERED PRIVACY. SCALABLE TRUST.
+            </p>
+          </div>
+
+          <div className="flex flex-col md:flex-row items-stretch justify-center gap-4 md:gap-12 mb-32">
+            <div className="flex-1 border border-[#FFE500]/30 rounded-2xl p-8 md:p-12 bg-gradient-to-br from-[#FFE500]/10 to-transparent relative overflow-hidden">
+               <h3 className="text-2xl font-bold text-[#FFE500] mb-2 font-neue">$FLUXAL</h3>
+               <p className="text-gray-400 text-sm tracking-wider mb-8 uppercase">THE UTILITY TOKEN</p>
+               <ul className="space-y-4 text-sm text-gray-300 font-neue">
+                 {['Governance and protocol decisions', 'Programmatic buy-back and burns', 'Access gates for premium features', 'Early access to new products'].map((item, i) => (
+                   <li key={i} className="flex items-start gap-3">
+                     <span className="text-[#FFE500] mt-0.5">✓</span> {item}
+                   </li>
+                 ))}
+               </ul>
+            </div>
+
+            <div className="flex items-center justify-center text-[#FFE500] text-4xl">
+              ↔
+            </div>
+
+            <div className="flex-1 border border-[#FF8C00]/30 rounded-2xl p-8 md:p-12 bg-gradient-to-br from-[#FF8C00]/10 to-transparent relative overflow-hidden">
+               <h3 className="text-2xl font-bold text-[#FF8C00] mb-2 font-neue">USDC/USDT/SOL + OTHERS</h3>
+               <p className="text-gray-400 text-sm tracking-wider mb-8 uppercase">PRIVATE DIGITAL CASH</p>
+               <ul className="space-y-4 text-sm text-gray-300 font-neue">
+                 {['Any stablecoin or token with privacy', 'Complete transaction anonymity', 'Offline payment capability', 'Zero-knowledge proof transfers'].map((item, i) => (
+                   <li key={i} className="flex items-start gap-3">
+                     <span className="text-[#FF8C00] mt-0.5">➜</span> {item}
+                   </li>
+                 ))}
+               </ul>
+            </div>
+          </div>
+
+          {/* Innovation Section */}
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-neue font-bold text-white uppercase tracking-tight mb-2">
+              CRYPTOGRAPHIC <span className="text-[#FFE500]">INNOVATION</span>
+            </h2>
+            <p className="text-gray-500 font-neue tracking-[0.2em] text-sm uppercase">
+              LAYERED PRIVACY. SCALABLE TRUST.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-12">
+              <div>
+                <h3 className="text-[#FFE500] text-xl font-bold mb-4 uppercase tracking-wider">PEDERSEN COMMITMENTS</h3>
+                <p className="text-gray-400 text-sm leading-relaxed font-neue">
+                  Our system uses <span className="text-white font-bold">Pedersen commitments</span> to hide transaction amounts while maintaining mathematical verifiability. Each commitment (vG + rH) <span className="text-white font-bold">cryptographically binds to a value without revealing it.</span>
+                </p>
+              </div>
+              <div>
+                <h3 className="text-[#FFE500] text-xl font-bold mb-4 uppercase tracking-wider">ZERO-KNOWLEDGE PROOFS</h3>
+                <p className="text-gray-400 text-sm leading-relaxed font-neue">
+                  zk-SNARKs generate compact proofs that verify transaction validity without exposing any sensitive information. Prove you have funds, prove amounts balance, and keep everything private.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-[#111] border border-[#333] rounded-xl p-6 font-mono text-xs md:text-sm text-gray-400 overflow-x-auto">
+              <div className="text-[#FFE500] mb-2">// Pedersen Commitment</div>
+              <div className="mb-4">commitment = v * G + r * H</div>
+              
+              <div className="text-[#FFE500] mb-2">// Zero-Knowledge Proof</div>
+              <div className="mb-1">proof = zk_prove( statement: "I know v, r such that C = vG + rH",</div>
+              <div className="mb-4">witness: {'{ v, r }'}, public: {'{ C }'} )</div>
+
+              <div className="text-[#FFE500] mb-2">// Nullifier Generation</div>
+              <div>nullifier = hash( private_key, commitment )</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* Trustware Section */}
+      <section className="relative z-10 py-32 px-8 md:px-20 bg-black border-t border-[#FFE500]/10 pb-40">
+        <div className="max-w-4xl mx-auto text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-neue font-bold text-white uppercase tracking-tight mb-6">
+            <span className="text-[#FFE500]">FLUXAL</span> IS TRUSTWARE
+          </h2>
+          <p className="text-gray-300 font-neue text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
+            The transition from analog to digital trust is underway. Learn how FLUXAL powers the core privacy infrastructure for the world.
+          </p>
+        </div>
+
+        <div className="max-w-4xl mx-auto border border-[#FFE500]/20 bg-[#FFE500]/5 rounded-3xl p-8 md:p-16 space-y-12">
+          <div>
+            <h3 className="text-white font-bold text-xl mb-4">Privacy's broadband moment</h3>
+            <p className="text-gray-400 text-sm leading-relaxed font-neue">
+              We're engineering a secure, private, and backward-compatible unified ZK layer for everything from money and identity to markets, coordination, and creativity—tools that scale from individuals to institutions without sacrificing user sovereignty.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-white font-bold text-xl mb-4">Token-agnostic by design – built to run across chains & providers</h3>
+            <p className="text-gray-400 text-sm leading-relaxed font-neue mb-6">
+              The <span className="text-[#FFE500]">$FLUXAL Protocol</span> is token-native: you deposit the assets you already hold - no synthetic pegs, no IOUs—directly into the privacy layer. One model, familiar UX, same guarantees.
+            </p>
+            <p className="text-gray-400 text-sm leading-relaxed font-neue">
+              The same cryptographic core ports cleanly via modular adapters, preserving UX and assurances across Ethereum, Bitcoin, Polygon, Solana, and beyond the crypto stack - think AMEX, VISA, or even your local bank. The math is provider-agnostic by design.
+            </p>
+          </div>
+        </div>
+      </section>
 
     </div>
   );
