@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRIVATE x402 EXECUTION TERMINAL</title>
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --term-bg: #0f0f0f;
+            --primary-neon: #ffbb00; /* Yellowish Orange */
+            --secondary-neon: #ffdd55; /* Lighter Yellow */
+            --error-red: #ff4444;
+            --success-green: #00ff88;
+            --font-main: 'Courier New', Courier, monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(255, 187, 0, 0.03) 0%, transparent 60%),
+                linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 100%, 100% 2px, 3px 100%;
+            font-family: var(--font-main);
+            color: var(--primary-neon);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            text-shadow: 0 0 2px rgba(255, 187, 0, 0.5);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            height: 80vh;
+            perspective: 1000px;
+        }
+
+        .terminal-window {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 15, 15, 0.95);
+            border: 1px solid var(--primary-neon);
+            border-radius: 10px;
+            box-shadow: 
+                0 0 20px rgba(255, 187, 0, 0.1),
+                inset 0 0 20px rgba(255, 187, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+            backdrop-filter: blur(5px);
+            animation: flicker 0.15s infinite;
+        }
+
+        /* CRT Flicker Effect */
+        @keyframes flicker {
+            0% { opacity: 0.97; }
+            50% { opacity: 1; }
+            100% { opacity: 0.98; }
+        }
+
+        .header-bar {
+            background: rgba(255, 187, 0, 0.1);
+            border-bottom: 1px solid var(--primary-neon);
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .red { background-color: #ff5f56; }
+        .yellow { background-color: #ffbd2e; }
+        .green { background-color: #27c93f; }
+
+        .title {
+            font-size: 14px;
+            letter-spacing: 2px;
+            font-weight: bold;
+            color: var(--secondary-neon);
+            text-transform: uppercase;
+        }
+
+        .terminal-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            font-size: 16px;
+            line-height: 1.5;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-neon) transparent;
+        }
+
+        .terminal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        .terminal-content::-webkit-scrollbar-thumb {
+            background-color: var(--primary-neon);
+            border-radius: 4px;
+        }
+        .terminal-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .output-line {
+            margin-bottom: 5px;
+            word-break: break-word;
+        }
+
+        .success { color: var(--success-green); }
+        .error { color: var(--error-red); }
+        .info { color: #aaa; }
+        .highlight { color: #fff; font-weight: bold; }
+
+        .input-area {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .prompt {
+            color: var(--success-green);
+            margin-right: 10px;
+            font-weight: bold;
+            text-shadow: 0 0 5px var(--success-green);
+        }
+
+        #cmd-input {
+            background: transparent;
+            border: none;
+            color: var(--primary-neon);
+            font-family: var(--font-main);
+            font-size: 16px;
+            flex: 1;
+            outline: none;
+            caret-color: var(--primary-neon);
+            text-shadow: 0 0 2px var(--primary-neon);
+        }
+
+        /* Scanline Effect */
+        .scanline {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0,0,0,0.2) 50%,
+                rgba(0,0,0,0.2)
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        .glow-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.7);
+            pointer-events: none;
+            z-index: 11;
+            border-radius: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="terminal-window" onclick="document.getElementById('cmd-input').focus()">
+            <div class="scanline"></div>
+            <div class="glow-overlay"></div>
+            
+            <div class="header-bar">
+                <div class="dots">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                </div>
+                <div class="title">PRIVATE x402 EXECUTION TERMINAL</div>
+                <div style="width: 40px;"></div> <!-- Spacer for centering -->
+            </div>
+
+            <div class="terminal-content" id="output">
+                <div class="output-line">Fluxal OS [Version 4.0.2]</div>
+                <div class="output-line">(c) 2024 Fluxal Corp. All rights reserved.</div>
+                <br>
+                <div class="output-line">System initialized. Secure connection established.</div>
+                <div class="output-line">Type <span class="highlight">'help'</span> for a list of commands.</div>
+                <br>
+            </div>
+            
+            <div style="padding: 0 20px 20px 20px;">
+                <div class="input-area">
+                    <span class="prompt">x402@node:~$</span>
+                    <input type="text" id="cmd-input" autocomplete="off" spellcheck="false" autofocus>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const input = document.getElementById('cmd-input');
+        const output = document.getElementById('output');
+        const terminalWindow = document.querySelector('.terminal-content');
+
+        const commands = {
+            help: () => {
+                print("Available commands:");
+                print("  <span class='highlight'>help</span>     - Display available commands");
+                print("  <span class='highlight'>status</span>   - Show system diagnostics");
+                print("  <span class='highlight'>privacy</span>  - Explain private execution x402");
+                print("  <span class='highlight'>run</span>      - Simulate launching a private execution capsule");
+                print("  <span class='highlight'>clear</span>    - Clear the terminal screen");
+            },
+            status: () => {
+                print("System Diagnostics:");
+                print("-------------------");
+                print("Core Integrity: <span class='success'>100%</span>");
+                print("Encryption:     <span class='success'>AES-256-GCM ENABLED</span>");
+                print("Node Status:    <span class='success'>ONLINE</span> (Latency: 12ms)");
+                print("Privacy Layer:  <span class='success'>ACTIVE</span>");
+            },
+            privacy: () => {
+                print("Fluxal x402 Protocol:");
+                print("A decentralized privacy layer for Solana transactions.");
+                print("Obfuscates transaction origin and destination using zk-SNARKs.");
+                print("Ensures complete anonymity for institutional-grade execution.");
+            },
+            clear: () => {
+                output.innerHTML = '';
+            },
+            run: async () => {
+                input.disabled = true;
+                await typeLine("Initializing execution environment...", 50);
+                await delay(500);
+                await typeLine("Allocating secure memory blocks...", 30);
+                await delay(300);
+                print("[INFO] Handshake initialized with Node x402-Alpha");
+                await delay(400);
+                print("[INFO] Verifying zk-proofs...");
+                await delay(800);
+                print("[SUCCESS] Proofs verified.");
+                await delay(300);
+                print("[INFO] Bundling transaction capsule...");
+                await delay(600);
+                await typeLine("........................................", 20);
+                print("<span class='success'>[SUCCESS] Execution Capsule Launched.</span>");
+                print("Transaction Hash: <span class='info'>5x9...a2F</span>");
+                input.disabled = false;
+                input.focus();
+            }
+        };
+
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const text = input.value.trim();
+                const cmd = text.toLowerCase();
+                
+                // Echo the command
+                print(`<span class="prompt">x402@node:~$</span> ${text}`);
+                
+                input.value = '';
+
+                if (cmd) {
+                    if (commands[cmd]) {
+                        commands[cmd]();
+                    } else {
+                        print(`<span class="error">Unknown command: '${text}'. Type 'help'.</span>`);
+                    }
+                }
+                
+                // Scroll to bottom
+                terminalWindow.scrollTop = terminalWindow.scrollHeight;
+            }
+        });
+
+        function print(html) {
+            const div = document.createElement('div');
+            div.className = 'output-line';
+            div.innerHTML = html;
+            output.appendChild(div);
+            terminalWindow.scrollTop = terminalWindow.scrollHeight;
+        }
+
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        async function typeLine(text, speed = 50) {
+            const div = document.createElement('div');
+            div.className = 'output-line';
+            output.appendChild(div);
+            
+            let i = 0;
+            while (i < text.length) {
+                div.innerHTML += text.charAt(i);
+                terminalWindow.scrollTop = terminalWindow.scrollHeight;
+                i++;
+                await delay(speed);
+            }
+        }
+
+        // Initial Focus
+        window.onload = () => input.focus();
+        // Keep focus
+        document.addEventListener('click', () => input.focus());
+
+    </script>
+</body>
+</html>
