@@ -26,20 +26,20 @@ export default function FluxalCursor() {
         app = TubesCursor(canvasRef.current, {
           tubes: {
             colors: ["#FFE500", "#FFE500", "#FF8C00"],
-            thickness: 3.0,
-            length: 2.2,
+            thickness: 1.8,
+            length: 1.3,
             velocity: 2.5,
             fade: 0.06
           },
           lights: {
             intensity: 420,
             colors: ["#FFE500", "#FF8C00", "#FFE500", "#FF8C00"],
-            radius: 1.8
+            radius: 1.1
           },
           bloom: {
             strength: 0.8,
             threshold: 0.2,
-            radius: 0.5
+            radius: 0.3
           }
         });
 
