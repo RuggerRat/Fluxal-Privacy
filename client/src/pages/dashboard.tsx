@@ -48,7 +48,7 @@ export default function Dashboard() {
       </nav>
 
       {/* Ticker Bar */}
-      <div className="fixed top-24 w-full z-40 bg-[#FFE500]/5 border-b border-[#FFE500]/20 py-2 px-4 overflow-hidden h-9 flex items-center">
+      <div className="absolute top-24 w-full z-40 bg-[#FFE500]/5 border-b border-[#FFE500]/20 py-2 px-4 overflow-hidden h-9 flex items-center">
         <div className="flex items-center gap-4 text-[10px] md:text-xs font-neue text-[#FFE500] tracking-widest whitespace-nowrap animate-marquee">
           <span className="font-bold">Quick User Updates</span>
           <span>—</span>
@@ -61,7 +61,7 @@ export default function Dashboard() {
       </div>
 
       {/* Beta Notification Bar */}
-      <div className="fixed top-[132px] w-full z-40 bg-[#FFE500]/5 border-b border-[#FFE500]/20 py-2 px-4 flex justify-center items-center gap-4 h-10">
+      <div className="absolute top-[132px] w-full z-40 bg-[#FFE500]/5 border-b border-[#FFE500]/20 py-2 px-4 flex justify-center items-center gap-4 h-10">
         <p className="text-[10px] md:text-xs font-neue tracking-wider text-[#FFE500] truncate">
           <span className="font-bold">Dashboard Beta is live</span> — The FLUXAL dashboard beta (in demo mode) is now live on Solana mainnet.
         </p>
@@ -166,10 +166,10 @@ export default function Dashboard() {
             {/* Feature 1 */}
             <div className="group p-8 rounded-2xl border border-white/10 bg-white/5 hover:border-[#FFE500]/50 hover:bg-[#FFE500]/5 transition-all duration-300">
               <div className="flex items-center gap-3 mb-4">
-                <WifiOff className="w-5 h-5 text-[#FFE500]" />
-                <h3 className="font-bold font-neue text-white uppercase tracking-wider text-sm">TRUE OFFLINE PAYMENTS</h3>
+                <WifiOff className="w-6 h-6 text-[#FFE500]" />
+                <h3 className="font-bold font-neue text-white uppercase tracking-wider text-base">TRUE OFFLINE PAYMENTS</h3>
               </div>
-              <p className="text-gray-400 text-xs leading-relaxed font-neue">
+              <p className="text-gray-400 text-sm leading-relaxed font-neue">
                 Complete device-to-device transactions with zero internet connectivity. Tap-to-pay using NFC, Bluetooth, or QR codes.
               </p>
             </div>
@@ -177,10 +177,10 @@ export default function Dashboard() {
             {/* Feature 2 */}
             <div className="group p-8 rounded-2xl border border-white/10 bg-white/5 hover:border-[#FFE500]/50 hover:bg-[#FFE500]/5 transition-all duration-300">
               <div className="flex items-center gap-3 mb-4">
-                <Shield className="w-5 h-5 text-[#FFE500]" />
-                <h3 className="font-bold font-neue text-white uppercase tracking-wider text-sm">CRYPTOGRAPHIC PRIVACY</h3>
+                <Shield className="w-6 h-6 text-[#FFE500]" />
+                <h3 className="font-bold font-neue text-white uppercase tracking-wider text-base">CRYPTOGRAPHIC PRIVACY</h3>
               </div>
-              <p className="text-gray-400 text-xs leading-relaxed font-neue">
+              <p className="text-gray-400 text-sm leading-relaxed font-neue">
                 Zero-knowledge proofs and Pedersen commitments ensure mathematical privacy guarantees. Perfect anonymity.
               </p>
             </div>
@@ -188,10 +188,10 @@ export default function Dashboard() {
             {/* Feature 3 */}
             <div className="group p-8 rounded-2xl border border-white/10 bg-white/5 hover:border-[#FFE500]/50 hover:bg-[#FFE500]/5 transition-all duration-300">
               <div className="flex items-center gap-3 mb-4">
-                <Link className="w-5 h-5 text-[#FFE500]" />
-                <h3 className="font-bold font-neue text-white uppercase tracking-wider text-sm">PERFECT DIVISIBILITY</h3>
+                <Link className="w-6 h-6 text-[#FFE500]" />
+                <h3 className="font-bold font-neue text-white uppercase tracking-wider text-base">PERFECT DIVISIBILITY</h3>
               </div>
-              <p className="text-gray-400 text-xs leading-relaxed font-neue">
+              <p className="text-gray-400 text-sm leading-relaxed font-neue">
                 Spend exact amounts with automatic cryptographic change creation. No minimum amounts or rounding errors.
               </p>
             </div>
@@ -199,10 +199,10 @@ export default function Dashboard() {
             {/* Feature 4 */}
             <div className="group p-8 rounded-2xl border border-white/10 bg-white/5 hover:border-[#FFE500]/50 hover:bg-[#FFE500]/5 transition-all duration-300">
               <div className="flex items-center gap-3 mb-4">
-                <Lock className="w-5 h-5 text-[#FFE500]" />
-                <h3 className="font-bold font-neue text-white uppercase tracking-wider text-sm">SECURE ENCLAVES</h3>
+                <Lock className="w-6 h-6 text-[#FFE500]" />
+                <h3 className="font-bold font-neue text-white uppercase tracking-wider text-base">SECURE ENCLAVES</h3>
               </div>
-              <p className="text-gray-400 text-xs leading-relaxed font-neue">
+              <p className="text-gray-400 text-sm leading-relaxed font-neue">
                 Private keys stored in tamper-resistant hardware. Biometric authentication for high-value transactions.
               </p>
             </div>
@@ -210,10 +210,10 @@ export default function Dashboard() {
             {/* Feature 5 */}
             <div className="group p-8 rounded-2xl border border-white/10 bg-white/5 hover:border-[#FFE500]/50 hover:bg-[#FFE500]/5 transition-all duration-300">
               <div className="flex items-center gap-3 mb-4">
-                <Ban className="w-5 h-5 text-[#FFE500]" />
-                <h3 className="font-bold font-neue text-white uppercase tracking-wider text-sm">ANTI-DOUBLE SPENDING</h3>
+                <Ban className="w-6 h-6 text-[#FFE500]" />
+                <h3 className="font-bold font-neue text-white uppercase tracking-wider text-base">ANTI-DOUBLE SPENDING</h3>
               </div>
-              <p className="text-gray-400 text-xs leading-relaxed font-neue">
+              <p className="text-gray-400 text-sm leading-relaxed font-neue">
                 Nullifiers prevent double-spending while maintaining complete anonymity. Cryptographic stamps ensure validity.
               </p>
             </div>
@@ -221,10 +221,10 @@ export default function Dashboard() {
             {/* Feature 6 */}
             <div className="group p-8 rounded-2xl border border-white/10 bg-white/5 hover:border-[#FFE500]/50 hover:bg-[#FFE500]/5 transition-all duration-300">
               <div className="flex items-center gap-3 mb-4">
-                <Zap className="w-5 h-5 text-[#FFE500]" />
-                <h3 className="font-bold font-neue text-white uppercase tracking-wider text-sm">SOLANA SPEED</h3>
+                <Zap className="w-6 h-6 text-[#FFE500]" />
+                <h3 className="font-bold font-neue text-white uppercase tracking-wider text-base">SOLANA SPEED</h3>
               </div>
-              <p className="text-gray-400 text-xs leading-relaxed font-neue">
+              <p className="text-gray-400 text-sm leading-relaxed font-neue">
                 Built on Solana for lightning-fast, low-cost USDC settlement when syncing online. High throughput meets privacy.
               </p>
             </div>
