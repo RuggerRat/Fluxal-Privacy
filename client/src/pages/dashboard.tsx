@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Copy, MoveRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import fluxalTitle from "@assets/Untitled_design__62_-removebg-preview_1765006354328.png";
+import fluxalLogo from "@assets/image-removebg-preview_(1)_1765005724882.png";
 
 export default function Dashboard() {
   const { toast } = useToast();
@@ -23,9 +25,8 @@ export default function Dashboard() {
       {/* Top Navigation Bar */}
       <nav className="fixed top-0 w-full z-50 flex items-center justify-between px-8 py-6 bg-black/50 backdrop-blur-sm border-b border-white/10">
         <div className="flex items-center gap-2">
-           <h1 className="text-5xl font-black tracking-tighter font-orbitron bg-clip-text text-transparent bg-gradient-to-b from-white via-[#FFE500] to-[#FF8C00] select-none italic transform -skew-x-12">
-            FLUXAL
-          </h1>
+           <img src={fluxalLogo} alt="Fluxal Logo" className="h-24 w-auto object-contain" />
+           <img src={fluxalTitle} alt="FLUXAL" className="h-20 w-auto object-contain" />
         </div>
 
         <div className="hidden md:flex items-center gap-8 font-neue text-sm text-gray-400 tracking-widest font-medium">
