@@ -233,6 +233,143 @@ export default function Dashboard() {
         </div>
       </div>
 
+      {/* Ecosystem Section */}
+      <div className="relative z-20 w-full bg-black py-20 px-8 md:px-20 border-t border-[#FFE500]/20">
+        <div className="max-w-7xl mx-auto">
+          {/* Section Header */}
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-neue font-bold text-white mb-2 uppercase tracking-wide">
+              <span className="text-[#FFE500]">FLUXAL</span> ECOSYSTEM
+            </h2>
+            <p className="text-gray-400 text-sm tracking-[0.2em] uppercase">
+              LAYERED PRIVACY. SCALABLE TRUST.
+            </p>
+          </div>
+
+          <div className="flex flex-col md:flex-row gap-8 items-stretch justify-center">
+            {/* Left Card - $FLUXAL */}
+            <div className="flex-1 rounded-2xl border border-[#FFE500]/30 bg-[#FFE500]/5 p-8 relative overflow-hidden">
+               {/* Glow effect */}
+               <div className="absolute top-0 right-0 w-32 h-32 bg-[#FFE500]/10 blur-3xl -z-10" />
+               
+               <h3 className="text-[#FFE500] font-bold text-xl font-neue mb-1">$FLUXAL</h3>
+               <p className="text-white text-xs tracking-wider uppercase mb-6 opacity-80">THE UTILITY TOKEN</p>
+
+               <ul className="space-y-3">
+                 {[
+                   "Governance and protocol decisions",
+                   "Programmatic buy-back and burns",
+                   "Access gates for premium features",
+                   "Early access to new products"
+                 ].map((item, i) => (
+                   <li key={i} className="flex items-center gap-3 text-xs text-gray-300 font-neue">
+                     <div className="w-4 h-4 rounded-full border border-[#FFE500] flex items-center justify-center">
+                       <div className="w-1.5 h-1.5 bg-[#FFE500] rounded-full" />
+                     </div>
+                     {item}
+                   </li>
+                 ))}
+               </ul>
+            </div>
+
+            {/* Arrow Divider (Desktop) */}
+            <div className="hidden md:flex flex-col justify-center items-center px-4">
+              <MoveRight className="w-8 h-8 text-gray-600" />
+            </div>
+
+            {/* Right Card - Stablecoins */}
+            <div className="flex-1 rounded-2xl border border-[#FF8C00]/30 bg-[#FF8C00]/5 p-8 relative overflow-hidden">
+               {/* Glow effect */}
+               <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF8C00]/10 blur-3xl -z-10" />
+
+               <h3 className="text-[#FF8C00] font-bold text-xl font-neue mb-1">USDC/USDT/SOL + OTHERS</h3>
+               <p className="text-white text-xs tracking-wider uppercase mb-6 opacity-80">PRIVATE DIGITAL CASH</p>
+
+               <ul className="space-y-3">
+                 {[
+                   "Any stablecoin or token with privacy",
+                   "Complete transaction anonymity",
+                   "Offline payment capability",
+                   "Zero-knowledge proof transfers"
+                 ].map((item, i) => (
+                   <li key={i} className="flex items-center gap-3 text-xs text-gray-300 font-neue">
+                     <div className="w-4 h-4 rounded-full border border-[#FF8C00] flex items-center justify-center">
+                       <div className="w-1.5 h-1.5 bg-[#FF8C00] rounded-full" />
+                     </div>
+                     {item}
+                   </li>
+                 ))}
+               </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Cryptographic Innovation Section */}
+      <div className="relative z-20 w-full bg-black py-20 px-8 md:px-20 border-t border-[#FFE500]/20">
+        <div className="max-w-7xl mx-auto">
+          {/* Section Header */}
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-neue font-bold text-white mb-2 uppercase tracking-wide">
+              CRYPTOGRAPHIC <span className="text-[#FFE500]">INNOVATION</span>
+            </h2>
+            <p className="text-gray-400 text-sm tracking-[0.2em] uppercase">
+              LAYERED PRIVACY. SCALABLE TRUST.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div className="space-y-12">
+              <div>
+                <h3 className="text-[#FFE500] font-bold font-neue uppercase tracking-wider mb-4 border-l-2 border-[#FFE500] pl-4">PEDERSEN COMMITMENTS</h3>
+                <p className="text-gray-400 text-sm leading-relaxed font-neue">
+                  Our system uses <span className="text-white font-bold">Pedersen commitments</span> to hide transaction amounts while maintaining mathematical verifiability. Each commitment (vG + rH) cryptographically binds to a value without revealing it.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-[#FF8C00] font-bold font-neue uppercase tracking-wider mb-4 border-l-2 border-[#FF8C00] pl-4">ZERO-KNOWLEDGE PROOFS</h3>
+                <p className="text-gray-400 text-sm leading-relaxed font-neue">
+                  <span className="text-white font-bold">zk-SNARKs</span> generate compact proofs that verify transaction validity without exposing any sensitive information. Prove you have funds, prove amounts balance, and keep everything private.
+                </p>
+              </div>
+            </div>
+
+            {/* Right Content - Code Block */}
+            <div className="rounded-xl bg-gray-900/50 border border-white/10 p-6 font-mono text-xs overflow-hidden relative group">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#FFE500] to-[#FF8C00]" />
+              
+              <div className="space-y-4">
+                <div className="text-gray-500">// Pedersen Commitment</div>
+                <div className="text-white">
+                  <span className="text-[#FF8C00]">commitment</span> = v * G + r * H
+                </div>
+
+                <div className="text-gray-500 mt-4">// Zero-Knowledge Proof</div>
+                <div className="text-white">
+                  <span className="text-[#FFE500]">proof</span> = zk_prove( <span className="text-blue-400">statement</span>: <span className="text-green-400">"I know v, r such that C = vG + rH"</span>,
+                  <br/>
+                  &nbsp;&nbsp;<span className="text-blue-400">witness</span>: &#123; v, r &#125;, <span className="text-blue-400">public</span>: &#123; C &#125; )
+                </div>
+
+                <div className="text-gray-500 mt-4">// Nullifier Generation</div>
+                <div className="text-white">
+                  <span className="text-[#FF8C00]">nullifier</span> = hash( private_key, commitment )
+                </div>
+              </div>
+
+              {/* Decorative terminal dots */}
+              <div className="absolute top-4 right-4 flex gap-2">
+                <div className="w-2 h-2 rounded-full bg-red-500/50" />
+                <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
+                <div className="w-2 h-2 rounded-full bg-green-500/50" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   );
 }
