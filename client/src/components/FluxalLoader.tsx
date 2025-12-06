@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function FluxalLoader({ duration = 3000 }: { duration?: number }) {
   const stageRef = useRef<HTMLDivElement>(null);
