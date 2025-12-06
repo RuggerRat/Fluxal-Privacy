@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Copy, MoveRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import tokenImage from "@assets/Untitled_design_(60)_1765005173140.png";
 
 export default function Dashboard() {
   const { toast } = useToast();
@@ -129,18 +128,7 @@ export default function Dashboard() {
 
         {/* Right Visual (Token Image) */}
         <div className="flex-1 flex items-center justify-center relative mt-10 md:mt-0">
-          <motion.div 
-             initial={{ opacity: 0, scale: 0.8 }}
-             animate={{ opacity: 1, scale: 1 }}
-             transition={{ duration: 1, delay: 0.2 }}
-             className="relative w-[400px] h-[400px] md:w-[500px] md:h-[500px]"
-          >
-            <img 
-              src={tokenImage} 
-              alt="Fluxal Token" 
-              className="w-full h-full object-contain drop-shadow-[0_0_50px_rgba(255,229,0,0.15)]"
-            />
-          </motion.div>
+          {/* Token Image Removed */}
         </div>
 
       </div>
