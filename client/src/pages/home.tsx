@@ -5,8 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { useLocation } from "wouter";
 
-import fluxalText from "@assets/image_1765006114990.png";
-
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [, setLocation] = useLocation();
@@ -52,16 +50,12 @@ export default function Home() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center relative flex flex-col items-center"
+          className="text-center relative"
         >
           {/* Main Title */}
-          <div className="flex items-center justify-center mb-8">
-            <img 
-              src={fluxalText} 
-              alt="FLUXAL" 
-              className="h-32 md:h-48 w-auto object-contain drop-shadow-[0_0_35px_rgba(255,229,0,0.6)]"
-            />
-          </div>
+          <h1 className="text-7xl md:text-9xl font-black tracking-tighter font-orbitron bg-clip-text text-transparent bg-gradient-to-b from-white via-[#FFE500] to-[#FF8C00] drop-shadow-[0_0_35px_rgba(255,229,0,0.6)] select-none italic transform -skew-x-12">
+            FLUXAL
+          </h1>
           
           {/* Subtitle */}
           <motion.p 
