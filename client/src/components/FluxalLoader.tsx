@@ -1,7 +1,24 @@
 import { useEffect, useRef } from 'react';
 
-export default function FluxalLoader() {
+export default function FluxalLoader({ duration = 3000 }: { duration?: number }) {
   const stageRef = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    // Progress bar animation
+    const startTime = Date.now();
+    const interval = setInterval(() => {
+      const elapsed = Date.now() - startTime;
+      const newProgress = Math.min((elapsed / duration) * 100, 100);
+      setProgress(newProgress);
+      
+      if (newProgress >= 100) {
+        clearInterval(interval);
+      }
+    }, 16); // ~60fps
+
+    return () => clearInterval(interval);
+  }, [duration]);
 
   useEffect(() => {
     if (!stageRef.current) return;
@@ -98,7 +115,10 @@ export default function FluxalLoader() {
           INITIALIZING
         </h2>
         <div className="mt-4 w-64 h-1 bg-[#333] overflow-hidden">
-            <div className="h-full bg-[#FFE500] animate-progress-indeterminate" />
+            <div 
+              className="h-full bg-[#FFE500] transition-all ease-linear" 
+              style={{ width: `${progress}%` }}
+            />
         </div>
       </div>
 

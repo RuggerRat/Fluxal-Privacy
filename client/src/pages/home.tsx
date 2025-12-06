@@ -6,16 +6,18 @@ import { useState } from "react";
 
 import xLogo from "@assets/image_1764912714351.png";
 
+import { useLocation } from "wouter";
+
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
+  const [, setLocation] = useLocation();
 
   const handleLaunch = () => {
     setIsLoading(true);
     // Simulate loading delay
     setTimeout(() => {
       setIsLoading(false);
-      // Here you would typically navigate to the terminal page
-      // setLocation('/terminal'); 
+      setLocation('/terminal'); 
     }, 3000);
   };
 
