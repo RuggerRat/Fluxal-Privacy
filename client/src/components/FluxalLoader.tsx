@@ -2,22 +2,28 @@ import { useEffect, useRef, useState } from 'react';
 
 export default function FluxalLoader({ duration = 3000 }: { duration?: number }) {
   const stageRef = useRef<HTMLDivElement>(null);
-  const [progress, setProgress] = useState(0);
+  const progressBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Progress bar animation
     const startTime = Date.now();
-    const interval = setInterval(() => {
-      const elapsed = Date.now() - startTime;
-      const newProgress = Math.min((elapsed / duration) * 100, 100);
-      setProgress(newProgress);
-      
-      if (newProgress >= 100) {
-        clearInterval(interval);
-      }
-    }, 16); // ~60fps
+    let animationFrame: number;
 
-    return () => clearInterval(interval);
+    const animateProgress = () => {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min((elapsed / duration) * 100, 100);
+      
+      if (progressBarRef.current) {
+        progressBarRef.current.style.width = `${progress}%`;
+      }
+
+      if (progress < 100) {
+        animationFrame = requestAnimationFrame(animateProgress);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(animateProgress);
+
+    return () => cancelAnimationFrame(animationFrame);
   }, [duration]);
 
   useEffect(() => {
@@ -116,8 +122,9 @@ export default function FluxalLoader({ duration = 3000 }: { duration?: number })
         </h2>
         <div className="mt-4 w-64 h-1 bg-[#333] overflow-hidden">
             <div 
-              className="h-full bg-[#FFE500] transition-all ease-linear" 
-              style={{ width: `${progress}%` }}
+              ref={progressBarRef}
+              className="h-full bg-[#FFE500]" 
+              style={{ width: '0%' }}
             />
         </div>
       </div>
