@@ -24,9 +24,9 @@ export default function Dashboard() {
       <FluxalCursor />
 
       {/* Top Navigation Bar */}
-      <nav className="fixed top-0 w-full z-50 flex items-center justify-between px-8 py-6 bg-black/50 backdrop-blur-sm border-b border-[#FFE500]/30">
-        <div className="flex items-center">
-           <img src={fluxalTitle} alt="FLUXAL" className="h-16 w-auto object-contain" />
+      <nav className="fixed top-0 w-full z-50 flex items-center justify-between px-8 py-2 bg-black/50 backdrop-blur-sm border-b border-[#FFE500]/30">
+        <div className="flex items-center h-full">
+           <img src={fluxalTitle} alt="FLUXAL" className="h-20 w-auto object-contain" />
         </div>
 
         <div className="flex items-center gap-8">
