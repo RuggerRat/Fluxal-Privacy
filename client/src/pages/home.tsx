@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useLocation } from "wouter";
 
 import fluxalText from "@assets/Untitled_design_(61)_1765005676350.png";
+import fluxalLogo from "@assets/image-removebg-preview_(1)_1765005724882.png";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
@@ -55,11 +56,18 @@ export default function Home() {
           className="text-center relative flex flex-col items-center"
         >
           {/* Main Title */}
-          <img 
-            src={fluxalText} 
-            alt="FLUXAL" 
-            className="h-32 md:h-48 w-auto object-contain drop-shadow-[0_0_35px_rgba(255,229,0,0.6)] mb-8"
-          />
+          <div className="flex items-center gap-4 mb-8">
+            <img 
+              src={fluxalLogo} 
+              alt="Fluxal Logo" 
+              className="h-32 md:h-48 w-auto object-contain drop-shadow-[0_0_35px_rgba(255,229,0,0.4)]" 
+            />
+            <img 
+              src={fluxalText} 
+              alt="FLUXAL" 
+              className="h-24 md:h-40 w-auto object-contain drop-shadow-[0_0_35px_rgba(255,229,0,0.6)]"
+            />
+          </div>
           
           {/* Subtitle */}
           <motion.p 
