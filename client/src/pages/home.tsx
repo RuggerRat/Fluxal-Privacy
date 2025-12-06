@@ -1,12 +1,40 @@
 import FluxalCursor from "@/components/FluxalCursor";
+import FluxalLoader from "@/components/FluxalLoader";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 
 import xLogo from "@assets/image_1764912714351.png";
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleLaunch = () => {
+    setIsLoading(true);
+    // Simulate loading delay
+    setTimeout(() => {
+      setIsLoading(false);
+      // Here you would typically navigate to the terminal page
+      // setLocation('/terminal'); 
+    }, 3000);
+  };
+
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden relative selection:bg-[#FFE500] selection:text-black">
+      <AnimatePresence>
+        {isLoading && (
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+                className="fixed inset-0 z-[100]"
+            >
+                <FluxalLoader />
+            </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Background Cursor Effect */}
       <FluxalCursor />
 
@@ -49,6 +77,7 @@ export default function Home() {
           >
             <Button 
               size="lg"
+              onClick={handleLaunch}
               className="relative group overflow-hidden bg-[#FFE500] text-black hover:bg-[#FFDD00] hover:text-black hover:scale-105 transition-all duration-300 text-lg font-bold px-10 py-7 rounded-none border-none uppercase tracking-wider transform -skew-x-12"
               style={{ clipPath: "polygon(15% 0, 100% 0, 100% 70%, 85% 100%, 0 100%, 0 30%)" }}
             >
