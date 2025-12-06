@@ -3,7 +3,7 @@ import FluxalCursor from "@/components/FluxalCursor";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { Copy, MoveRight, WifiOff, Shield, Link, Lock, Ban, Zap, CheckCircle, ArrowLeftRight, ArrowRight } from "lucide-react";
+import { Copy, MoveRight, WifiOff, Shield, Link, Lock, Ban, Zap } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import fluxalTitle from "@assets/Untitled_design__62_-removebg-preview_1765006354328.png";
 
@@ -21,7 +21,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden relative font-neue selection:bg-[#FFE500] selection:text-black">
-      <FluxalCursor key="dashboard-cursor-v2" />
+      <FluxalCursor />
 
       {/* Top Navigation Bar */}
       <nav className="fixed top-0 w-full z-50 flex items-center justify-between px-8 py-2 bg-black/50 backdrop-blur-sm border-b border-[#FFE500]/30 h-24">
@@ -230,117 +230,6 @@ export default function Dashboard() {
             </div>
 
           </div>
-        </div>
-      </div>
-
-      {/* Ecosystem Section */}
-      <div className="relative z-20 w-full bg-black py-20 px-8 md:px-20 border-t border-[#FFE500]/20">
-        <div className="max-w-7xl mx-auto">
-          
-          {/* Ecosystem Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-neue font-bold text-white mb-4 uppercase tracking-wide">
-              <span className="text-[#FFE500]">FLUXAL</span> ECOSYSTEM
-            </h2>
-            <p className="text-gray-400 text-sm md:text-base tracking-widest uppercase">
-              LAYERED PRIVACY. SCALABLE TRUST.
-            </p>
-          </div>
-
-          {/* Ecosystem Cards */}
-          <div className="flex flex-col md:flex-row gap-8 items-center justify-center mb-32 relative">
-            
-            {/* Left Card - Token */}
-            <div className="flex-1 w-full p-8 rounded-2xl border border-[#FFE500]/30 bg-[#FFE500]/5 hover:bg-[#FFE500]/10 transition-all duration-300 h-full">
-              <h3 className="text-2xl font-bold font-neue text-[#FFE500] mb-1">$FLUX</h3>
-              <p className="text-xs text-gray-400 font-neue tracking-wider mb-6 uppercase">THE UTILITY TOKEN</p>
-              
-              <ul className="space-y-4">
-                {[
-                  "Governance and protocol decisions",
-                  "Programmatic buy-back and burns",
-                  "Access gates for premium features",
-                  "Early access to new products"
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-[#FFE500] flex-shrink-0" />
-                    <span className="text-sm text-gray-300 font-neue">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Exchange Icon */}
-            <div className="hidden md:flex items-center justify-center text-[#FFE500]">
-               <ArrowLeftRight className="w-8 h-8" />
-            </div>
-
-            {/* Right Card - Stablecoins */}
-            <div className="flex-1 w-full p-8 rounded-2xl border border-white/20 bg-white/5 hover:border-[#FFE500]/30 transition-all duration-300 h-full">
-              <h3 className="text-2xl font-bold font-neue text-[#8da2b5] mb-1 text-white">USDC/USDT/SOL + OTHERS</h3>
-              <p className="text-xs text-gray-400 font-neue tracking-wider mb-6 uppercase">PRIVATE DIGITAL CASH</p>
-              
-              <ul className="space-y-4">
-                {[
-                  "Any stablecoin or token with privacy",
-                  "Complete transaction anonymity",
-                  "Offline payment capability",
-                  "Zero-knowledge proof transfers"
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <ArrowRight className="w-5 h-5 text-white flex-shrink-0" />
-                    <span className="text-sm text-gray-300 font-neue">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* Innovation Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-neue font-bold text-white mb-4 uppercase tracking-wide">
-              CRYPTOGRAPHIC <span className="text-[#FFE500]">INNOVATION</span>
-            </h2>
-            <p className="text-gray-400 text-sm md:text-base tracking-widest uppercase">
-              LAYERED PRIVACY. SCALABLE TRUST.
-            </p>
-          </div>
-
-          {/* Innovation Content */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            
-            {/* Left Text */}
-            <div className="space-y-12">
-              <div>
-                <h3 className="text-[#FFE500] font-bold font-neue text-lg mb-4 uppercase tracking-wider">PEDERSEN COMMITMENTS</h3>
-                <p className="text-gray-300 font-neue leading-relaxed text-sm">
-                  Our system uses <strong className="text-white">Pedersen commitments</strong> to hide transaction amounts while maintaining mathematical verifiability. Each commitment (vG + rH) <strong className="text-white">cryptographically binds to a value without revealing it.</strong>
-                </p>
-              </div>
-              
-              <div>
-                <h3 className="text-[#FFE500] font-bold font-neue text-lg mb-4 uppercase tracking-wider">ZERO-KNOWLEDGE PROOFS</h3>
-                <p className="text-gray-300 font-neue leading-relaxed text-sm">
-                  zk-SNARKs generate compact proofs that verify transaction validity without exposing any sensitive information. Prove you have funds, prove amounts balance, and keep everything private.
-                </p>
-              </div>
-            </div>
-
-            {/* Right Code Block */}
-            <div className="rounded-xl border border-white/10 bg-[#111] p-6 font-mono text-xs overflow-x-auto">
-              <div className="text-gray-500 mb-2">// Pedersen Commitment</div>
-              <div className="mb-4"><span className="text-[#FFE500]">commitment</span> = v * G + r * H</div>
-              
-              <div className="text-gray-500 mb-2">// Zero-Knowledge Proof</div>
-              <div className="mb-1"><span className="text-[#FF8C00]">proof</span> = zk_prove( statement: <span className="text-gray-400">"I know v, r such that C = vG + rH"</span>,</div>
-              <div className="mb-4">witness: {'{'} v, r {'}'}, public: {'{'} C {'}'} )</div>
-              
-              <div className="text-gray-500 mb-2">// Nullifier Generation</div>
-              <div><span className="text-[#FFE500]">nullifier</span> = hash( private_key, commitment )</div>
-            </div>
-
-          </div>
-
         </div>
       </div>
 
