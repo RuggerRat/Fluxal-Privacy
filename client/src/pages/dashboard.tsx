@@ -24,9 +24,9 @@ export default function Dashboard() {
       <FluxalCursor />
 
       {/* Top Navigation Bar */}
-      <nav className="fixed top-0 w-full z-50 flex items-center justify-between px-8 py-2 bg-black/50 backdrop-blur-sm border-b border-[#FFE500]/30">
+      <nav className="fixed top-0 w-full z-50 flex items-center justify-between px-8 py-2 bg-black/50 backdrop-blur-sm border-b border-[#FFE500]/30 h-24">
         <div className="flex items-center h-full">
-           <img src={fluxalTitle} alt="FLUXAL" className="h-20 w-auto object-contain" />
+           <img src={fluxalTitle} alt="FLUXAL" className="h-16 w-auto object-contain" />
         </div>
 
         <div className="flex items-center gap-8">
@@ -48,7 +48,7 @@ export default function Dashboard() {
       </nav>
 
       {/* Ticker Bar */}
-      <div className="fixed top-[88px] w-full z-40 bg-[#FFE500]/5 border-y border-[#FFE500]/20 py-2 px-4 overflow-hidden">
+      <div className="fixed top-24 w-full z-40 bg-[#FFE500]/5 border-b border-[#FFE500]/20 py-2 px-4 overflow-hidden h-9 flex items-center">
         <div className="flex items-center gap-4 text-xs font-neue text-[#FFE500] tracking-widest whitespace-nowrap animate-marquee">
           <span className="font-bold">Quick User Updates</span>
           <span>-</span>
@@ -60,8 +60,21 @@ export default function Dashboard() {
         </div>
       </div>
 
+      {/* Beta Notification Bar */}
+      <div className="fixed top-[132px] w-full z-40 bg-black border-b border-[#FFE500]/20 py-2 px-4 flex justify-center items-center gap-4 h-10">
+        <p className="text-[10px] md:text-xs font-neue tracking-wider text-gray-400 truncate">
+          <span className="font-bold text-white">Dashboard Beta is live</span> — The FLUXAL dashboard beta (in demo mode) is now live on Solana mainnet.
+        </p>
+        <Button 
+          variant="outline" 
+          className="hidden md:flex h-6 text-[10px] px-4 rounded-full border-[#FFE500]/30 text-[#FFE500] hover:bg-[#FFE500] hover:text-black uppercase tracking-widest bg-transparent"
+        >
+          Read more & Try it here
+        </Button>
+      </div>
+
       {/* Main Hero Section */}
-      <div className="relative z-10 flex flex-col md:flex-row min-h-screen pt-32 px-8 md:px-20 items-center">
+      <div className="relative z-10 flex flex-col md:flex-row min-h-screen pt-52 px-8 md:px-20 items-center">
         
         {/* Left Content */}
         <div className="flex-1 flex flex-col justify-center space-y-8">
