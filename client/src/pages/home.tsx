@@ -17,7 +17,7 @@ export default function Home() {
     // Simulate loading delay
     setTimeout(() => {
       setIsLoading(false);
-      // Loading complete, stay on page
+      window.location.href = '/terminal.html';
     }, 3000);
   };
 
