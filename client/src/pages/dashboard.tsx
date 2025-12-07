@@ -67,13 +67,11 @@ export default function Dashboard() {
             <a href="#" className="hover:text-[#FFE500] transition-colors">FAQ</a>
           </div>
 
-          <a href="/signin">
-            <Button 
-              className="bg-[#FFE500] border border-[#FFE500] text-black hover:bg-[#FF8C00] hover:text-black font-bold rounded-full px-6 py-1 h-auto font-neue tracking-wide text-xs uppercase"
-            >
-              WALLET
-            </Button>
-          </a>
+          <Button 
+            className="bg-[#FFE500] border border-[#FFE500] text-black hover:bg-[#FF8C00] hover:text-black font-bold rounded-full px-6 py-1 h-auto font-neue tracking-wide text-xs uppercase"
+          >
+            WALLET
+          </Button>
         </div>
       </nav>
 
