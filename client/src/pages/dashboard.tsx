@@ -27,7 +27,7 @@ const INITIAL_SOL_PRICE = 132.67;
 export default function Dashboard() {
   const [_, setLocation] = useLocation();
   const { user, authenticated, logout, connectWallet } = usePrivy();
-  const { wallets } = useWallets();
+  const { wallets, ready: walletsReady } = useWallets();
   const { toast } = useToast();
   const [balance, setBalance] = useState<number>(0);
   const [solPrice, setSolPrice] = useState<number>(INITIAL_SOL_PRICE);
@@ -41,14 +41,21 @@ export default function Dashboard() {
   const shortAddress = address ? `${address.slice(0, 4)}...${address.slice(-4)}` : "Not Connected";
 
   const handleDeposit = async () => {
+    if (!walletsReady) {
+        toast({
+            title: "Wallet Initializing",
+            description: "Please wait a moment for wallet connection to stabilize.",
+            className: "bg-[#FFE500] text-black border-none font-mono",
+        });
+        return;
+    }
+
     try {
         // Use the first connected wallet available for signing
-        // We prioritize the wallet that matches the authenticated user's address if possible, 
-        // but fallback to any connected wallet to ensure the transaction can proceed.
         const wallet = wallets.find((w) => w.address === user?.wallet?.address) || wallets[0];
         
         if (!wallet) {
-            console.error("No connected wallets found via useWallets()");
+            console.error("No connected wallets found via useWallets(). Wallets array:", wallets);
             toast({
                 title: "Wallet Not Detected",
                 description: "We couldn't detect your connected wallet for signing. Please ensure your wallet is unlocked and connected.",
@@ -434,7 +441,7 @@ export default function Dashboard() {
                                             </div>
                                         </TableCell>
                                         <TableCell>
-                                            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#22c55e]/20 border border-[#22c55e]/30 text-[#4ADE80] text-[10px] font-bold uppercase tracking-wider">
+                                            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#111] border border-green-500/30 text-green-400 text-[10px] font-bold uppercase tracking-wider">
                                                 <CheckCircle2 className="w-3 h-3" /> {item.status}
                                             </div>
                                         </TableCell>
