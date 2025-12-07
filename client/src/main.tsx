@@ -6,7 +6,6 @@ import "./index.css";
 import {
   PhantomWalletAdapter,
   SolflareWalletAdapter,
-  BackpackWalletAdapter,
 } from '@solana/wallet-adapter-wallets'
 
 import { PrivyProvider } from '@privy-io/react-auth'
@@ -25,7 +24,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             connectors: [
               new PhantomWalletAdapter(),
               new SolflareWalletAdapter(),
-              new BackpackWalletAdapter(),
             ],
           },
         },
