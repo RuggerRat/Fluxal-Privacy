@@ -2,33 +2,21 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import "./index.css";
-
-import {
-  PhantomWalletAdapter,
-  SolflareWalletAdapter,
-} from '@solana/wallet-adapter-wallets';
-
 import { PrivyProvider } from '@privy-io/react-auth'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <PrivyProvider
-      appId="cmivd4mze05lo140d22rjpeb"
+      appId="cmivd4mze05lol40d22ripecb"
       config={{
         loginMethods: ['wallet'],
-
         supportedChains: ['solana' as any],
         defaultChain: 'solana' as any,
-
         externalWallets: {
           solana: {
-            connectors: [
-              PhantomWalletAdapter,
-              SolflareWalletAdapter,
-            ],
+            connectors: [],
           },
         },
-
         solana: {
           wallets: ['injected', 'walletconnect'],
         },
