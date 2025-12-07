@@ -15,7 +15,8 @@ createRoot(document.getElementById("root")!).render(
       loginMethods: ['wallet'],
       appearance: { 
         theme: 'light',
-        walletChainType: 'solana-only'
+        walletChainType: 'solana-only',
+        walletList: ['phantom']
       },
       externalWallets: {
         solana: {
