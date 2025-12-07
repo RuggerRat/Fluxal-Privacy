@@ -10,7 +10,10 @@ import fluxalEngine from "@assets/image_1765087318769.png";
 import fluxalSdk from "@assets/image_1765087690465.png";
 import fluxalInfra from "@assets/image_1765087697841.png";
 
+import { useLocation } from "wouter";
+
 export default function Dashboard() {
+  const [_, setLocation] = useLocation();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -20,33 +23,7 @@ export default function Dashboard() {
       setIsLoading(false);
     }, 2500);
 
-    // Inject Privy script
-    const script = document.createElement("script");
-    script.type = "module";
-    script.innerHTML = `
-      import { PrivyClient } from "https://cdn.privy.io/web-sdk/v1.js";
-      window.privy = new PrivyClient({
-        appId: "cmivd4mze05lol40d22ripecb",
-        config: {
-          appearance: { theme: "light" },
-          solana: {
-            wallets: ["injected", "walletconnect"],
-          },
-          embeddedWallets: {
-            createOnLogin: "solana",
-          }
-        }
-      });
-      console.log("Privy loaded via dynamic script injection");
-    `;
-    document.body.appendChild(script);
-
-    return () => {
-      clearTimeout(timer);
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
-      }
-    };
+    return () => clearTimeout(timer);
   }, []);
 
   const copyAddress = () => {
@@ -95,28 +72,7 @@ export default function Dashboard() {
           </div>
 
           <Button 
-            onClick={() => {
-              try {
-                // @ts-ignore
-                if (window.privy) {
-                   // @ts-ignore
-                   window.privy.login().then((user) => {
-                     console.log("User logged in", user);
-                     toast({
-                       title: "Wallet Connected",
-                       description: "Successfully connected to Privy",
-                       className: "bg-[#FFE500] text-black border-none font-mono",
-                     });
-                   }).catch((error: any) => {
-                     console.error("Login failed", error);
-                   });
-                } else {
-                  console.error("Privy not initialized");
-                }
-              } catch (e) {
-                console.error("Error invoking privy", e);
-              }
-            }}
+            onClick={() => setLocation("/connect")}
             className="bg-[#FFE500] border border-[#FFE500] text-black hover:bg-[#FF8C00] hover:text-black font-bold rounded-full px-6 py-1 h-auto font-neue tracking-wide text-xs uppercase"
           >
             WALLET
