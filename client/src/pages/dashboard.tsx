@@ -365,6 +365,42 @@ export default function Dashboard() {
             </div>
           </div>
 
+          {/* FLUXAL IS TRUSTWARE Section */}
+          <div className="mt-32 mb-16">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-neue font-bold text-white mb-4 uppercase tracking-wide">
+                <span className="text-[#FFE500]">FLUXAL</span> IS TRUSTWARE
+              </h2>
+              <p className="text-gray-400 text-sm md:text-base max-w-2xl mx-auto uppercase tracking-widest leading-relaxed">
+                The transition from analog to digital trust is underway.
+                Learn how FLUXAL powers the core privacy infrastructure for the world.
+              </p>
+            </div>
+
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-8 md:p-12 max-w-4xl mx-auto hover:border-[#FFE500]/30 transition-colors duration-300">
+              <div className="space-y-12">
+                <div>
+                  <h3 className="text-xl md:text-2xl font-bold font-neue text-white mb-4">Privacy's broadband moment</h3>
+                  <p className="text-gray-400 text-sm md:text-base leading-relaxed font-neue">
+                    We're engineering a secure, private, and backward-compatible unified ZK layer for everything from money and identity to markets, coordination, and creativity—tools that scale from individuals to institutions without sacrificing user sovereignty.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="text-xl md:text-2xl font-bold font-neue text-white mb-4">Token-agnostic by design – built to run across chains & providers</h3>
+                  <div className="space-y-6 text-gray-400 text-sm md:text-base leading-relaxed font-neue">
+                    <p>
+                      The <span className="text-[#FFE500]">$FLUX</span> Protocol is token-native: you deposit the assets you already hold - no synthetic pegs, no IOUs—directly into the privacy layer. One model, familiar UX, same guarantees.
+                    </p>
+                    <p>
+                      The same cryptographic core ports cleanly via modular adapters, preserving UX and assurances across Ethereum, Bitcoin, Polygon, Solana, and beyond the crypto stack - think AMEX, VISA, or even your local bank. The math is provider-agnostic by design.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
