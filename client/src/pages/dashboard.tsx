@@ -6,6 +6,7 @@ import { Copy, MoveRight, WifiOff, Shield, Link, Lock, Ban, Zap } from "lucide-r
 import { useToast } from "@/hooks/use-toast";
 import fluxalTitle from "@assets/Untitled_design__62_-removebg-preview_1765006354328.png";
 import fluxalLogoY from "@assets/image_1765082701286.png";
+import fluxalCard from "@assets/image_(68)_1765084807154.png";
 
 export default function Dashboard() {
   const { toast } = useToast();
@@ -395,6 +396,44 @@ export default function Dashboard() {
                     <p>
                       The same cryptographic core ports cleanly via modular adapters, preserving UX and assurances across Ethereum, Bitcoin, Polygon, Solana, and beyond the crypto stack - think AMEX, VISA, or even your local bank. The math is provider-agnostic by design.
                     </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* FLUXAL WALLET Product Section */}
+          <div className="mt-32 mb-32">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-5xl font-neue font-bold text-white mb-4 uppercase tracking-wide">
+                PRODUCTS
+              </h2>
+              <p className="text-gray-400 text-sm font-bold uppercase tracking-widest mb-2">
+                FOR USERS
+              </p>
+              <h3 className="text-2xl md:text-3xl font-neue font-bold text-[#FFE500] uppercase tracking-wider">
+                FLUXAL WALLET
+              </h3>
+            </div>
+
+            <div className="flex flex-col items-center justify-center max-w-2xl mx-auto">
+              <div className="relative w-64 h-80 md:w-80 md:h-96 mb-8 group">
+                <div className="absolute inset-0 bg-[#FFE500]/20 blur-[60px] rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
+                <img 
+                  src={fluxalCard} 
+                  alt="FLUXAL Wallet Card" 
+                  className="w-full h-full object-contain relative z-10 drop-shadow-2xl transform group-hover:scale-105 transition-transform duration-500" 
+                />
+              </div>
+
+              <div className="text-center space-y-8 px-4">
+                <p className="text-gray-300 font-mono text-xs md:text-sm leading-relaxed max-w-xl mx-auto">
+                  <span className="text-[#FFE500] font-bold">$FLUXAL</span> Wallet brings privacy to everyday crypto: featuring shielded balances, private & offline P2P transfer and private swaps on Jupiter/Raydium that route directly to and from your shielded balance. Support for selected stables + SOL with more assets to come post-launch. For Desktop, iOS & Android.
+                </p>
+
+                <div className="flex justify-center">
+                  <div className="px-6 py-2 rounded-full border border-white/20 text-white text-[10px] md:text-xs tracking-[0.2em] font-bold uppercase bg-white/5 hover:bg-white/10 transition-colors">
+                    COMING SOON
                   </div>
                 </div>
               </div>
