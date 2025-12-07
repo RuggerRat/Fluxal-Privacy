@@ -5,6 +5,10 @@ import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
 import { useMemo } from 'react';
 import App from "./App";
 import "./index.css";
+import { Buffer } from 'buffer';
+
+// Polyfill Buffer for Solana web3.js
+window.Buffer = window.Buffer || Buffer;
 
 // Default styles that can be overridden by your app
 import '@solana/wallet-adapter-react-ui/styles.css';
