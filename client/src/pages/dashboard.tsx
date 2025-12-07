@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { usePrivy } from "@privy-io/react-auth";
 import { Connection, PublicKey, LAMPORTS_PER_SOL } from "@solana/web3.js";
-import { Home, WifiOff, Activity, MessageSquare, Eye, EyeOff, Bug, DollarSign } from "lucide-react";
+import { Home, WifiOff, Activity, MessageSquare, Eye, EyeOff, Bug, Send, Download, FolderOpen, File, CheckCircle2, AlertTriangle, ShieldCheck, ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import fluxalTitle from "@assets/Untitled_design__62_-removebg-preview_1765006354328.png";
@@ -10,6 +10,15 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 // Mock data for initial state or fallback
 const INITIAL_SOL_PRICE = 132.67;
@@ -94,58 +103,222 @@ export default function Dashboard() {
     </button>
   );
 
-  return (
-    <div className="min-h-screen bg-[#0A0A0A] text-white font-neue flex overflow-hidden">
-      
-      {/* Sidebar */}
-      <aside className="w-64 border-r border-white/5 bg-black flex flex-col p-6 z-20">
-        <div className="mb-10 pl-2">
-             <img src={fluxalTitle} alt="FLUXAL" className="h-12 w-auto object-contain opacity-90" />
-        </div>
-
-        <nav className="space-y-2 flex-1">
-            <SidebarItem id="dashboard" icon={Home} label="Dashboard" />
-            <SidebarItem id="offline" icon={WifiOff} label="Offline Cash" />
-            <SidebarItem id="activity" icon={Activity} label="Activity" />
-            <SidebarItem id="feedback" icon={MessageSquare} label="Feedback" />
-        </nav>
-      </aside>
-
-      {/* Main Content */}
-      <main className="flex-1 flex flex-col relative overflow-hidden">
-         {/* Top Bar */}
-         <header className="h-16 border-b border-white/5 flex items-center justify-between px-8 bg-black/50 backdrop-blur-sm sticky top-0 z-10">
-            <div>
-                 {/* Empty left side or breadcrumbs */}
-            </div>
-            <div className="flex items-center gap-4">
-                 <div className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-mono text-gray-300 flex items-center gap-2">
-                    <div className={`w-1.5 h-1.5 rounded-full ${authenticated ? "bg-[#FFE500] animate-pulse" : "bg-red-500"}`} />
-                    {authenticated ? shortAddress : "Not Connected"}
+  const renderContent = () => {
+      switch (activeTab) {
+        case "offline":
+          return (
+            <div className="max-w-6xl mx-auto space-y-6">
+              <div className="flex justify-between items-center mb-6">
+                 <h1 className="text-2xl font-bold">Offline Cash</h1>
+                 <div className="flex gap-4">
+                     <div className="px-4 py-2 rounded-full border border-white/10 bg-[#111] text-xs text-gray-400 font-mono flex items-center gap-2">
+                        Keep some SOL in this wallet to deposit.
+                        <AlertTriangle className="w-3 h-3 text-gray-500" />
+                     </div>
+                     <Button variant="outline" className="border-white/10 bg-[#111] text-white hover:bg-white/5 hover:text-[#FFE500] gap-2 h-9 text-xs uppercase tracking-wider font-bold">
+                        <Send className="w-3 h-3" /> Deposit
+                     </Button>
+                     <Button variant="outline" className="border-white/10 bg-[#111] text-white hover:bg-white/5 hover:text-[#FFE500] gap-2 h-9 text-xs uppercase tracking-wider font-bold">
+                        <Download className="w-3 h-3" /> Withdraw
+                     </Button>
                  </div>
-                 {authenticated ? (
-                     <Button 
-                        onClick={logout}
-                        variant="ghost" 
-                        className="text-xs text-gray-500 hover:text-white h-8"
-                     >
-                        Disconnect
-                     </Button>
-                 ) : (
-                     <Button 
-                        onClick={() => setLocation("/connect")}
-                        variant="ghost" 
-                        className="text-xs text-[#FFE500] hover:text-[#FFDD00] h-8"
-                     >
-                        Connect
-                     </Button>
-                 )}
-            </div>
-         </header>
+              </div>
 
-         {/* Content Area */}
-         <div className="flex-1 overflow-y-auto p-8">
-            <div className="max-w-5xl mx-auto">
+              {/* Warning Banner */}
+              <div className="border border-[#FFE500]/50 bg-[#FFE500]/5 rounded-xl p-4 flex items-start gap-3">
+                 <AlertTriangle className="w-5 h-5 text-[#FFE500] mt-0.5 shrink-0" />
+                 <div>
+                    <h3 className="text-[#FFE500] font-bold text-xs uppercase tracking-widest mb-1">Early Demo - Use With Caution</h3>
+                    <p className="text-[#FFE500]/80 text-xs font-mono leading-relaxed">
+                        Offline Cash is an early, partial implementation intended for demonstration and testing only. Use at your own risk and only deposit small amounts you are fully prepared to lose.
+                    </p>
+                 </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                 {/* Balance Card */}
+                 <div className="bg-[#111] border border-white/5 rounded-xl p-6">
+                    <h3 className="text-gray-400 font-mono text-xs mb-4">Offline balance USD</h3>
+                    <div className="text-4xl font-bold text-white mb-2">$0.00</div>
+                    <p className="text-gray-500 text-xs">Available for offline transactions</p>
+                 </div>
+
+                 {/* Security Status */}
+                 <div className="bg-[#111] border border-white/5 rounded-xl p-6">
+                    <h3 className="text-gray-400 font-mono text-xs mb-4">Security status</h3>
+                    <div className="flex items-center gap-2 mb-2">
+                        <ShieldCheck className="w-5 h-5 text-[#FFE500]" />
+                        <span className="text-white font-bold">Secure</span>
+                    </div>
+                    <p className="text-gray-500 text-xs mb-4">All proofs verified</p>
+                    <div className="inline-block px-3 py-1 rounded-full bg-[#FFE500]/10 text-[#FFE500] text-[10px] font-bold border border-[#FFE500]/20 uppercase tracking-wider">
+                        128-bit Security
+                    </div>
+                 </div>
+              </div>
+
+              {/* Private Assets */}
+              <div className="space-y-4">
+                 <div className="flex justify-between items-end">
+                    <h3 className="text-sm font-bold text-white">Private assets</h3>
+                    <div className="flex gap-4">
+                        <Button variant="outline" className="border-[#FFE500]/30 bg-[#FFE500]/5 text-[#FFE500] hover:bg-[#FFE500]/10 gap-2 h-8 text-[10px] uppercase tracking-wider font-bold rounded-full">
+                            <FolderOpen className="w-3 h-3" /> Locate assets
+                        </Button>
+                        <Button variant="ghost" className="text-gray-400 hover:text-white h-8 text-[10px] uppercase tracking-wider font-bold">
+                            Choose files
+                        </Button>
+                        <Button variant="ghost" className="text-gray-400 hover:text-white h-8 text-[10px] uppercase tracking-wider font-bold">
+                            Clear assets
+                        </Button>
+                    </div>
+                 </div>
+
+                 <div className="border border-white/5 border-dashed rounded-xl bg-[#0F0F0F] h-24 flex items-center justify-center">
+                    <p className="text-gray-600 text-xs font-mono">Select a folder that contains voucher files to see them displayed here.</p>
+                 </div>
+              </div>
+              
+              <div className="border border-white/5 rounded-xl p-4 bg-[#0F0F0F] flex items-start gap-3">
+                 <div className="w-4 h-4 rounded-full border border-gray-600 flex items-center justify-center shrink-0 mt-0.5 text-[10px] text-gray-600 font-mono">i</div>
+                 <p className="text-gray-500 text-xs font-mono leading-relaxed">
+                    Once you successfully withdraw funds from a voucher, move or archive that JSON file so the list stays tidy.
+                    Wallet errors such as Transaction failed simulation or Account already exists almost always mean the voucher was already redeemed.
+                 </p>
+              </div>
+
+              <div className="text-gray-500 text-xs font-mono">
+                Current FLUX price: ${solPrice.toLocaleString(undefined, { minimumFractionDigits: 6 })}
+              </div>
+            </div>
+          );
+        
+        case "activity":
+            // Mock Activity Data
+            const activities = [
+                { type: "Sent", amount: "-1.244015635 SOL", status: "Finalized", timestamp: "Dec 04, 01:41 PM", signature: "45WxbJo15q..." },
+                { type: "Received", amount: "+0.025874295 SOL", status: "Finalized", timestamp: "Dec 04, 01:40 PM", signature: "2skgU3NY7z..." },
+                { type: "Sent", amount: "-0.00203928 SOL", status: "Finalized", timestamp: "Dec 04, 01:40 PM", signature: "2skgU3NY7z..." },
+                { type: "Received", amount: "+0.00001 SOL", status: "Finalized", timestamp: "Dec 04, 01:36 PM", signature: "2w2w73HDuL..." },
+                { type: "Sent", amount: "-2.315 SOL", status: "Finalized", timestamp: "Dec 04, 01:36 PM", signature: "3E0kfn3ZSo..." },
+                { type: "Received", amount: "+0.632990292 SOL", status: "Finalized", timestamp: "Dec 04, 01:34 PM", signature: "5pejHwMKot..." },
+                { type: "Sent", amount: "-0.00203928 SOL", status: "Finalized", timestamp: "Dec 04, 01:34 PM", signature: "5pejHwMKot..." },
+                { type: "Sent", amount: "-0.027795218 SOL", status: "Finalized", timestamp: "Dec 04, 01:33 PM", signature: "48pMW5qL6c..." },
+                { type: "Sent", amount: "-34199203.154141 SpectreUSD", status: "Finalized", timestamp: "Dec 04, 01:33 PM", signature: "48pMW5qL6c..." },
+                { type: "Received", amount: "+1e-7 SOL", status: "Finalized", timestamp: "Dec 04, 01:28 PM", signature: "29pfg1XFwm..." },
+            ];
+
+            return (
+                <div className="max-w-6xl mx-auto h-full flex flex-col">
+                    <div className="flex justify-between items-center mb-6">
+                        <h1 className="text-2xl font-bold">Activity</h1>
+                    </div>
+
+                    <div className="flex justify-between items-center mb-6">
+                         <div className="relative w-72">
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+                            <Input placeholder="Search activity" className="pl-10 bg-[#111] border-white/10 text-white placeholder:text-gray-600 focus:border-[#FFE500]/50" />
+                         </div>
+                         <div className="flex items-center gap-2">
+                            <span className="text-xs text-gray-500 font-mono">Rows per page</span>
+                            <Select defaultValue="10">
+                                <SelectTrigger className="w-[70px] h-8 bg-[#111] border-white/10 text-xs">
+                                    <SelectValue placeholder="10" />
+                                </SelectTrigger>
+                                <SelectContent className="bg-[#111] border-white/10 text-white">
+                                    <SelectItem value="10">10</SelectItem>
+                                    <SelectItem value="20">20</SelectItem>
+                                    <SelectItem value="50">50</SelectItem>
+                                </SelectContent>
+                            </Select>
+                         </div>
+                    </div>
+
+                    <div className="border border-white/5 rounded-xl overflow-hidden bg-[#111]">
+                        <Table>
+                            <TableHeader className="bg-black/50">
+                                <TableRow className="border-white/5 hover:bg-transparent">
+                                    <TableHead className="text-gray-500 font-mono text-xs uppercase w-[150px]">Type</TableHead>
+                                    <TableHead className="text-gray-500 font-mono text-xs uppercase">Amount</TableHead>
+                                    <TableHead className="text-gray-500 font-mono text-xs uppercase">Status</TableHead>
+                                    <TableHead className="text-gray-500 font-mono text-xs uppercase">Timestamp</TableHead>
+                                    <TableHead className="text-gray-500 font-mono text-xs uppercase text-right">Signature</TableHead>
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                {activities.map((item, i) => (
+                                    <TableRow key={i} className="border-white/5 hover:bg-white/5">
+                                        <TableCell className="font-mono text-xs">
+                                            <div className="flex items-center gap-2">
+                                                {item.type === "Sent" ? <Send className="w-3 h-3 text-red-400 rotate-45" /> : <Download className="w-3 h-3 text-green-400" />}
+                                                {item.type}
+                                            </div>
+                                        </TableCell>
+                                        <TableCell className={`font-mono text-xs ${item.amount.startsWith("+") ? "text-green-400" : "text-red-400"}`}>{item.amount}</TableCell>
+                                        <TableCell>
+                                            <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#FFE500]/10 border border-[#FFE500]/20 text-[#FFE500] text-[10px] font-bold uppercase tracking-wider">
+                                                <CheckCircle2 className="w-3 h-3" /> {item.status}
+                                            </div>
+                                        </TableCell>
+                                        <TableCell className="font-mono text-xs text-gray-400">{item.timestamp}</TableCell>
+                                        <TableCell className="font-mono text-xs text-gray-500 text-right flex items-center justify-end gap-1">
+                                            {item.signature} <MoveRight className="w-3 h-3 opacity-50" />
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </div>
+
+                    <div className="flex justify-between items-center mt-6 text-xs text-gray-500 font-mono">
+                        <div>Showing 1-10 of 13</div>
+                        <div className="flex gap-2">
+                            <Button variant="outline" size="icon" className="h-8 w-8 border-white/10 bg-[#111] hover:bg-white/5 text-gray-400" disabled>
+                                <ChevronLeft className="w-4 h-4" />
+                            </Button>
+                             <Button variant="outline" size="icon" className="h-8 w-8 border-white/10 bg-[#111] hover:bg-white/5 text-gray-400">
+                                <ChevronRight className="w-4 h-4" />
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            );
+
+        case "feedback":
+            return (
+                <div className="max-w-4xl mx-auto">
+                    <h1 className="text-2xl font-bold mb-8">Feedback</h1>
+                    
+                    <div className="bg-[#111] border border-white/5 rounded-xl p-8 md:p-12 max-w-2xl mx-auto">
+                         <h2 className="text-lg font-mono text-gray-400 mb-8">Web wallet demo feedback</h2>
+
+                         <div className="space-y-6">
+                            <div className="space-y-2">
+                                <Input placeholder="How should we address you?" className="bg-[#0F0F0F] border-white/10 text-white placeholder:text-gray-600 focus:border-[#FFE500]/50 h-12" />
+                            </div>
+
+                            <div className="space-y-2">
+                                <Textarea placeholder="Tell us what's working well, what's confusing, or what you'd like to see next." className="bg-[#0F0F0F] border-white/10 text-white placeholder:text-gray-600 focus:border-[#FFE500]/50 min-h-[160px] resize-none p-4" />
+                            </div>
+
+                            <div className="space-y-2">
+                                <Label className="text-xs text-gray-500 font-mono">Wallet address</Label>
+                                <div className="px-4 py-3 bg-[#0F0F0F] border border-white/10 rounded-md text-xs font-mono text-gray-400">
+                                    {address || "Not connected"}
+                                </div>
+                            </div>
+
+                            <Button className="w-full bg-[#FFE500] hover:bg-[#FF8C00] text-black font-bold h-12 uppercase tracking-widest text-xs border-none mt-4">
+                                Submit feedback
+                            </Button>
+                         </div>
+                    </div>
+                </div>
+            );
+
+        default:
+          return (
+             <div className="max-w-5xl mx-auto">
                 <h1 className="text-2xl font-bold mb-8">Dashboard</h1>
 
                 {/* Balance Card */}
@@ -240,6 +413,62 @@ export default function Dashboard() {
                 </div>
 
             </div>
+          );
+      }
+  };
+
+  return (
+    <div className="min-h-screen bg-[#0A0A0A] text-white font-neue flex overflow-hidden">
+      
+      {/* Sidebar */}
+      <aside className="w-64 border-r border-white/5 bg-black flex flex-col p-6 z-20">
+        <div className="mb-10 pl-2">
+             <img src={fluxalTitle} alt="FLUXAL" className="h-12 w-auto object-contain opacity-90" />
+        </div>
+
+        <nav className="space-y-2 flex-1">
+            <SidebarItem id="dashboard" icon={Home} label="Dashboard" />
+            <SidebarItem id="offline" icon={WifiOff} label="Offline Cash" />
+            <SidebarItem id="activity" icon={Activity} label="Activity" />
+            <SidebarItem id="feedback" icon={MessageSquare} label="Feedback" />
+        </nav>
+      </aside>
+
+      {/* Main Content */}
+      <main className="flex-1 flex flex-col relative overflow-hidden">
+         {/* Top Bar */}
+         <header className="h-16 border-b border-white/5 flex items-center justify-between px-8 bg-black/50 backdrop-blur-sm sticky top-0 z-10">
+            <div>
+                 {/* Empty left side or breadcrumbs */}
+            </div>
+            <div className="flex items-center gap-4">
+                 <div className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-mono text-gray-300 flex items-center gap-2">
+                    <div className={`w-1.5 h-1.5 rounded-full ${authenticated ? "bg-[#FFE500] animate-pulse" : "bg-red-500"}`} />
+                    {authenticated ? shortAddress : "Not Connected"}
+                 </div>
+                 {authenticated ? (
+                     <Button 
+                        onClick={logout}
+                        variant="ghost" 
+                        className="text-xs text-gray-500 hover:text-white h-8"
+                     >
+                        Disconnect
+                     </Button>
+                 ) : (
+                     <Button 
+                        onClick={() => setLocation("/connect")}
+                        variant="ghost" 
+                        className="text-xs text-[#FFE500] hover:text-[#FFDD00] h-8"
+                     >
+                        Connect
+                     </Button>
+                 )}
+            </div>
+         </header>
+
+         {/* Content Area */}
+         <div className="flex-1 overflow-y-auto p-8">
+            {renderContent()}
          </div>
 
          {/* Bug Report Fab */}
