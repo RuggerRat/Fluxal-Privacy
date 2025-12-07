@@ -1,40 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { useState } from "react";
 import { useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
 import fluxalTitle from "@assets/Untitled_design__62_-removebg-preview_1765006354328.png";
+import { usePrivy } from '@privy-io/react-auth';
 
 export default function Connect() {
   const [_, setLocation] = useLocation();
   const { toast } = useToast();
-  const [isLoading, setIsLoading] = useState(false);
+  const { login, ready, authenticated } = usePrivy();
 
   const handleConnect = async () => {
-    setIsLoading(true);
-
     try {
-      // @ts-ignore
-      if (window.privy) {
-        console.log("Calling window.privy.login...");
-        // @ts-ignore
-        await window.privy.login({ provider: 'wallet', chain: 'solana' });
-        
-        // Note: Privy handles the UI and callback. 
-        // We can add a listener or check status if needed, but for now we trust the flow.
-        toast({
-             title: "Wallet Connected",
-             description: "Successfully connected to Privy",
-             className: "bg-[#FFE500] text-black border-none font-mono",
-        });
-      } else {
-         console.error("Privy not initialized yet");
-         toast({
-            title: "Connection Error",
-            description: "Privy client not ready. Please refresh.",
-            variant: "destructive",
-          });
-      }
+        login({ provider: 'wallet', chain: 'solana' });
     } catch (e) {
       console.error("Login failed", e);
       toast({
@@ -42,8 +20,6 @@ export default function Connect() {
         description: "Please try again.",
         variant: "destructive",
       });
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -69,10 +45,10 @@ export default function Connect() {
         <Button 
           id="connectBtn"
           onClick={handleConnect}
-          disabled={isLoading}
+          disabled={!ready}
           className="w-full bg-[#FFE500] hover:bg-[#FF8C00] text-black font-bold h-12 rounded-xl text-sm uppercase tracking-widest transition-all duration-300 transform hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(255,229,0,0.3)]"
         >
-          {isLoading ? "CONNECTING..." : "CONTINUE WITH WALLET"}
+          {!ready ? "INITIALIZING..." : (authenticated ? "CONNECTED" : "CONTINUE WITH WALLET")}
         </Button>
         
         <div className="mt-8">
