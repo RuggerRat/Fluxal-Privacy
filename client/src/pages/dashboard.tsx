@@ -172,7 +172,7 @@ export default function Dashboard() {
             <img 
               src={fluxalLogoY} 
               alt="FLUXAL" 
-              className="w-3/4 h-auto object-contain drop-shadow-[0_0_30px_rgba(255,229,0,0.3)] opacity-90 group-hover:opacity-100 transition-opacity duration-500"
+              className="w-3/4 h-auto object-contain drop-shadow-[0_0_30px_rgba(255,229,0,0.3)] opacity-90 group-hover:opacity-100 transition-opacity duration-500 mix-blend-screen"
             />
           </div>
         </div>
