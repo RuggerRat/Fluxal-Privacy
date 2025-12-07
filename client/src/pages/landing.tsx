@@ -79,23 +79,10 @@ export default function Landing() {
         </div>
       </nav>
 
-      {/* Ticker Bar */}
-      <div className="absolute top-24 w-full z-40 bg-[#FFE500]/5 border-b border-[#FFE500]/20 py-2 px-4 overflow-hidden h-9 flex items-center justify-center">
-        <div className="flex items-center gap-4 text-[10px] md:text-xs font-neue font-black tracking-wide text-[#FFE500] whitespace-nowrap uppercase">
-          <span className="text-white">Quick User Updates</span>
-          <span className="text-white mx-2">—</span>
-          <span className="text-[#FFE500]">User feedback updates:</span>
-          <span className="mx-2">-</span>
-          <span>Offline cash icon updated to match designs</span>
-          <span className="mx-2">-</span>
-          <span>Sidebar menu items line height fix</span>
-        </div>
-      </div>
-
       {/* Beta Notification Bar */}
-      <div className="absolute top-[132px] w-full z-40 bg-[#FFE500]/5 border-b border-[#FFE500]/20 py-2 px-4 flex justify-center items-center gap-4 h-10">
+      <div className="absolute top-24 w-full z-40 bg-[#FFE500]/5 border-b border-[#FFE500]/20 py-2 px-4 flex justify-center items-center gap-4 h-10">
         <p className="text-[10px] md:text-xs font-neue font-black tracking-wide text-[#FFE500] truncate uppercase">
-          <span className="text-white">Dashboard Beta is live</span> <span className="text-white mx-2">—</span> The FLUXAL dashboard beta (in demo mode) is now live on Solana mainnet.
+          <span className="text-white">Dashboard is live</span> <span className="text-white mx-2">—</span> The FLUXAL dashboard is now live on Solana mainnet and available to all users.
         </p>
         <Button 
           variant="outline" 
