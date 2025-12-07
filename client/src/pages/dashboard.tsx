@@ -162,20 +162,8 @@ export default function Dashboard() {
 
         </div>
 
-        {/* Right Visual (Token Image) */}
-        <div className="flex-1 flex items-center justify-center relative mt-10 md:mt-0">
-          <div className="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px] rounded-full bg-gradient-to-br from-white/5 to-transparent border border-white/10 backdrop-blur-sm flex items-center justify-center group hover:scale-105 transition-transform duration-700">
-            <div className="absolute inset-0 rounded-full bg-[#FFE500]/5 blur-3xl" />
-            <div className="absolute inset-0 rounded-full border border-white/5 animate-[spin_10s_linear_infinite]" />
-            <div className="absolute inset-4 rounded-full border border-dashed border-[#FFE500]/20 animate-[spin_20s_linear_infinite_reverse]" />
-            
-            <img 
-              src={fluxalLogoY} 
-              alt="FLUXAL" 
-              className="w-3/4 h-auto object-contain drop-shadow-[0_0_30px_rgba(255,229,0,0.3)] opacity-90 group-hover:opacity-100 transition-opacity duration-500 mix-blend-screen"
-            />
-          </div>
-        </div>
+        {/* Right Visual (Token Image) - REMOVED */}
+        {/* <div className="flex-1 flex items-center justify-center relative mt-10 md:mt-0"> ... </div> */}
 
       </div>
 
