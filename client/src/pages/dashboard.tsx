@@ -42,18 +42,18 @@ export default function Dashboard() {
 
   const handleDeposit = async () => {
     try {
-        // Try to find the connected wallet, prioritizing the one matching the user's address if possible
-        // otherwise just take the first available wallet
+        // Use the first connected wallet available for signing
+        // We prioritize the wallet that matches the authenticated user's address if possible, 
+        // but fallback to any connected wallet to ensure the transaction can proceed.
         const wallet = wallets.find((w) => w.address === user?.wallet?.address) || wallets[0];
         
         if (!wallet) {
+            console.error("No connected wallets found via useWallets()");
             toast({
-                title: "Wallet not connected",
-                description: "Please connect your wallet to proceed with deposit.",
-                className: "bg-[#FFE500] text-black border-none font-mono",
+                title: "Wallet Not Detected",
+                description: "We couldn't detect your connected wallet for signing. Please ensure your wallet is unlocked and connected.",
+                variant: "destructive"
             });
-            // Prompt connection if no wallet is found
-            connectWallet();
             return;
         }
 
@@ -75,6 +75,7 @@ export default function Dashboard() {
             })
         );
         
+        // Request signature from the wallet
         const { signature } = await wallet.sendTransaction(transaction, connection);
         
         toast({
@@ -97,7 +98,7 @@ export default function Dashboard() {
       // Show mockup toast as requested
       toast({
           title: "Withdrawal Processing",
-          description: "You will Recieve your Funds in a moment",
+          description: "You will Receive your Funds in a moment",
           className: "bg-[#FFE500] text-black border-none font-mono",
       });
   };
