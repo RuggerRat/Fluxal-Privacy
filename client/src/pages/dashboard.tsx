@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
-import { usePrivy } from "@privy-io/react-auth";
+import { usePrivy, useWallets } from "@privy-io/react-auth";
 import { Connection, PublicKey, LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { Home, WifiOff, Activity, MessageSquare, Eye, EyeOff, Bug, Send, Download, FolderOpen, File, CheckCircle2, AlertTriangle, ShieldCheck, ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -26,14 +26,15 @@ const INITIAL_SOL_PRICE = 132.67;
 export default function Dashboard() {
   const [_, setLocation] = useLocation();
   const { user, authenticated, logout } = usePrivy();
+  const { wallets } = useWallets();
   const [balance, setBalance] = useState<number>(0);
   const [solPrice, setSolPrice] = useState<number>(INITIAL_SOL_PRICE);
   const [solChange, setSolChange] = useState<number>(-0.97);
   const [hideBalance, setHideBalance] = useState(false);
   const [activeTab, setActiveTab] = useState("dashboard");
 
-  const wallet = user?.wallet;
-  const address = wallet?.address || "";
+  const activeWallet = wallets[0];
+  const address = activeWallet?.address || user?.wallet?.address || "";
   const shortAddress = address ? `${address.slice(0, 4)}...${address.slice(-4)}` : "Not Connected";
 
   useEffect(() => {
