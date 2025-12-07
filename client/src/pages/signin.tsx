@@ -1,25 +1,84 @@
-// import { useAppKit } from "@reown/appkit/react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
 
 export default function Signin() {
-  // const { open } = useAppKit();
   const { toast } = useToast();
   const [location, setLocation] = useLocation();
+  const modalRef = useRef<any>(null);
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    const initWalletConnect = async () => {
+      try {
+        // Dynamic imports from esm.sh as requested
+        // @ts-ignore
+        const { createModal } = await import("https://esm.sh/@walletconnect/modal");
+        // @ts-ignore
+        const { SolanaAdapter } = await import("https://esm.sh/@walletconnect/solana-adapter");
+
+        const adapter = new SolanaAdapter({
+          network: "mainnet",
+          appMetadata: {
+            name: "Fluxal",
+          }
+        });
+
+        const modal = createModal({
+          projectId: "9258364bbfb36e1882eb3fb863ef3b287",
+          solanaAdapters: [adapter],
+        });
+
+        modalRef.current = modal;
+        setIsReady(true);
+        console.log("Fluxal Wallet Connect initialized");
+      } catch (error) {
+        console.error("Failed to initialize WalletConnect:", error);
+        toast({
+          title: "Initialization Error",
+          description: "Failed to load wallet connection libraries.",
+          variant: "destructive"
+        });
+      }
+    };
+
+    initWalletConnect();
+  }, [toast]);
   
-  const handleConnect = () => {
-    // open();
-    toast({
-      title: "Connecting Wallet",
-      description: "Opening Reown WalletConnect... (Simulation)",
-      className: "bg-[#FFE500] text-black border-none font-mono",
-    });
-    
-    // Simulate connection delay then redirect
-    setTimeout(() => {
-        setLocation("/dashboard");
-    }, 2000);
+  const handleConnect = async () => {
+    if (!modalRef.current) {
+        toast({
+          title: "Loading...",
+          description: "Wallet connection is initializing. Please wait.",
+          className: "bg-[#FFE500] text-black border-none font-mono",
+        });
+        return;
+    }
+
+    try {
+        toast({
+            title: "Connecting Wallet",
+            description: "Opening Reown WalletConnect...",
+            className: "bg-[#FFE500] text-black border-none font-mono",
+        });
+
+        const session = await modalRef.current.open();
+        console.log("Connected wallet:", session);
+        
+        if (session) {
+            toast({
+                title: "Connected!",
+                description: "Wallet connected successfully.",
+                className: "bg-green-500 text-black border-none font-mono",
+            });
+            setTimeout(() => {
+                setLocation("/dashboard");
+            }, 1000);
+        }
+    } catch (error) {
+        console.error("Connection failed:", error);
+        // User might have closed the modal, or actual error
+    }
   };
   
   return (
@@ -35,9 +94,14 @@ export default function Signin() {
 
             <button 
                 onClick={handleConnect}
-                className="w-full bg-[#4ADE80] hover:bg-[#22c55e] text-black font-bold py-3 px-6 rounded-lg transition-colors duration-200 text-sm tracking-wide"
+                disabled={!isReady}
+                className={`w-full font-bold py-3 px-6 rounded-lg transition-colors duration-200 text-sm tracking-wide ${
+                    isReady 
+                    ? "bg-[#4ADE80] hover:bg-[#22c55e] text-black" 
+                    : "bg-gray-700 text-gray-400 cursor-not-allowed"
+                }`}
             >
-                Continue with Wallet
+                {isReady ? "Continue with Wallet" : "Initializing..."}
             </button>
         </div>
     </div>
