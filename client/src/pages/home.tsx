@@ -15,7 +15,7 @@ export default function Home() {
     // Simulate loading delay
     setTimeout(() => {
       setIsLoading(false);
-      setLocation('/dashboard');
+      setLocation('/connect');
     }, 3000);
   };
 
