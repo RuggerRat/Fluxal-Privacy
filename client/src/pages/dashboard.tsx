@@ -445,7 +445,7 @@ export default function Dashboard() {
           {/* FLUXAL Developers Section */}
           <div className="mt-32 mb-32">
              <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-neue font-bold text-gray-400 uppercase tracking-widest mb-2">
+              <h2 className="text-3xl md:text-5xl font-neue font-bold text-white uppercase tracking-widest mb-2">
                 FOR DEVELOPERS
               </h2>
             </div>
