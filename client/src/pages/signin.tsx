@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
 import { createModal } from "@walletconnect/modal";
-import { SolanaAdapter } from "@walletconnect/solana-adapter";
+import SolanaAdapter from "@walletconnect/solana-adapter"; // Try default import
 
 export default function Signin() {
   const { toast } = useToast();
