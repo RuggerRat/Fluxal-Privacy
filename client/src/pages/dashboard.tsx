@@ -120,16 +120,24 @@ export default function Dashboard() {
             </div>
             <div className="flex items-center gap-4">
                  <div className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-mono text-gray-300 flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#FFE500] animate-pulse" />
-                    {shortAddress}
+                    <div className={`w-1.5 h-1.5 rounded-full ${authenticated ? "bg-[#FFE500] animate-pulse" : "bg-red-500"}`} />
+                    {authenticated ? shortAddress : "Not Connected"}
                  </div>
-                 {authenticated && (
+                 {authenticated ? (
                      <Button 
                         onClick={logout}
                         variant="ghost" 
                         className="text-xs text-gray-500 hover:text-white h-8"
                      >
                         Disconnect
+                     </Button>
+                 ) : (
+                     <Button 
+                        onClick={() => setLocation("/connect")}
+                        variant="ghost" 
+                        className="text-xs text-[#FFE500] hover:text-[#FFDD00] h-8"
+                     >
+                        Connect
                      </Button>
                  )}
             </div>

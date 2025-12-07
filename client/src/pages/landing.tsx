@@ -504,17 +504,15 @@ export default function Landing() {
 
            {/* Footer */}
            <div className="border-t border-[#FFE500]/20 pt-12 pb-12 flex flex-col md:flex-row justify-between items-center gap-8">
-             <img src={fluxalTitle} alt="FLUXAL" className="h-8 w-auto opacity-50 grayscale hover:grayscale-0 transition-all duration-500" />
+             <div className="h-8 w-auto" /> {/* Spacer to replace logo */}
              
              <div className="flex gap-8 text-xs text-gray-500 font-mono tracking-widest">
                 <a href="#" className="hover:text-[#FFE500]">TWITTER</a>
-                <a href="#" className="hover:text-[#FFE500]">DISCORD</a>
                 <a href="#" className="hover:text-[#FFE500]">GITHUB</a>
-                <a href="#" className="hover:text-[#FFE500]">TELEGRAM</a>
              </div>
 
              <p className="text-[10px] text-gray-600 font-mono">
-                © 2024 FLUXAL LABS. ALL RIGHTS RESERVED.
+                © 2025 FLUXAL LABS. ALL RIGHTS RESERVED.
              </p>
            </div>
 
