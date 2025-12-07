@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { Copy, MoveRight, WifiOff, Shield, Link, Lock, Ban, Zap } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import fluxalTitle from "@assets/Untitled_design__62_-removebg-preview_1765006354328.png";
+import fluxalLogoY from "@assets/image_1765082701286.png";
 
 export default function Dashboard() {
   const { toast } = useToast();
@@ -169,7 +170,7 @@ export default function Dashboard() {
             <div className="absolute inset-4 rounded-full border border-dashed border-[#FFE500]/20 animate-[spin_20s_linear_infinite_reverse]" />
             
             <img 
-              src={fluxalTitle} 
+              src={fluxalLogoY} 
               alt="FLUXAL" 
               className="w-3/4 h-auto object-contain drop-shadow-[0_0_30px_rgba(255,229,0,0.3)] opacity-90 group-hover:opacity-100 transition-opacity duration-500"
             />
