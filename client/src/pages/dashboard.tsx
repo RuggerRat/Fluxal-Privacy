@@ -256,6 +256,116 @@ export default function Dashboard() {
         </div>
       </div>
 
+      {/* Ecosystem & Innovation Section */}
+      <div className="relative z-20 w-full bg-transparent py-20 px-8 md:px-20 border-t border-[#FFE500]/20">
+        <div className="max-w-7xl mx-auto">
+          {/* Section Header */}
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-neue font-bold text-white mb-2 uppercase tracking-wide">
+              <span className="text-[#FFE500]">FLUXAL</span> ECOSYSTEM
+            </h2>
+            <p className="text-gray-400 text-sm md:text-base uppercase tracking-widest">
+              LAYERED PRIVACY. SCALABLE TRUST.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-32">
+            {/* Card 1: $FLUX */}
+            <div className="p-8 rounded-2xl border border-[#FFE500]/30 bg-[#FFE500]/5 flex flex-col h-full hover:bg-[#FFE500]/10 transition-colors duration-300">
+              <h3 className="text-2xl font-bold font-neue text-[#FFE500] mb-1">$FLUX</h3>
+              <p className="text-gray-400 text-sm uppercase tracking-wider mb-6">THE UTILITY TOKEN</p>
+              
+              <ul className="space-y-4 flex-1">
+                {[
+                  "Governance and protocol decisions",
+                  "Programmatic buy-back and burns",
+                  "Access gates for premium features",
+                  "Early access to new products"
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3 text-sm text-gray-300">
+                    <div className="mt-1 w-4 h-4 rounded-full border border-[#FFE500] flex items-center justify-center shrink-0">
+                      <div className="w-2 h-2 bg-[#FFE500] rounded-full" />
+                    </div>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Card 2: USDC/USDT */}
+            <div className="p-8 rounded-2xl border border-[#5865F2]/30 bg-[#5865F2]/5 flex flex-col h-full relative overflow-hidden hover:bg-[#5865F2]/10 transition-colors duration-300">
+              <h3 className="text-2xl font-bold font-neue text-[#5865F2] mb-1">USDC/USDT/SOL + OTHERS</h3>
+              <p className="text-gray-400 text-sm uppercase tracking-wider mb-6">PRIVATE DIGITAL CASH</p>
+              
+              <ul className="space-y-4 flex-1">
+                {[
+                  "Any stablecoin or token with privacy",
+                  "Complete transaction anonymity",
+                  "Offline payment capability",
+                  "Zero-knowledge proof transfers"
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3 text-sm text-gray-300">
+                     <div className="mt-1 w-4 h-4 rounded-full border border-[#5865F2] flex items-center justify-center shrink-0">
+                      <div className="w-2 h-2 bg-[#5865F2] rounded-full" />
+                    </div>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Cryptographic Innovation Header */}
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-neue font-bold text-white mb-2 uppercase tracking-wide">
+              CRYPTOGRAPHIC <span className="text-[#FFE500]">INNOVATION</span>
+            </h2>
+            <p className="text-gray-400 text-sm md:text-base uppercase tracking-widest">
+              LAYERED PRIVACY. SCALABLE TRUST.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left Text */}
+            <div className="space-y-12">
+              <div>
+                <h3 className="text-xl font-bold font-neue text-[#FFE500] mb-4 uppercase tracking-wider">PEDERSEN COMMITMENTS</h3>
+                <p className="text-gray-400 text-sm leading-relaxed font-mono">
+                  Our system uses <strong className="text-white">Pedersen commitments</strong> to hide transaction amounts while maintaining mathematical verifiability. Each commitment (vG + rH) cryptographically binds to a value without revealing it.
+                </p>
+              </div>
+              
+              <div>
+                <h3 className="text-xl font-bold font-neue text-[#FFE500] mb-4 uppercase tracking-wider">ZERO-KNOWLEDGE PROOFS</h3>
+                <p className="text-gray-400 text-sm leading-relaxed font-mono">
+                  zk-SNARKs generate compact proofs that verify transaction validity without exposing any sensitive information. Prove you have funds, prove amounts balance, and keep everything private.
+                </p>
+              </div>
+            </div>
+
+            {/* Right Code Block */}
+            <div className="rounded-xl border border-white/10 bg-black/50 p-6 font-mono text-xs md:text-sm text-gray-300 relative overflow-hidden group hover:border-[#FFE500]/30 transition-colors duration-300">
+               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#FFE500] to-[#FF8C00]" />
+               <pre className="overflow-x-auto whitespace-pre-wrap">
+{`// Pedersen Commitment
+commitment = v * G + r * H
+
+// Zero-Knowledge Proof
+proof = zk_prove( 
+  statement: "I know v, r such that C = vG + rH",
+  witness: { v, r }, 
+  public: { C } 
+)
+
+// Nullifier Generation
+nullifier = hash( private_key, commitment )`}
+               </pre>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
     </div>
   );
 }
