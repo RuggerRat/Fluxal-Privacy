@@ -7,6 +7,8 @@ import { useToast } from "@/hooks/use-toast";
 import fluxalTitle from "@assets/Untitled_design__62_-removebg-preview_1765006354328.png";
 import fluxalLogoY from "@assets/image_1765082701286.png";
 import fluxalEngine from "@assets/image_1765087318769.png";
+import fluxalSdk from "@assets/image_1765087690465.png";
+import fluxalInfra from "@assets/image_1765087697841.png";
 
 export default function Dashboard() {
   const { toast } = useToast();
@@ -442,21 +444,25 @@ export default function Dashboard() {
 
           {/* FLUXAL Developers Section */}
           <div className="mt-32 mb-32">
-             <div className="text-center mb-12">
-              <p className="text-gray-400 text-sm font-bold uppercase tracking-widest mb-2">
+             <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-5xl font-neue font-bold text-gray-400 uppercase tracking-widest mb-2">
                 FOR DEVELOPERS
-              </p>
+              </h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               {/* SDK Card */}
               <div className="group p-12 rounded-3xl border border-white/10 bg-white/5 hover:border-[#FFE500]/50 hover:bg-[#FFE500]/5 transition-all duration-300 text-center flex flex-col items-center">
-                 <div className="mb-8 relative">
+                 <div className="mb-8 relative h-32 flex items-center justify-center">
                     <div className="absolute inset-0 bg-[#FFE500]/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    <Layers className="w-20 h-20 text-white group-hover:text-[#FFE500] transition-colors duration-300 relative z-10" strokeWidth={0.8} />
+                    <img 
+                      src={fluxalSdk} 
+                      alt="FLUXAL SDK" 
+                      className="w-32 h-32 object-contain relative z-10 drop-shadow-2xl" 
+                    />
                  </div>
-                 <h3 className="text-xl font-bold font-neue text-[#FFE500] mb-4 uppercase tracking-wider">FLUXAL SDK</h3>
-                 <p className="text-gray-400 text-sm leading-relaxed font-mono mb-8 max-w-sm">
+                 <h3 className="text-2xl font-bold font-neue text-[#FFE500] mb-6 uppercase tracking-wider">FLUXAL SDK</h3>
+                 <p className="text-gray-400 text-base md:text-lg leading-relaxed font-mono mb-8 max-w-sm">
                    Start building today with FLUXAL developer tools: integrate private payments into your app, test new features in our sandbox, and extend FLUXAL core functionality.
                  </p>
                  <div className="mt-auto">
@@ -471,12 +477,16 @@ export default function Dashboard() {
 
               {/* Infrastructure Card */}
               <div className="group p-12 rounded-3xl border border-white/10 bg-white/5 hover:border-[#FFE500]/50 hover:bg-[#FFE500]/5 transition-all duration-300 text-center flex flex-col items-center">
-                 <div className="mb-8 relative">
+                 <div className="mb-8 relative h-32 flex items-center justify-center">
                     <div className="absolute inset-0 bg-[#FFE500]/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    <Database className="w-20 h-20 text-white group-hover:text-[#FFE500] transition-colors duration-300 relative z-10" strokeWidth={0.8} />
+                    <img 
+                      src={fluxalInfra} 
+                      alt="FLUXAL INFRASTRUCTURE" 
+                      className="w-32 h-32 object-contain relative z-10 drop-shadow-2xl" 
+                    />
                  </div>
-                 <h3 className="text-xl font-bold font-neue text-[#FFE500] mb-4 uppercase tracking-wider">FLUXAL INFRASTRUCTURE</h3>
-                 <p className="text-gray-400 text-sm leading-relaxed font-mono mb-8 max-w-sm">
+                 <h3 className="text-2xl font-bold font-neue text-[#FFE500] mb-6 uppercase tracking-wider">FLUXAL INFRASTRUCTURE</h3>
+                 <p className="text-gray-400 text-base md:text-lg leading-relaxed font-mono mb-8 max-w-sm">
                    FLUXAL Infrastructure is the platform for private web3 development, giving developers access to robust, reliable, and integrated privacy tools to build and scale their applications.
                  </p>
                  <div className="mt-auto">
