@@ -26,7 +26,7 @@ const INITIAL_SOL_PRICE = 132.67;
 
 export default function Dashboard() {
   const [_, setLocation] = useLocation();
-  const { user, authenticated, logout } = usePrivy();
+  const { user, authenticated, logout, connectWallet } = usePrivy();
   const { wallets } = useWallets();
   const { toast } = useToast();
   const [balance, setBalance] = useState<number>(0);
@@ -42,13 +42,18 @@ export default function Dashboard() {
 
   const handleDeposit = async () => {
     try {
-        const wallet = wallets.find((w) => w.walletClientType === 'phantom') || wallets[0];
+        // Try to find the connected wallet, prioritizing the one matching the user's address if possible
+        // otherwise just take the first available wallet
+        const wallet = wallets.find((w) => w.address === user?.wallet?.address) || wallets[0];
+        
         if (!wallet) {
             toast({
-                title: "No wallet found",
-                description: "Please connect a wallet to deposit",
-                variant: "destructive"
+                title: "Wallet not connected",
+                description: "Please connect your wallet to proceed with deposit.",
+                className: "bg-[#FFE500] text-black border-none font-mono",
             });
+            // Prompt connection if no wallet is found
+            connectWallet();
             return;
         }
 
