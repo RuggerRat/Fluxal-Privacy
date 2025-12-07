@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
-import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { PublicKey, LAMPORTS_PER_SOL, SystemProgram, Transaction } from "@solana/web3.js";
+import { usePrivy, useWallets } from "@privy-io/react-auth";
+import { Connection, PublicKey, LAMPORTS_PER_SOL, SystemProgram, Transaction } from "@solana/web3.js";
 import { Home, WifiOff, Activity, MessageSquare, Eye, EyeOff, Bug, Send, Download, FolderOpen, File, CheckCircle2, AlertTriangle, ShieldCheck, ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
@@ -26,8 +26,8 @@ const INITIAL_SOL_PRICE = 132.67;
 
 export default function Dashboard() {
   const [_, setLocation] = useLocation();
-  const { connection } = useConnection();
-  const { publicKey, sendTransaction, disconnect, connected } = useWallet();
+  const { user, authenticated, logout, connectWallet } = usePrivy();
+  const { wallets, ready: walletsReady } = useWallets();
   const { toast } = useToast();
   const [balance, setBalance] = useState<number>(0);
   const [solPrice, setSolPrice] = useState<number>(INITIAL_SOL_PRICE);
@@ -36,20 +36,37 @@ export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [depositAmount, setDepositAmount] = useState("");
 
-  const address = publicKey ? publicKey.toBase58() : "";
+  const wallet = user?.wallet;
+  const address = wallet?.address || "";
   const shortAddress = address ? `${address.slice(0, 4)}...${address.slice(-4)}` : "Not Connected";
 
   const handleDeposit = async () => {
-    if (!connected || !publicKey) {
+    if (!walletsReady) {
         toast({
-            title: "Wallet Not Connected",
-            description: "Please connect your wallet to deposit.",
-            variant: "destructive"
+            title: "Wallet Initializing",
+            description: "Please wait a moment for wallet connection to stabilize.",
+            className: "bg-[#FFE500] text-black border-none font-mono",
         });
         return;
     }
 
     try {
+        // Use the first connected wallet available for signing
+        const wallet = wallets.find((w) => w.address === user?.wallet?.address) || wallets[0];
+        
+        if (!wallet) {
+            console.error("No connected wallets found via useWallets(). Wallets array:", wallets);
+            toast({
+                title: "Wallet Not Detected",
+                description: "We couldn't detect your connected wallet for signing. Please ensure your wallet is unlocked and connected.",
+                variant: "destructive"
+            });
+            return;
+        }
+
+        // Create a connection
+        const connection = new Connection("https://api.mainnet-beta.solana.com");
+
         // Convert amount to SOL (assuming mockup just sends SOL for now as USDC requires token accounts)
         // In a real app this would interact with the USDC token program
         const amount = parseFloat(depositAmount) || 0;
@@ -59,14 +76,14 @@ export default function Dashboard() {
         // 0.000001 SOL
         const transaction = new Transaction().add(
             SystemProgram.transfer({
-                fromPubkey: publicKey,
-                toPubkey: publicKey,
+                fromPubkey: new PublicKey(wallet.address),
+                toPubkey: new PublicKey(wallet.address),
                 lamports: 1000, 
             })
         );
         
         // Request signature from the wallet
-        const signature = await sendTransaction(transaction, connection);
+        const { signature } = await wallet.sendTransaction(transaction, connection);
         
         toast({
             title: "Deposit Initiated",
@@ -94,11 +111,11 @@ export default function Dashboard() {
   };
 
   useEffect(() => {
-    // Optional: Redirect to connect if not authenticated
-    // if (!connected) {
-    //    setLocation("/connect"); 
-    // }
-  }, [connected, setLocation]);
+    if (!authenticated) {
+        // Optional: Redirect to connect if not authenticated
+        // setLocation("/connect"); 
+    }
+  }, [authenticated, setLocation]);
 
   useEffect(() => {
     const fetchPrice = async () => {
@@ -115,9 +132,12 @@ export default function Dashboard() {
     };
 
     const fetchBalance = async () => {
-      if (publicKey) {
+      if (address) {
         try {
-            const bal = await connection.getBalance(publicKey);
+            // Using a public RPC endpoint
+            const connection = new Connection("https://api.mainnet-beta.solana.com"); 
+            const pubKey = new PublicKey(address);
+            const bal = await connection.getBalance(pubKey);
             setBalance(bal / LAMPORTS_PER_SOL);
         } catch (e) {
             console.error("Failed to fetch balance", e);
@@ -134,7 +154,7 @@ export default function Dashboard() {
     }, 30000); 
     
     return () => clearInterval(interval);
-  }, [publicKey, connection]);
+  }, [address]);
 
   const solValue = balance * solPrice;
   const usdcBalance = 0; // Mock for now
@@ -642,12 +662,12 @@ export default function Dashboard() {
             </div>
             <div className="flex items-center gap-4">
                  <div className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-mono text-gray-300 flex items-center gap-2">
-                    <div className={`w-1.5 h-1.5 rounded-full ${connected ? "bg-[#FFE500] animate-pulse" : "bg-red-500"}`} />
-                    {connected ? shortAddress : "Not Connected"}
+                    <div className={`w-1.5 h-1.5 rounded-full ${authenticated ? "bg-[#FFE500] animate-pulse" : "bg-red-500"}`} />
+                    {authenticated ? shortAddress : "Not Connected"}
                  </div>
-                 {connected ? (
+                 {authenticated ? (
                      <Button 
-                        onClick={disconnect}
+                        onClick={logout}
                         variant="ghost" 
                         className="text-xs text-gray-500 hover:text-white h-8"
                      >

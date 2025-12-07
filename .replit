@@ -4,7 +4,6 @@ hidden = [".config", ".git", "generated-icon.png", "node_modules", "dist"]
 
 [nix]
 channel = "stable-24_05"
-packages = ["python3", "systemd"]
 
 [deployment]
 deploymentTarget = "static"
@@ -14,10 +13,6 @@ publicDir = "dist/public"
 [[ports]]
 localPort = 5000
 externalPort = 80
-
-[[ports]]
-localPort = 33563
-externalPort = 3002
 
 [[ports]]
 localPort = 43555
