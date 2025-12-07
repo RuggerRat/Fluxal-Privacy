@@ -6,14 +6,14 @@ import "./index.css";
 import {
   PhantomWalletAdapter,
   SolflareWalletAdapter,
-} from '@solana/wallet-adapter-wallets'
+} from '@solana/wallet-adapter-wallets';
 
 import { PrivyProvider } from '@privy-io/react-auth'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <PrivyProvider
-      appId="cmivd4mze05lol40d22ripecb"
+      appId="cmivd4mze05lo140d22rjpeb"
       config={{
         loginMethods: ['wallet'],
 
