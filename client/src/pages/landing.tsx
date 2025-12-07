@@ -80,8 +80,8 @@ export default function Landing() {
       </nav>
 
       {/* Ticker Bar */}
-      <div className="absolute top-24 w-full z-40 bg-[#FFE500]/5 border-b border-[#FFE500]/20 py-2 px-4 overflow-hidden h-9 flex items-center">
-        <div className="flex items-center gap-4 text-[10px] md:text-xs font-neue font-black tracking-wide text-[#FFE500] whitespace-nowrap animate-marquee uppercase">
+      <div className="absolute top-24 w-full z-40 bg-[#FFE500]/5 border-b border-[#FFE500]/20 py-2 px-4 overflow-hidden h-9 flex items-center justify-center">
+        <div className="flex items-center gap-4 text-[10px] md:text-xs font-neue font-black tracking-wide text-[#FFE500] whitespace-nowrap uppercase">
           <span className="text-white">Quick User Updates</span>
           <span className="text-white mx-2">—</span>
           <span className="text-[#FFE500]">User feedback updates:</span>
@@ -515,7 +515,7 @@ export default function Landing() {
                 <a href="#" className="hover:text-[#FFE500]">GITHUB</a>
              </div>
 
-             <p className="text-[10px] text-gray-600 font-mono text-center md:text-right">
+             <p className="text-xs text-gray-400 font-mono text-center md:text-right font-bold">
                 © 2025 FLUXAL LABS. ALL RIGHTS RESERVED.
              </p>
            </div>
