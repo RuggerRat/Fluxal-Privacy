@@ -81,26 +81,26 @@ export default function Landing() {
 
       {/* Ticker Bar */}
       <div className="absolute top-24 w-full z-40 bg-[#FFE500]/5 border-b border-[#FFE500]/20 py-2 px-4 overflow-hidden h-9 flex items-center">
-        <div className="flex items-center gap-4 text-[10px] md:text-xs font-neue text-[#FFE500] tracking-widest whitespace-nowrap animate-marquee">
-          <span className="font-bold">Quick User Updates</span>
-          <span>—</span>
-          <span>User feedback updates:</span>
-          <span>-</span>
+        <div className="flex items-center gap-4 text-[10px] md:text-xs font-neue font-black tracking-wide text-[#FFE500] whitespace-nowrap animate-marquee uppercase">
+          <span className="text-white">Quick User Updates</span>
+          <span className="text-white mx-2">—</span>
+          <span className="text-[#FFE500]">User feedback updates:</span>
+          <span className="mx-2">-</span>
           <span>Offline cash icon updated to match designs</span>
-          <span>-</span>
+          <span className="mx-2">-</span>
           <span>Sidebar menu items line height fix</span>
         </div>
       </div>
 
       {/* Beta Notification Bar */}
       <div className="absolute top-[132px] w-full z-40 bg-[#FFE500]/5 border-b border-[#FFE500]/20 py-2 px-4 flex justify-center items-center gap-4 h-10">
-        <p className="text-[10px] md:text-xs font-neue tracking-wider text-[#FFE500] truncate">
-          <span className="font-bold">Dashboard Beta is live</span> — The FLUXAL dashboard beta (in demo mode) is now live on Solana mainnet.
+        <p className="text-[10px] md:text-xs font-neue font-black tracking-wide text-[#FFE500] truncate uppercase">
+          <span className="text-white">Dashboard Beta is live</span> <span className="text-white mx-2">—</span> The FLUXAL dashboard beta (in demo mode) is now live on Solana mainnet.
         </p>
         <Button 
           variant="outline" 
           onClick={() => setLocation("/connect")}
-          className="hidden md:flex h-6 text-[10px] px-4 rounded-full border-[#FFE500]/30 text-[#FFE500] hover:bg-[#FFE500] hover:text-black uppercase tracking-widest bg-transparent"
+          className="hidden md:flex h-6 text-[10px] px-4 rounded-full border-[#FFE500]/30 text-[#FFE500] hover:bg-[#FFE500] hover:text-black uppercase tracking-widest bg-transparent font-bold"
         >
           Read more & Try it here
         </Button>
@@ -503,15 +503,19 @@ export default function Landing() {
            </div>
 
            {/* Footer */}
-           <div className="border-t border-[#FFE500]/20 pt-12 pb-12 flex flex-col md:flex-row justify-between items-center gap-8">
-             <div className="h-8 w-auto" /> {/* Spacer to replace logo */}
+           <div className="border-t border-[#FFE500]/20 pt-12 pb-12 grid grid-cols-1 md:grid-cols-3 items-center gap-8">
+             <div className="hidden md:block" /> {/* Empty Left Column */}
              
-             <div className="flex gap-8 text-xs text-gray-500 font-mono tracking-widest">
-                <a href="#" className="hover:text-[#FFE500]">TWITTER</a>
+             <div className="flex justify-center gap-12 text-xs text-gray-500 font-mono tracking-widest">
+                <a href="#" className="hover:text-[#FFE500] flex items-center gap-2 group">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" className="w-4 h-4 fill-current group-hover:text-[#FFE500] transition-colors">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                  </svg>
+                </a>
                 <a href="#" className="hover:text-[#FFE500]">GITHUB</a>
              </div>
 
-             <p className="text-[10px] text-gray-600 font-mono">
+             <p className="text-[10px] text-gray-600 font-mono text-center md:text-right">
                 © 2025 FLUXAL LABS. ALL RIGHTS RESERVED.
              </p>
            </div>
