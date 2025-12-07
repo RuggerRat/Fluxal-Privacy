@@ -59,9 +59,17 @@ export default function Connect() {
   }, []);
 
   const handleConnect = async () => {
-    if (!isReady) return;
-    
     setIsLoading(true);
+    
+    // Allow a short delay for initialization if it's just finishing up
+    if (!isReady) {
+        // @ts-ignore
+        if (!window.privy) {
+            console.log("Privy not ready on click, waiting...");
+            await new Promise(resolve => setTimeout(resolve, 1000));
+        }
+    }
+
     try {
       // @ts-ignore
       if (window.privy) {
@@ -77,8 +85,12 @@ export default function Connect() {
            // setLocation("/"); 
         });
       } else {
-         // Should not happen if isReady is true, but just in case
          console.error("Privy not initialized yet");
+         toast({
+            title: "Connection Error",
+            description: "Wallet adapter failed to load. Please refresh.",
+            variant: "destructive",
+          });
       }
     } catch (e) {
       console.error("Login failed", e);
@@ -113,17 +125,10 @@ export default function Connect() {
 
         <Button 
           onClick={handleConnect}
-          disabled={!isReady || isLoading}
-          className={`w-full font-bold h-12 rounded-xl text-sm uppercase tracking-widest transition-all duration-300 transform 
-            ${!isReady || isLoading 
-              ? "bg-gray-800 text-gray-400 cursor-not-allowed" 
-              : "bg-[#FFE500] hover:bg-[#FF8C00] text-black hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(255,229,0,0.3)]"
-            }`}
+          disabled={isLoading}
+          className="w-full bg-[#FFE500] hover:bg-[#FF8C00] text-black font-bold h-12 rounded-xl text-sm uppercase tracking-widest transition-all duration-300 transform hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(255,229,0,0.3)]"
         >
-          {!isReady 
-            ? "INITIALIZING..." 
-            : (isLoading ? "CONNECTING..." : "CONTINUE WITH WALLET")
-          }
+          {isLoading ? "CONNECTING..." : "CONTINUE WITH WALLET"}
         </Button>
         
         <div className="mt-8">
