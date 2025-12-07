@@ -81,11 +81,10 @@ export default function Home() {
           >
             <Button 
               size="lg"
-              onClick={handleLaunch}
-              className="relative group overflow-hidden bg-[#FFE500] text-black hover:bg-[#FFDD00] hover:text-black hover:scale-105 transition-all duration-300 text-lg font-bold px-10 py-7 rounded-none border-none uppercase tracking-wider transform -skew-x-12"
+              className="relative group overflow-hidden bg-[#FFE500] text-black hover:bg-[#FFDD00] hover:text-black hover:scale-105 transition-all duration-300 text-lg font-bold px-10 py-7 rounded-none border-none uppercase tracking-wider transform -skew-x-12 opacity-50 cursor-not-allowed"
               style={{ clipPath: "polygon(15% 0, 100% 0, 100% 70%, 85% 100%, 0 100%, 0 30%)" }}
             >
-              <span className="relative z-10 transform skew-x-12 inline-block">Launch Terminal</span>
+              <span className="relative z-10 transform skew-x-12 inline-block">Terminal Offline</span>
               <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
             </Button>
             
