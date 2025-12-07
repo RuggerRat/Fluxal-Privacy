@@ -294,7 +294,7 @@ export default function Dashboard() {
 
             {/* Card 2: USDC/USDT */}
             <div className="p-8 rounded-2xl border border-[#5865F2]/30 bg-[#5865F2]/5 flex flex-col h-full relative overflow-hidden hover:bg-[#5865F2]/10 transition-colors duration-300">
-              <h3 className="text-2xl font-bold font-neue text-[#5865F2] mb-1">USDC/USDT/SOL + OTHERS</h3>
+              <h3 className="text-2xl font-bold font-neue text-white mb-1">USDC/USDT/SOL + OTHERS</h3>
               <p className="text-gray-400 text-sm uppercase tracking-wider mb-6">PRIVATE DIGITAL CASH</p>
               
               <ul className="space-y-4 flex-1">
