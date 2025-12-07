@@ -7,9 +7,10 @@ createRoot(document.getElementById("root")!).render(
   <PrivyProvider
     appId='cmivd4mze05lol40d22ripecb'
     config={{
-      loginMethods: ["wallet"],
-      appearance: { theme: 'light' },
-      solana: { wallets: ['injected', 'walletconnect'] }
+      loginMethods: ['wallet'],
+      solana: {
+        wallets: ['injected']
+      }
     }}
   >
     <App />
