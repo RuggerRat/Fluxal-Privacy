@@ -6,6 +6,10 @@ import { Home, WifiOff, Activity, MessageSquare, Eye, EyeOff, Bug, DollarSign } 
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import fluxalTitle from "@assets/Untitled_design__62_-removebg-preview_1765006354328.png";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogClose } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 
 // Mock data for initial state or fallback
 const INITIAL_SOL_PRICE = 132.67;
@@ -96,7 +100,7 @@ export default function Dashboard() {
       {/* Sidebar */}
       <aside className="w-64 border-r border-white/5 bg-black flex flex-col p-6 z-20">
         <div className="mb-10 pl-2">
-             <img src={fluxalTitle} alt="FLUXAL" className="h-8 w-auto object-contain opacity-90" />
+             <img src={fluxalTitle} alt="FLUXAL" className="h-12 w-auto object-contain opacity-90" />
         </div>
 
         <nav className="space-y-2 flex-1">
@@ -105,20 +109,6 @@ export default function Dashboard() {
             <SidebarItem id="activity" icon={Activity} label="Activity" />
             <SidebarItem id="feedback" icon={MessageSquare} label="Feedback" />
         </nav>
-
-        <div className="mt-auto pt-6 border-t border-white/5">
-             <div className="rounded-xl bg-white/5 p-4 border border-white/5 hover:border-[#FFE500]/20 transition-colors">
-                 <h4 className="text-xs text-gray-400 mb-2 uppercase tracking-wider font-bold">Guided Tour</h4>
-                 <div className="flex gap-2">
-                    <button className="text-[10px] px-3 py-1.5 rounded-full border border-white/20 hover:bg-white/10 transition-colors">
-                        Restart tour
-                    </button>
-                 </div>
-                 <p className="text-[10px] text-gray-500 mt-3 leading-tight">
-                    Need a refresher? Restart the Offline Cash walkthrough.
-                 </p>
-             </div>
-        </div>
       </aside>
 
       {/* Main Content */}
@@ -212,11 +202,6 @@ export default function Dashboard() {
                             <div className="text-right font-mono text-sm text-white font-bold">
                                 {hideBalance ? "••••" : solValue.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
                             </div>
-                            {/* 
-                            <div className={`text-right font-mono text-sm ${solChange >= 0 ? 'text-green-500' : 'text-red-500'}`}>
-                                {solChange > 0 ? '+' : ''}{solChange.toFixed(2)}%
-                            </div>
-                            */}
                         </div>
 
                          {/* Asset Row: USDC */}
@@ -241,11 +226,6 @@ export default function Dashboard() {
                             <div className="text-right font-mono text-sm text-white font-bold">
                                 {hideBalance ? "••••" : usdcValue.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
                             </div>
-                            {/*
-                            <div className="text-right font-mono text-sm text-gray-500">
-                                0.00%
-                            </div>
-                            */}
                         </div>
 
                     </div>
@@ -256,10 +236,46 @@ export default function Dashboard() {
 
          {/* Bug Report Fab */}
          <div className="absolute bottom-8 right-8">
-            <Button className="rounded-full bg-[#1e1e1e] border border-white/10 text-xs text-gray-400 hover:text-white hover:border-[#FFE500]/50 gap-2 pl-3 pr-4 h-10">
-                <Bug className="w-3 h-3" />
-                Report a Bug
-            </Button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button className="rounded-full bg-[#1e1e1e] border border-white/10 text-xs text-gray-400 hover:text-white hover:border-[#FFE500]/50 gap-2 pl-3 pr-4 h-10">
+                    <Bug className="w-3 h-3" />
+                    Report a Bug
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="bg-[#1e1e24] border-white/10 text-white sm:max-w-[425px]">
+                <DialogHeader>
+                  <DialogTitle className="text-xl font-bold font-neue">Report a Bug</DialogTitle>
+                </DialogHeader>
+                <div className="grid gap-4 py-4">
+                  <div className="grid gap-2">
+                    <Label htmlFor="name" className="text-gray-300 font-neue">Name</Label>
+                    <Input id="name" placeholder="Your Name" className="bg-[#2b2b30] border-white/10 text-white placeholder:text-gray-500" />
+                  </div>
+                  <div className="grid gap-2">
+                    <Label htmlFor="email" className="text-gray-300 font-neue">Email</Label>
+                    <Input id="email" placeholder="your.email@example.org" className="bg-[#2b2b30] border-white/10 text-white placeholder:text-gray-500" />
+                  </div>
+                  <div className="grid gap-2">
+                    <Label htmlFor="description" className="text-gray-300 font-neue">Description (required)</Label>
+                    <Textarea id="description" placeholder="What's the bug? What did you expect?" className="bg-[#2b2b30] border-white/10 text-white placeholder:text-gray-500 min-h-[100px]" />
+                  </div>
+                  <Button variant="outline" className="w-full bg-transparent border-white/10 text-white hover:bg-white/5 hover:text-white">
+                    Add a screenshot
+                  </Button>
+                </div>
+                <DialogFooter className="flex-col gap-2 sm:flex-col sm:space-x-0">
+                  <Button className="w-full bg-[#5865F2] hover:bg-[#4752c4] text-white font-bold">
+                    Send Bug Report
+                  </Button>
+                  <DialogClose asChild>
+                     <Button variant="ghost" className="w-full text-gray-400 hover:text-white hover:bg-transparent">
+                        Cancel
+                     </Button>
+                  </DialogClose>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
          </div>
 
       </main>
