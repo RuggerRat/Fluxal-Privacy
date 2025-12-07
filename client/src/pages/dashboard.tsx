@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
-import { useWallet, useConnection } from '@solana/wallet-adapter-react';
-import { PublicKey, LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { usePrivy, useWallets } from "@privy-io/react-auth";
+import { Connection, PublicKey, LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { Home, WifiOff, Activity, MessageSquare, Eye, EyeOff, Bug, Send, Download, FolderOpen, File, CheckCircle2, AlertTriangle, ShieldCheck, ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
@@ -25,21 +25,24 @@ const INITIAL_SOL_PRICE = 132.67;
 
 export default function Dashboard() {
   const [_, setLocation] = useLocation();
-  const { publicKey, connected, disconnect } = useWallet();
-  const { connection } = useConnection();
-  
+  const { user, authenticated, logout } = usePrivy();
+  const { wallets } = useWallets();
   const [balance, setBalance] = useState<number>(0);
   const [solPrice, setSolPrice] = useState<number>(INITIAL_SOL_PRICE);
   const [solChange, setSolChange] = useState<number>(-0.97);
   const [hideBalance, setHideBalance] = useState(false);
   const [activeTab, setActiveTab] = useState("dashboard");
 
-  const address = publicKey?.toBase58() || "";
+  const activeWallet = wallets[0];
+  const address = activeWallet?.address || user?.wallet?.address || "";
   const shortAddress = address ? `${address.slice(0, 4)}...${address.slice(-4)}` : "Not Connected";
 
   useEffect(() => {
-    // No auto-redirect, let user stay on dashboard but show disconnected state
-  }, [connected]);
+    if (!authenticated) {
+        // Optional: Redirect to connect if not authenticated
+        // setLocation("/connect"); 
+    }
+  }, [authenticated, setLocation]);
 
   useEffect(() => {
     const fetchPrice = async () => {
@@ -56,15 +59,16 @@ export default function Dashboard() {
     };
 
     const fetchBalance = async () => {
-      if (publicKey && connection) {
+      if (address) {
         try {
-            const bal = await connection.getBalance(publicKey);
+            // Using a public RPC endpoint
+            const connection = new Connection("https://api.mainnet-beta.solana.com"); 
+            const pubKey = new PublicKey(address);
+            const bal = await connection.getBalance(pubKey);
             setBalance(bal / LAMPORTS_PER_SOL);
         } catch (e) {
             console.error("Failed to fetch balance", e);
         }
-      } else {
-        setBalance(0);
       }
     };
 
@@ -77,7 +81,7 @@ export default function Dashboard() {
     }, 30000); 
     
     return () => clearInterval(interval);
-  }, [publicKey, connection]);
+  }, [address]);
 
   const solValue = balance * solPrice;
   const usdcBalance = 0; // Mock for now
@@ -571,12 +575,12 @@ export default function Dashboard() {
             </div>
             <div className="flex items-center gap-4">
                  <div className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-mono text-gray-300 flex items-center gap-2">
-                    <div className={`w-1.5 h-1.5 rounded-full ${connected ? "bg-[#FFE500] animate-pulse" : "bg-red-500"}`} />
-                    {connected ? shortAddress : "Not Connected"}
+                    <div className={`w-1.5 h-1.5 rounded-full ${authenticated ? "bg-[#FFE500] animate-pulse" : "bg-red-500"}`} />
+                    {authenticated ? shortAddress : "Not Connected"}
                  </div>
-                 {connected ? (
+                 {authenticated ? (
                      <Button 
-                        onClick={disconnect}
+                        onClick={logout}
                         variant="ghost" 
                         className="text-xs text-gray-500 hover:text-white h-8"
                      >

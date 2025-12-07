@@ -3,25 +3,23 @@ import { motion } from "framer-motion";
 import { useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
 import fluxalTitle from "@assets/Untitled_design__62_-removebg-preview_1765006354328.png";
+import { usePrivy } from '@privy-io/react-auth';
 import { useEffect } from "react";
-import { useWallet } from '@solana/wallet-adapter-react';
-import { useWalletModal } from '@solana/wallet-adapter-react-ui';
 
 export default function Connect() {
   const [_, setLocation] = useLocation();
   const { toast } = useToast();
-  const { connected, connecting } = useWallet();
-  const { setVisible } = useWalletModal();
+  const { login, ready, authenticated } = usePrivy();
 
   useEffect(() => {
-    if (connected) {
+    if (ready && authenticated) {
       setLocation("/dashboard");
     }
-  }, [connected, setLocation]);
+  }, [ready, authenticated, setLocation]);
 
-  const handleConnect = () => {
+  const handleConnect = async () => {
     try {
-        setVisible(true);
+        login({ provider: 'wallet', chain: 'solana' });
     } catch (e) {
       console.error("Login failed", e);
       toast({
@@ -54,10 +52,10 @@ export default function Connect() {
         <Button 
           id="connectBtn"
           onClick={handleConnect}
-          disabled={connected}
+          disabled={!ready || authenticated}
           className="w-full bg-[#FFE500] hover:bg-[#FF8C00] text-black font-bold h-12 rounded-xl text-sm uppercase tracking-widest transition-all duration-300 transform hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(255,229,0,0.3)]"
         >
-          {connecting ? "CONNECTING..." : (connected ? "REDIRECTING..." : "CONTINUE WITH WALLET")}
+          {!ready ? "INITIALIZING..." : (authenticated ? "REDIRECTING..." : "CONTINUE WITH WALLET")}
         </Button>
         
         <div className="mt-8">
