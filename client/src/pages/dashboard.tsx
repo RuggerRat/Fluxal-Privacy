@@ -68,6 +68,28 @@ export default function Dashboard() {
           </div>
 
           <Button 
+            onClick={() => {
+              try {
+                // @ts-ignore
+                if (window.privy) {
+                   // @ts-ignore
+                   window.privy.login().then((user) => {
+                     console.log("User logged in", user);
+                     toast({
+                       title: "Wallet Connected",
+                       description: "Successfully connected to Privy",
+                       className: "bg-[#FFE500] text-black border-none font-mono",
+                     });
+                   }).catch((error: any) => {
+                     console.error("Login failed", error);
+                   });
+                } else {
+                  console.error("Privy not initialized");
+                }
+              } catch (e) {
+                console.error("Error invoking privy", e);
+              }
+            }}
             className="bg-[#FFE500] border border-[#FFE500] text-black hover:bg-[#FF8C00] hover:text-black font-bold rounded-full px-6 py-1 h-auto font-neue tracking-wide text-xs uppercase"
           >
             WALLET
