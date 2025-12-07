@@ -14,7 +14,7 @@ export default function Dashboard() {
   useEffect(() => {
     // Simulate initialization loading
     const timer = setTimeout(() => {
-      setIsLoading(false);
+     // setIsLoading(false);
     }, 2500);
     return () => clearTimeout(timer);
   }, []);
