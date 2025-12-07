@@ -4,7 +4,7 @@ hidden = [".config", ".git", "generated-icon.png", "node_modules", "dist"]
 
 [nix]
 channel = "stable-24_05"
-packages = ["python3", "gnumake", "gcc", "pkg-config", "libusb1"]
+packages = ["python3", "gnumake", "gcc"]
 
 [deployment]
 deploymentTarget = "static"
@@ -14,10 +14,6 @@ publicDir = "dist/public"
 [[ports]]
 localPort = 5000
 externalPort = 80
-
-[[ports]]
-localPort = 34807
-externalPort = 3001
 
 [[ports]]
 localPort = 43555

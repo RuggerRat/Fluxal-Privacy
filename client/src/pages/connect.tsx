@@ -12,7 +12,7 @@ export default function Connect() {
 
   const handleConnect = async () => {
     try {
-        login();
+        login({ provider: 'wallet', chain: 'solana' });
     } catch (e) {
       console.error("Login failed", e);
       toast({
