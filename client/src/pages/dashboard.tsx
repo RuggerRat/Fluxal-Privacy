@@ -293,7 +293,7 @@ export default function Dashboard() {
             </div>
 
             {/* Card 2: USDC/USDT */}
-            <div className="p-8 rounded-2xl border border-[#5865F2]/30 bg-[#5865F2]/5 flex flex-col h-full relative overflow-hidden hover:bg-[#5865F2]/10 transition-colors duration-300">
+            <div className="p-8 rounded-2xl border border-white/20 bg-white/5 flex flex-col h-full relative overflow-hidden hover:bg-white/10 transition-colors duration-300">
               <h3 className="text-2xl font-bold font-neue text-white mb-1">USDC/USDT/SOL + OTHERS</h3>
               <p className="text-gray-400 text-sm uppercase tracking-wider mb-6">PRIVATE DIGITAL CASH</p>
               
@@ -305,8 +305,8 @@ export default function Dashboard() {
                   "Zero-knowledge proof transfers"
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3 text-sm text-gray-300">
-                     <div className="mt-1 w-4 h-4 rounded-full border border-[#5865F2] flex items-center justify-center shrink-0">
-                      <div className="w-2 h-2 bg-[#5865F2] rounded-full" />
+                     <div className="mt-1 w-4 h-4 rounded-full border border-white flex items-center justify-center shrink-0">
+                      <div className="w-2 h-2 bg-white rounded-full" />
                     </div>
                     {item}
                   </li>
@@ -344,21 +344,23 @@ export default function Dashboard() {
             </div>
 
             {/* Right Code Block */}
-            <div className="rounded-xl border border-white/10 bg-black/50 p-6 font-mono text-xs md:text-sm text-gray-300 relative overflow-hidden group hover:border-[#FFE500]/30 transition-colors duration-300">
+            <div className="rounded-xl border border-white/10 bg-[#1e1e1e] p-6 font-mono text-xs md:text-sm text-gray-300 relative overflow-hidden group hover:border-[#FFE500]/30 transition-colors duration-300">
                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#FFE500] to-[#FF8C00]" />
-               <pre className="overflow-x-auto whitespace-pre-wrap">
+               <pre className="overflow-x-auto whitespace-pre-wrap leading-relaxed">
 {`// Pedersen Commitment
-commitment = v * G + r * H
-
+`}
+<span className="text-[#9cdcfe]">commitment</span> <span className="text-[#d4d4d4]">=</span> <span className="text-[#9cdcfe]">v</span> <span className="text-[#d4d4d4]">*</span> <span className="text-[#569cd6]">G</span> <span className="text-[#d4d4d4]">+</span> <span className="text-[#9cdcfe]">r</span> <span className="text-[#d4d4d4]">*</span> <span className="text-[#569cd6]">H</span>
+{`
 // Zero-Knowledge Proof
-proof = zk_prove( 
-  statement: "I know v, r such that C = vG + rH",
-  witness: { v, r }, 
-  public: { C } 
-)
-
+`}
+<span className="text-[#9cdcfe]">proof</span> <span className="text-[#d4d4d4]">=</span> <span className="text-[#dcdcaa]">zk_prove</span><span className="text-[#d4d4d4]">(</span> <span className="text-[#9cdcfe]">statement</span><span className="text-[#d4d4d4]">:</span> <span className="text-[#ce9178]">"I know v, r such that C = vG + rH"</span><span className="text-[#d4d4d4]">,</span>
+  <span className="text-[#9cdcfe]">witness</span><span className="text-[#d4d4d4]">:</span> <span className="text-[#da70d6]">{`{ v, r }`}</span><span className="text-[#d4d4d4]">,</span> 
+  <span className="text-[#9cdcfe]">public</span><span className="text-[#d4d4d4]">:</span> <span className="text-[#da70d6]">{`{ C }`}</span> 
+<span className="text-[#d4d4d4]">)</span>
+{`
 // Nullifier Generation
-nullifier = hash( private_key, commitment )`}
+`}
+<span className="text-[#9cdcfe]">nullifier</span> <span className="text-[#d4d4d4]">=</span> <span className="text-[#dcdcaa]">hash</span><span className="text-[#d4d4d4]">(</span> <span className="text-[#9cdcfe]">private_key</span><span className="text-[#d4d4d4]">,</span> <span className="text-[#9cdcfe]">commitment</span> <span className="text-[#d4d4d4]">)</span>
                </pre>
             </div>
           </div>
