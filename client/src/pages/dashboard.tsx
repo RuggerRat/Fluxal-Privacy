@@ -20,36 +20,33 @@ export default function Dashboard() {
       setIsLoading(false);
     }, 2500);
 
-    const initPrivy = async () => {
-      try {
-        console.log("Attempting to load Privy...");
-        // @ts-ignore
-        const module = await import(/* @vite-ignore */ "https://cdn.privy.io/web-sdk/v1.js");
-        const PrivyClient = module.PrivyClient;
-        
-        console.log("PrivyClient loaded, initializing...");
-        // @ts-ignore
-        window.privy = new PrivyClient({
-          appId: "cmivd4mze05lol40d22ripecb",
-          config: {
-            appearance: { theme: "light" },
-            solana: {
-              wallets: ["injected", "walletconnect"],
-            },
-            embeddedWallets: {
-              createOnLogin: "solana",
-            }
+    // Inject Privy script
+    const script = document.createElement("script");
+    script.type = "module";
+    script.innerHTML = `
+      import { PrivyClient } from "https://cdn.privy.io/web-sdk/v1.js";
+      window.privy = new PrivyClient({
+        appId: "cmivd4mze05lol40d22ripecb",
+        config: {
+          appearance: { theme: "light" },
+          solana: {
+            wallets: ["injected", "walletconnect"],
+          },
+          embeddedWallets: {
+            createOnLogin: "solana",
           }
-        });
-        console.log("Privy initialized successfully");
-      } catch (err) {
-        console.error("Failed to load Privy:", err);
+        }
+      });
+      console.log("Privy loaded via dynamic script injection");
+    `;
+    document.body.appendChild(script);
+
+    return () => {
+      clearTimeout(timer);
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
       }
     };
-    
-    initPrivy();
-
-    return () => clearTimeout(timer);
   }, []);
 
   const copyAddress = () => {
