@@ -196,20 +196,20 @@ export default function Dashboard() {
         case "activity":
             // Mock Activity Data
             const activities = [
-                { type: "Sent", amount: "-1.244015635 SOL", status: "Finalized", timestamp: "Dec 04, 01:41 PM", signature: "45WxbJo15q..." },
-                { type: "Received", amount: "+0.025874295 SOL", status: "Finalized", timestamp: "Dec 04, 01:40 PM", signature: "2skgU3NY7z..." },
-                { type: "Sent", amount: "-0.00203928 SOL", status: "Finalized", timestamp: "Dec 04, 01:40 PM", signature: "2skgU3NY7z..." },
-                { type: "Received", amount: "+0.00001 SOL", status: "Finalized", timestamp: "Dec 04, 01:36 PM", signature: "2w2w73HDuL..." },
-                { type: "Sent", amount: "-2.315 SOL", status: "Finalized", timestamp: "Dec 04, 01:36 PM", signature: "3E0kfn3ZSo..." },
-                { type: "Received", amount: "+0.632990292 SOL", status: "Finalized", timestamp: "Dec 04, 01:34 PM", signature: "5pejHwMKot..." },
-                { type: "Sent", amount: "-0.00203928 SOL", status: "Finalized", timestamp: "Dec 04, 01:34 PM", signature: "5pejHwMKot..." },
-                { type: "Sent", amount: "-0.027795218 SOL", status: "Finalized", timestamp: "Dec 04, 01:33 PM", signature: "48pMW5qL6c..." },
-                { type: "Sent", amount: "-34199203.154141 SpectreUSD", status: "Finalized", timestamp: "Dec 04, 01:33 PM", signature: "48pMW5qL6c..." },
-                { type: "Received", amount: "+1e-7 SOL", status: "Finalized", timestamp: "Dec 04, 01:28 PM", signature: "29pfg1XFwm..." },
+                { type: "Sent", amount: "-1.244015635 SOL", subAmount: "951Ed...pwoa", status: "Finalized", timestamp: "Dec 04, 01:41 PM", signature: "45WxbJo15q..." },
+                { type: "Received", amount: "+0.025874295 SOL", subAmount: "PL4dM...2aeq", status: "Finalized", timestamp: "Dec 04, 01:40 PM", signature: "2skgU3NY7z..." },
+                { type: "Sent", amount: "-0.00203928 SOL", subAmount: "DKvs5...dwot", status: "Finalized", timestamp: "Dec 04, 01:40 PM", signature: "2skgU3NY7z..." },
+                { type: "Received", amount: "+0.00001 SOL", subAmount: "95HCw...3qyp", status: "Finalized", timestamp: "Dec 04, 01:36 PM", signature: "2w2w73HDuL..." },
+                { type: "Sent", amount: "-2.315 SOL", subAmount: "95HCw...3qyp", status: "Finalized", timestamp: "Dec 04, 01:36 PM", signature: "3E0kfn3ZSo..." },
+                { type: "Received", amount: "+0.632990292 SOL", subAmount: "PL4dM...2aeq", status: "Finalized", timestamp: "Dec 04, 01:34 PM", signature: "5pejHwMKot..." },
+                { type: "Sent", amount: "-0.00203928 SOL", subAmount: "9uh15...qrRC", status: "Finalized", timestamp: "Dec 04, 01:34 PM", signature: "5pejHwMKot..." },
+                { type: "Sent", amount: "-0.027795218 SOL", subAmount: "AVUCZ...cnZH", status: "Finalized", timestamp: "Dec 04, 01:33 PM", signature: "48pMW5qL6c..." },
+                { type: "Sent", amount: "-34199203.154141 SpectreOSI", subAmount: "FahQ6...drVi", status: "Finalized", timestamp: "Dec 04, 01:33 PM", signature: "48pMW5qL6c..." },
+                { type: "Received", amount: "+1e-7 SOL", subAmount: "HLSMe...hi2F", status: "Finalized", timestamp: "Dec 04, 01:28 PM", signature: "29pfg1XFwm..." },
             ];
 
             return (
-                <div className="max-w-6xl mx-auto h-full flex flex-col">
+                <div className="max-w-7xl mx-auto h-full flex flex-col">
                     <div className="flex justify-between items-center mb-6">
                         <h1 className="text-2xl font-bold">Activity</h1>
                     </div>
@@ -217,12 +217,12 @@ export default function Dashboard() {
                     <div className="flex justify-between items-center mb-6">
                          <div className="relative w-72">
                             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
-                            <Input placeholder="Search activity" className="pl-10 bg-[#111] border-white/10 text-white placeholder:text-gray-600 focus:border-[#FFE500]/50" />
+                            <Input placeholder="Search activity" className="pl-10 bg-[#111] border-white/10 text-white placeholder:text-gray-600 focus:border-[#FFE500]/50 h-10 rounded-lg text-xs font-mono" />
                          </div>
-                         <div className="flex items-center gap-2">
+                         <div className="flex items-center gap-3">
                             <span className="text-xs text-gray-500 font-mono">Rows per page</span>
                             <Select defaultValue="10">
-                                <SelectTrigger className="w-[70px] h-8 bg-[#111] border-white/10 text-xs">
+                                <SelectTrigger className="w-[70px] h-8 bg-[#111] border-white/10 text-xs rounded-lg">
                                     <SelectValue placeholder="10" />
                                 </SelectTrigger>
                                 <SelectContent className="bg-[#111] border-white/10 text-white">
@@ -234,35 +234,58 @@ export default function Dashboard() {
                          </div>
                     </div>
 
-                    <div className="border border-white/5 rounded-xl overflow-hidden bg-[#111]">
+                    <div className="rounded-xl overflow-hidden bg-transparent">
                         <Table>
-                            <TableHeader className="bg-black/50">
+                            <TableHeader className="bg-transparent border-b border-white/5">
                                 <TableRow className="border-white/5 hover:bg-transparent">
-                                    <TableHead className="text-gray-500 font-mono text-xs uppercase w-[150px]">Type</TableHead>
-                                    <TableHead className="text-gray-500 font-mono text-xs uppercase">Amount</TableHead>
-                                    <TableHead className="text-gray-500 font-mono text-xs uppercase">Status</TableHead>
-                                    <TableHead className="text-gray-500 font-mono text-xs uppercase">Timestamp</TableHead>
-                                    <TableHead className="text-gray-500 font-mono text-xs uppercase text-right">Signature</TableHead>
+                                    <TableHead className="text-gray-400 font-mono text-xs font-bold uppercase w-[200px] pl-4">Type</TableHead>
+                                    <TableHead className="text-gray-400 font-mono text-xs font-bold uppercase w-[250px]">Amount</TableHead>
+                                    <TableHead className="text-gray-400 font-mono text-xs font-bold uppercase">Status</TableHead>
+                                    <TableHead className="text-gray-400 font-mono text-xs font-bold uppercase">Timestamp</TableHead>
+                                    <TableHead className="text-gray-400 font-mono text-xs font-bold uppercase text-right pr-4">Signature</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
                                 {activities.map((item, i) => (
-                                    <TableRow key={i} className="border-white/5 hover:bg-white/5">
-                                        <TableCell className="font-mono text-xs">
-                                            <div className="flex items-center gap-2">
-                                                {item.type === "Sent" ? <Send className="w-3 h-3 text-red-400 rotate-45" /> : <Download className="w-3 h-3 text-green-400" />}
-                                                {item.type}
+                                    <TableRow key={i} className="border-white/5 hover:bg-white/5 h-20">
+                                        <TableCell className="font-mono text-xs pl-4">
+                                            <div className="flex items-center gap-3">
+                                                <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center shrink-0">
+                                                    {item.type === "Sent" ? 
+                                                        <Send className="w-3.5 h-3.5 text-white -rotate-45 mb-0.5 ml-0.5" /> : 
+                                                        <Download className="w-3.5 h-3.5 text-white" />
+                                                    }
+                                                </div>
+                                                <span className="text-white font-bold">{item.type}</span>
                                             </div>
                                         </TableCell>
-                                        <TableCell className={`font-mono text-xs ${item.amount.startsWith("+") ? "text-green-400" : "text-red-400"}`}>{item.amount}</TableCell>
                                         <TableCell>
-                                            <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#FFE500]/10 border border-[#FFE500]/20 text-[#FFE500] text-[10px] font-bold uppercase tracking-wider">
+                                            <div className="flex flex-col gap-1.5">
+                                                <span className={`font-mono text-xs font-bold ${item.amount.startsWith("+") ? "text-[#4ADE80]" : "text-[#F87171]"}`}>
+                                                    {item.amount}
+                                                </span>
+                                                <span className="font-mono text-[10px] text-gray-500">
+                                                    {item.subAmount}
+                                                </span>
+                                            </div>
+                                        </TableCell>
+                                        <TableCell>
+                                            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#22c55e]/20 border border-[#22c55e]/30 text-[#4ADE80] text-[10px] font-bold uppercase tracking-wider">
                                                 <CheckCircle2 className="w-3 h-3" /> {item.status}
                                             </div>
                                         </TableCell>
-                                        <TableCell className="font-mono text-xs text-gray-400">{item.timestamp}</TableCell>
-                                        <TableCell className="font-mono text-xs text-gray-500 text-right flex items-center justify-end gap-1">
-                                            {item.signature} <MoveRight className="w-3 h-3 opacity-50" />
+                                        <TableCell className="font-mono text-xs text-gray-300 font-bold">{item.timestamp}</TableCell>
+                                        <TableCell className="font-mono text-xs text-gray-500 text-right pr-4">
+                                            <div className="flex items-center justify-end gap-2 group cursor-pointer hover:text-white transition-colors">
+                                                {item.signature} 
+                                                <div className="w-4 h-4 flex items-center justify-center">
+                                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-50 group-hover:opacity-100">
+                                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                                        <polyline points="15 3 21 3 21 9"></polyline>
+                                                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                                                    </svg>
+                                                </div>
+                                            </div>
                                         </TableCell>
                                     </TableRow>
                                 ))}
@@ -273,10 +296,10 @@ export default function Dashboard() {
                     <div className="flex justify-between items-center mt-6 text-xs text-gray-500 font-mono">
                         <div>Showing 1-10 of 13</div>
                         <div className="flex gap-2">
-                            <Button variant="outline" size="icon" className="h-8 w-8 border-white/10 bg-[#111] hover:bg-white/5 text-gray-400" disabled>
+                            <Button variant="outline" size="icon" className="h-8 w-8 rounded-full border-white/10 bg-[#111] hover:bg-white/5 text-gray-400" disabled>
                                 <ChevronLeft className="w-4 h-4" />
                             </Button>
-                             <Button variant="outline" size="icon" className="h-8 w-8 border-white/10 bg-[#111] hover:bg-white/5 text-gray-400">
+                             <Button variant="outline" size="icon" className="h-8 w-8 rounded-full border-white/10 bg-[#111] hover:bg-white/5 text-gray-400">
                                 <ChevronRight className="w-4 h-4" />
                             </Button>
                         </div>
