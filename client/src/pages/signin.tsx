@@ -1,6 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import { useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
+import { createModal } from "@walletconnect/modal";
+import { SolanaAdapter } from "@walletconnect/solana-adapter";
 
 export default function Signin() {
   const { toast } = useToast();
@@ -11,12 +13,6 @@ export default function Signin() {
   useEffect(() => {
     const initWalletConnect = async () => {
       try {
-        // Dynamic imports from esm.sh as requested
-        // @ts-ignore
-        const { createModal } = await import("https://esm.sh/@walletconnect/modal");
-        // @ts-ignore
-        const { SolanaAdapter } = await import("https://esm.sh/@walletconnect/solana-adapter");
-
         const adapter = new SolanaAdapter({
           network: "mainnet",
           appMetadata: {
@@ -56,12 +52,6 @@ export default function Signin() {
     }
 
     try {
-        toast({
-            title: "Connecting Wallet",
-            description: "Opening Reown WalletConnect...",
-            className: "bg-[#FFE500] text-black border-none font-mono",
-        });
-
         const session = await modalRef.current.open();
         console.log("Connected wallet:", session);
         
