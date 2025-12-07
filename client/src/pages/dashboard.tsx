@@ -2,7 +2,7 @@ import FluxalLoader from "@/components/FluxalLoader";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { Copy, MoveRight, WifiOff, Shield, Link, Lock, Ban, Zap } from "lucide-react";
+import { Copy, MoveRight, WifiOff, Shield, Link, Lock, Ban, Zap, Layers, Database } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import fluxalTitle from "@assets/Untitled_design__62_-removebg-preview_1765006354328.png";
 import fluxalLogoY from "@assets/image_1765082701286.png";
@@ -436,6 +436,57 @@ export default function Dashboard() {
                     COMING SOON
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          {/* FLUXAL Developers Section */}
+          <div className="mt-32 mb-32">
+             <div className="text-center mb-12">
+              <p className="text-gray-400 text-sm font-bold uppercase tracking-widest mb-2">
+                FOR DEVELOPERS
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              {/* SDK Card */}
+              <div className="group p-12 rounded-3xl border border-white/10 bg-white/5 hover:border-[#FFE500]/50 hover:bg-[#FFE500]/5 transition-all duration-300 text-center flex flex-col items-center">
+                 <div className="mb-8 relative">
+                    <div className="absolute inset-0 bg-[#FFE500]/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <Layers className="w-20 h-20 text-white group-hover:text-[#FFE500] transition-colors duration-300 relative z-10" strokeWidth={0.8} />
+                 </div>
+                 <h3 className="text-xl font-bold font-neue text-[#FFE500] mb-4 uppercase tracking-wider">FLUXAL SDK</h3>
+                 <p className="text-gray-400 text-sm leading-relaxed font-mono mb-8 max-w-sm">
+                   Start building today with FLUXAL developer tools: integrate private payments into your app, test new features in our sandbox, and extend FLUXAL core functionality.
+                 </p>
+                 <div className="mt-auto">
+                    <Button
+                      variant="outline"
+                      className="rounded-full px-8 py-2 border-white/20 text-white hover:bg-[#FFE500] hover:text-black hover:border-[#FFE500] transition-all font-bold text-[10px] tracking-widest uppercase bg-transparent"
+                    >
+                      LEARN MORE
+                    </Button>
+                 </div>
+              </div>
+
+              {/* Infrastructure Card */}
+              <div className="group p-12 rounded-3xl border border-white/10 bg-white/5 hover:border-[#FFE500]/50 hover:bg-[#FFE500]/5 transition-all duration-300 text-center flex flex-col items-center">
+                 <div className="mb-8 relative">
+                    <div className="absolute inset-0 bg-[#FFE500]/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <Database className="w-20 h-20 text-white group-hover:text-[#FFE500] transition-colors duration-300 relative z-10" strokeWidth={0.8} />
+                 </div>
+                 <h3 className="text-xl font-bold font-neue text-[#FFE500] mb-4 uppercase tracking-wider">FLUXAL INFRASTRUCTURE</h3>
+                 <p className="text-gray-400 text-sm leading-relaxed font-mono mb-8 max-w-sm">
+                   FLUXAL Infrastructure is the platform for private web3 development, giving developers access to robust, reliable, and integrated privacy tools to build and scale their applications.
+                 </p>
+                 <div className="mt-auto">
+                    <Button
+                      variant="outline"
+                      className="rounded-full px-8 py-2 border-white/20 text-white hover:bg-[#FFE500] hover:text-black hover:border-[#FFE500] transition-all font-bold text-[10px] tracking-widest uppercase bg-transparent"
+                    >
+                      LEARN MORE
+                    </Button>
+                 </div>
               </div>
             </div>
           </div>
