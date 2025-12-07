@@ -115,12 +115,95 @@ export default function Dashboard() {
                         Keep some SOL in this wallet to deposit.
                         <AlertTriangle className="w-3 h-3 text-gray-500" />
                      </div>
-                     <Button variant="outline" className="border-white/10 bg-[#111] text-white hover:bg-white/5 hover:text-[#FFE500] gap-2 h-9 text-xs uppercase tracking-wider font-bold">
-                        <Send className="w-3 h-3" /> Deposit
-                     </Button>
-                     <Button variant="outline" className="border-white/10 bg-[#111] text-white hover:bg-white/5 hover:text-[#FFE500] gap-2 h-9 text-xs uppercase tracking-wider font-bold">
-                        <Download className="w-3 h-3" /> Withdraw
-                     </Button>
+                     <Dialog>
+                        <DialogTrigger asChild>
+                             <Button variant="outline" className="border-white/10 bg-[#111] text-white hover:bg-white/5 hover:text-[#FFE500] gap-2 h-9 text-xs uppercase tracking-wider font-bold">
+                                <Send className="w-3 h-3" /> Deposit
+                             </Button>
+                        </DialogTrigger>
+                        <DialogContent className="bg-black border border-white/10 text-white sm:max-w-[425px]">
+                            <DialogHeader>
+                              <DialogTitle className="text-xl font-bold font-neue">Deposit USDC</DialogTitle>
+                            </DialogHeader>
+                            <div className="grid gap-6 py-4">
+                              <div className="space-y-2">
+                                <Label htmlFor="amount" className="text-gray-300 font-mono text-xs">Amount (USDC)</Label>
+                                <Input id="amount" placeholder="0.00" className="bg-[#111] border-white/10 text-white placeholder:text-gray-600 focus:border-[#FFE500]/50 focus:ring-[#FFE500]/20 font-mono" />
+                              </div>
+                              <div className="space-y-2">
+                                <Label htmlFor="recipient" className="text-gray-300 font-mono text-xs">Recipient wallet (optional)</Label>
+                                <Input id="recipient" placeholder={address} className="bg-[#111] border-white/10 text-gray-400 placeholder:text-gray-600 focus:border-[#FFE500]/50 focus:ring-[#FFE500]/20 font-mono text-xs" />
+                                <p className="text-[10px] text-gray-500 font-mono">
+                                    Leave empty to bind the voucher to your connected wallet ({shortAddress}).
+                                </p>
+                              </div>
+                            </div>
+                            <DialogFooter className="flex gap-2 sm:justify-between">
+                              <DialogClose asChild>
+                                 <Button variant="outline" className="flex-1 border-[#FFE500]/30 text-white hover:bg-[#FFE500]/10 hover:text-[#FFE500] rounded-full">
+                                    Cancel
+                                 </Button>
+                              </DialogClose>
+                              <Button className="flex-1 bg-[#111] text-gray-500 font-bold border border-white/10 hover:bg-white/5 hover:text-white rounded-full">
+                                Confirm deposit
+                              </Button>
+                            </DialogFooter>
+                        </DialogContent>
+                     </Dialog>
+
+                     <Dialog>
+                        <DialogTrigger asChild>
+                             <Button variant="outline" className="border-white/10 bg-[#111] text-white hover:bg-white/5 hover:text-[#FFE500] gap-2 h-9 text-xs uppercase tracking-wider font-bold">
+                                <Download className="w-3 h-3" /> Withdraw
+                             </Button>
+                        </DialogTrigger>
+                        <DialogContent className="bg-black border border-white/10 text-white sm:max-w-[425px]">
+                            <DialogHeader>
+                              <DialogTitle className="text-xl font-bold font-neue">Withdraw USDC</DialogTitle>
+                            </DialogHeader>
+                            
+                            <div className="py-4 space-y-4">
+                                <Button variant="outline" className="w-full border-[#FFE500]/30 text-[#FFE500] hover:bg-[#FFE500]/10 rounded-full font-mono text-xs">
+                                    Select voucher file
+                                </Button>
+
+                                <div className="space-y-2">
+                                    <Label className="text-gray-300 font-mono text-xs">Voucher ID (hex, 32 bytes)</Label>
+                                    <Input placeholder="0x..." className="bg-[#111] border-white/10 text-white placeholder:text-gray-600 focus:border-[#FFE500]/50 focus:ring-[#FFE500]/20 font-mono text-xs" />
+                                </div>
+
+                                <div className="space-y-2">
+                                    <Label className="text-gray-300 font-mono text-xs">Secret (hex, 32 bytes)</Label>
+                                    <Input placeholder="0x..." className="bg-[#111] border-white/10 text-white placeholder:text-gray-600 focus:border-[#FFE500]/50 focus:ring-[#FFE500]/20 font-mono text-xs" />
+                                </div>
+
+                                <div className="space-y-2">
+                                    <Label className="text-gray-300 font-mono text-xs">Salt (hex, 32 bytes)</Label>
+                                    <Input placeholder="0x..." className="bg-[#111] border-white/10 text-white placeholder:text-gray-600 focus:border-[#FFE500]/50 focus:ring-[#FFE500]/20 font-mono text-xs" />
+                                </div>
+
+                                <div className="space-y-2">
+                                    <Label className="text-gray-300 font-mono text-xs">Recipient wallet (base58)</Label>
+                                    <Input placeholder="Recipient Solana address" className="bg-[#111] border-white/10 text-white placeholder:text-gray-600 focus:border-[#FFE500]/50 focus:ring-[#FFE500]/20 font-mono text-xs" />
+                                </div>
+
+                                <p className="text-[10px] text-gray-500 font-mono leading-relaxed">
+                                    The voucher file contains voucherId, secret, salt, and the recipient. Load them from a voucher file above or paste them manually to redeem the deposit.
+                                </p>
+                            </div>
+
+                            <DialogFooter className="flex gap-2 sm:justify-between">
+                              <DialogClose asChild>
+                                 <Button variant="outline" className="flex-1 border-[#FFE500]/30 text-white hover:bg-[#FFE500]/10 hover:text-[#FFE500] rounded-full">
+                                    Cancel
+                                 </Button>
+                              </DialogClose>
+                              <Button className="flex-1 bg-[#111] text-gray-500 font-bold border border-white/10 hover:bg-white/5 hover:text-white rounded-full">
+                                Confirm withdraw
+                              </Button>
+                            </DialogFooter>
+                        </DialogContent>
+                     </Dialog>
                  </div>
               </div>
 
@@ -331,8 +414,33 @@ export default function Dashboard() {
                                 </div>
                             </div>
 
-                            <Button className="w-full bg-[#FFE500] hover:bg-[#FF8C00] text-black font-bold h-12 uppercase tracking-widest text-xs border-none mt-4">
-                                Submit feedback
+                            <Button 
+                                onClick={() => {
+                                    /* In a real app, submit logic here */
+                                }}
+                                className="w-full bg-[#FFE500] hover:bg-[#FF8C00] text-black font-bold h-12 uppercase tracking-widest text-xs border-none mt-4"
+                            >
+                                <Dialog>
+                                    <DialogTrigger asChild>
+                                        <span className="w-full h-full flex items-center justify-center">Submit feedback</span>
+                                    </DialogTrigger>
+                                    <DialogContent className="bg-black border border-[#FFE500]/30 text-white sm:max-w-[425px]">
+                                        <div className="flex flex-col items-center justify-center py-8 text-center space-y-4">
+                                            <div className="w-16 h-16 rounded-full bg-[#FFE500]/10 flex items-center justify-center mb-2">
+                                                <CheckCircle2 className="w-8 h-8 text-[#FFE500]" />
+                                            </div>
+                                            <h2 className="text-xl font-bold font-neue text-white uppercase tracking-wide">Thank You</h2>
+                                            <p className="text-gray-400 font-mono text-sm max-w-xs">
+                                                Your feedback helps us build a better private economy.
+                                            </p>
+                                            <DialogClose asChild>
+                                                <Button className="mt-4 bg-[#FFE500] text-black hover:bg-[#FF8C00] rounded-full px-8 font-bold uppercase tracking-wider text-xs">
+                                                    Close
+                                                </Button>
+                                            </DialogClose>
+                                        </div>
+                                    </DialogContent>
+                                </Dialog>
                             </Button>
                          </div>
                     </div>
