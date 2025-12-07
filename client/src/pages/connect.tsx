@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
 import fluxalTitle from "@assets/Untitled_design__62_-removebg-preview_1765006354328.png";
@@ -9,86 +9,29 @@ export default function Connect() {
   const [_, setLocation] = useLocation();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
-  const [isReady, setIsReady] = useState(false);
-
-  useEffect(() => {
-    // Check if Privy is already initialized
-    // @ts-ignore
-    if (window.privy) {
-      setIsReady(true);
-      return;
-    }
-
-    // Polling mechanism to check for Privy
-    const checkInterval = setInterval(() => {
-      // @ts-ignore
-      if (window.privy) {
-        setIsReady(true);
-        clearInterval(checkInterval);
-      }
-    }, 100);
-
-    // Inject Privy script if not already present
-    if (!document.getElementById("privy-script")) {
-        const script = document.createElement("script");
-        script.id = "privy-script";
-        script.type = "module";
-        script.innerHTML = `
-          import { PrivyClient } from "https://cdn.privy.io/web-sdk/v1.js";
-          window.privy = new PrivyClient({
-            appId: "cmivd4mze05lol40d22ripecb",
-            config: {
-              appearance: { theme: "light" },
-              solana: {
-                wallets: ["injected", "walletconnect"],
-              },
-              embeddedWallets: {
-                createOnLogin: "solana",
-              }
-            }
-          });
-          console.log("Privy loaded on Connect page");
-        `;
-        document.body.appendChild(script);
-    }
-    
-    return () => {
-        clearInterval(checkInterval);
-        // We do NOT remove the script here to preserve it for other pages or re-visits
-    };
-  }, []);
 
   const handleConnect = async () => {
     setIsLoading(true);
-    
-    // Allow a short delay for initialization if it's just finishing up
-    if (!isReady) {
-        // @ts-ignore
-        if (!window.privy) {
-            console.log("Privy not ready on click, waiting...");
-            await new Promise(resolve => setTimeout(resolve, 1000));
-        }
-    }
 
     try {
       // @ts-ignore
       if (window.privy) {
+        console.log("Calling window.privy.login...");
         // @ts-ignore
-        await window.privy.login({ provider: 'wallet', chain: 'solana' }).then((user) => {
-           console.log("User logged in", user);
-           toast({
+        await window.privy.login({ provider: 'wallet', chain: 'solana' });
+        
+        // Note: Privy handles the UI and callback. 
+        // We can add a listener or check status if needed, but for now we trust the flow.
+        toast({
              title: "Wallet Connected",
              description: "Successfully connected to Privy",
              className: "bg-[#FFE500] text-black border-none font-mono",
-           });
-           // Optional: Redirect back to dashboard after connection
-           // setLocation("/"); 
         });
       } else {
          console.error("Privy not initialized yet");
          toast({
             title: "Connection Error",
-            description: "Privy client failed to load. Please refresh.",
+            description: "Privy client not ready. Please refresh.",
             variant: "destructive",
           });
       }
@@ -124,6 +67,7 @@ export default function Connect() {
         <p className="text-gray-400 text-sm mb-10 font-mono tracking-wide">Continue to your Fluxal Wallet</p>
 
         <Button 
+          id="connectBtn"
           onClick={handleConnect}
           disabled={isLoading}
           className="w-full bg-[#FFE500] hover:bg-[#FF8C00] text-black font-bold h-12 rounded-xl text-sm uppercase tracking-widest transition-all duration-300 transform hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(255,229,0,0.3)]"
