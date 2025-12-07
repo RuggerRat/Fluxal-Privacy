@@ -9,12 +9,8 @@ createRoot(document.getElementById("root")!).render(
     config={{
       loginMethods: ['wallet'],
       appearance: { theme: 'light' },
-      // @ts-ignore
-      supportedChains: ['solana'],
-      // @ts-ignore
-      defaultChain: 'solana',
       solana: {
-        wallets: ['injected']
+        wallets: ['phantom']
       }
     }}
   >
