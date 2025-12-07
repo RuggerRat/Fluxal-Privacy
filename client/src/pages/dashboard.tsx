@@ -248,11 +248,11 @@ export default function Dashboard() {
                             <TableBody>
                                 {activities.map((item, i) => (
                                     <TableRow key={i} className="border-white/5 hover:bg-white/5 h-20">
-                                        <TableCell className="font-mono text-xs pl-4">
+                                        <TableCell className="font-mono text-xs pl-4 font-medium">
                                             <div className="flex items-center gap-3">
                                                 <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center shrink-0">
                                                     {item.type === "Sent" ? 
-                                                        <Send className="w-3.5 h-3.5 text-white -rotate-45 mb-0.5 ml-0.5" /> : 
+                                                        <Send className="w-3.5 h-3.5 text-white -rotate-45 mr-0.5 mt-0.5" /> : 
                                                         <Download className="w-3.5 h-3.5 text-white" />
                                                     }
                                                 </div>
@@ -261,10 +261,10 @@ export default function Dashboard() {
                                         </TableCell>
                                         <TableCell>
                                             <div className="flex flex-col gap-1.5">
-                                                <span className={`font-mono text-xs font-bold ${item.amount.startsWith("+") ? "text-[#4ADE80]" : "text-[#F87171]"}`}>
+                                                <span className={`font-mono text-xs font-bold tracking-wide ${item.amount.startsWith("+") ? "text-[#4ADE80]" : "text-[#F87171]"}`}>
                                                     {item.amount}
                                                 </span>
-                                                <span className="font-mono text-[10px] text-gray-500">
+                                                <span className="font-mono text-[10px] text-gray-400 font-medium">
                                                     {item.subAmount}
                                                 </span>
                                             </div>
@@ -274,8 +274,8 @@ export default function Dashboard() {
                                                 <CheckCircle2 className="w-3 h-3" /> {item.status}
                                             </div>
                                         </TableCell>
-                                        <TableCell className="font-mono text-xs text-gray-300 font-bold">{item.timestamp}</TableCell>
-                                        <TableCell className="font-mono text-xs text-gray-500 text-right pr-4">
+                                        <TableCell className="font-mono text-xs text-gray-300 font-bold tracking-wide">{item.timestamp}</TableCell>
+                                        <TableCell className="font-mono text-xs text-gray-500 text-right pr-4 font-medium">
                                             <div className="flex items-center justify-end gap-2 group cursor-pointer hover:text-white transition-colors">
                                                 {item.signature} 
                                                 <div className="w-4 h-4 flex items-center justify-center">
@@ -458,7 +458,7 @@ export default function Dashboard() {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col relative overflow-hidden">
+      <main className="flex-1 flex flex-col relative overflow-hidden antialiased">
          {/* Top Bar */}
          <header className="h-16 border-b border-white/5 flex items-center justify-between px-8 bg-black/50 backdrop-blur-sm sticky top-0 z-10">
             <div>
