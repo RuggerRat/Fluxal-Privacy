@@ -8,8 +8,12 @@ createRoot(document.getElementById("root")!).render(
     appId='cmivd4mze05lol40d22ripecb'
     config={{
       loginMethods: ["email", "wallet"],
-      appearance: { theme: 'light' },
-      solana: { wallets: ['phantom'] }
+      appearance: { 
+        theme: 'light',
+        walletList: ['phantom'],
+        showWalletLoginFirst: false
+      },
+      solana: { wallets: ['injected', 'walletconnect'] }
     }}
   >
     <App />
