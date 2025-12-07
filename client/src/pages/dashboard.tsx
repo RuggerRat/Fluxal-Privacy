@@ -36,8 +36,13 @@ export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [depositAmount, setDepositAmount] = useState("");
 
-  const wallet = user?.wallet;
-  const address = wallet?.address || "";
+  // Prioritize the connected Phantom wallet, or fallback to any connected wallet
+  // This ensures we're looking at the actual external wallet's address
+  const activeWallet = wallets.find((w) => w.walletClientType === 'phantom') || wallets[0];
+  
+  // If activeWallet exists, use its address. Otherwise fallback to user.wallet (embedded/linked)
+  const address = activeWallet?.address || user?.wallet?.address || "";
+  
   const shortAddress = address ? `${address.slice(0, 4)}...${address.slice(-4)}` : "Not Connected";
 
   const handleDeposit = async () => {
@@ -51,8 +56,8 @@ export default function Dashboard() {
     }
 
     try {
-        // Use the first connected wallet available for signing
-        const wallet = wallets.find((w) => w.address === user?.wallet?.address) || wallets[0];
+        // Use the active wallet we identified earlier
+        const wallet = activeWallet;
         
         if (!wallet) {
             console.error("No connected wallets found via useWallets(). Wallets array:", wallets);
