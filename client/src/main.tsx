@@ -7,16 +7,18 @@ import { PrivyProvider } from '@privy-io/react-auth'
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <PrivyProvider
-      appId="cmivd4mze05lol40d22ripecb"
+      appId="client-WY6TQMYDyGwwsd7RcVjbbkBAT5zSAbvyFAJcozyaJhDi"
       config={{
         loginMethods: ['wallet'],
         supportedChains: ['solana' as any],
         defaultChain: 'solana' as any,
+
         externalWallets: {
           solana: {
             connectors: [],
           },
         },
+
         solana: {
           wallets: ['injected', 'walletconnect'],
         },
