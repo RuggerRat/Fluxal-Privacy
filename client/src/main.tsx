@@ -1,33 +1,28 @@
 import { createRoot } from "react-dom/client";
-import { PrivyProvider } from '@privy-io/react-auth';
-import { toSolanaWalletConnectors } from '@privy-io/react-auth/solana';
+import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
+import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
+import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
+import { useMemo } from 'react';
 import App from "./App";
 import "./index.css";
+import "@solana/wallet-adapter-react-ui/styles.css";
 
-const solanaConnectors = toSolanaWalletConnectors({
-    shouldAutoConnect: true,
-});
+// Default to mainnet as requested for wallet interactions
+const endpoint = "https://api.mainnet-beta.solana.com";
 
-createRoot(document.getElementById("root")!).render(
-  <PrivyProvider
-    appId='cmivd4mze05lol40d22ripecb'
-    config={{
-      loginMethods: ['wallet'],
-      appearance: { 
-        theme: 'light',
-        walletChainType: 'solana-only',
-        walletList: ['phantom']
-      },
-      externalWallets: {
-        solana: {
-            connectors: solanaConnectors
-        }
-      },
-      solana: {
-        wallets: ['phantom']
-      }
-    }}
-  >
-    <App />
-  </PrivyProvider>
-);
+function Main() {
+    // Only Phantom as requested
+    const wallets = useMemo(() => [new PhantomWalletAdapter()], []);
+
+    return (
+        <ConnectionProvider endpoint={endpoint}>
+            <WalletProvider wallets={wallets} autoConnect>
+                <WalletModalProvider>
+                    <App />
+                </WalletModalProvider>
+            </WalletProvider>
+        </ConnectionProvider>
+    );
+}
+
+createRoot(document.getElementById("root")!).render(<Main />);

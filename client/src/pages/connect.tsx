@@ -3,32 +3,19 @@ import { motion } from "framer-motion";
 import { useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
 import fluxalTitle from "@assets/Untitled_design__62_-removebg-preview_1765006354328.png";
-import { usePrivy } from '@privy-io/react-auth';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { useEffect } from "react";
 
 export default function Connect() {
   const [_, setLocation] = useLocation();
-  const { toast } = useToast();
-  const { login, ready, authenticated } = usePrivy();
+  const { connected } = useWallet();
 
   useEffect(() => {
-    if (ready && authenticated) {
+    if (connected) {
       setLocation("/dashboard");
     }
-  }, [ready, authenticated, setLocation]);
-
-  const handleConnect = async () => {
-    try {
-        login({ provider: 'wallet', chain: 'solana' });
-    } catch (e) {
-      console.error("Login failed", e);
-      toast({
-        title: "Connection Failed",
-        description: "Please try again.",
-        variant: "destructive",
-      });
-    }
-  };
+  }, [connected, setLocation]);
 
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center relative overflow-hidden text-white font-neue">
@@ -49,14 +36,14 @@ export default function Connect() {
         <h1 className="text-3xl font-bold mb-3 font-neue tracking-wide">Sign in</h1>
         <p className="text-gray-400 text-sm mb-10 font-mono tracking-wide">Continue to your Fluxal Wallet</p>
 
-        <Button 
-          id="connectBtn"
-          onClick={handleConnect}
-          disabled={!ready || authenticated}
-          className="w-full bg-[#FFE500] hover:bg-[#FF8C00] text-black font-bold h-12 rounded-xl text-sm uppercase tracking-widest transition-all duration-300 transform hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(255,229,0,0.3)]"
-        >
-          {!ready ? "INITIALIZING..." : (authenticated ? "REDIRECTING..." : "CONTINUE WITH WALLET")}
-        </Button>
+        <div className="flex justify-center w-full">
+            {/* Custom styling for the wallet adapter button to match design */}
+            <div className="[&>button]:w-full [&>button]:justify-center [&>button]:bg-[#FFE500] [&>button]:text-black [&>button]:font-bold [&>button]:h-12 [&>button]:rounded-xl [&>button]:text-sm [&>button]:uppercase [&>button]:tracking-widest [&>button]:transition-all [&>button]:duration-300 [&>button]:transform [&>button]:hover:scale-[1.02] [&>button]:hover:shadow-[0_0_20px_rgba(255,229,0,0.3)] [&>button]:hover:bg-[#FF8C00]">
+                <WalletMultiButton>
+                    CONTINUE WITH WALLET
+                </WalletMultiButton>
+            </div>
+        </div>
         
         <div className="mt-8">
             <button 
