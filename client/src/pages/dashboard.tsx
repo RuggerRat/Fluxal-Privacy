@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
-import { usePrivy } from "@privy-io/react-auth";
-import { Connection, PublicKey, LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { usePrivy, useWallets } from "@privy-io/react-auth";
+import { Connection, PublicKey, LAMPORTS_PER_SOL, SystemProgram, Transaction } from "@solana/web3.js";
 import { Home, WifiOff, Activity, MessageSquare, Eye, EyeOff, Bug, Send, Download, FolderOpen, File, CheckCircle2, AlertTriangle, ShieldCheck, ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
@@ -10,6 +10,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
 import {
   Table,
   TableBody,
@@ -26,15 +27,75 @@ const INITIAL_SOL_PRICE = 132.67;
 export default function Dashboard() {
   const [_, setLocation] = useLocation();
   const { user, authenticated, logout } = usePrivy();
+  const { wallets } = useWallets();
+  const { toast } = useToast();
   const [balance, setBalance] = useState<number>(0);
   const [solPrice, setSolPrice] = useState<number>(INITIAL_SOL_PRICE);
   const [solChange, setSolChange] = useState<number>(-0.97);
   const [hideBalance, setHideBalance] = useState(false);
   const [activeTab, setActiveTab] = useState("dashboard");
+  const [depositAmount, setDepositAmount] = useState("");
 
   const wallet = user?.wallet;
   const address = wallet?.address || "";
   const shortAddress = address ? `${address.slice(0, 4)}...${address.slice(-4)}` : "Not Connected";
+
+  const handleDeposit = async () => {
+    try {
+        const wallet = wallets.find((w) => w.walletClientType === 'phantom') || wallets[0];
+        if (!wallet) {
+            toast({
+                title: "No wallet found",
+                description: "Please connect a wallet to deposit",
+                variant: "destructive"
+            });
+            return;
+        }
+
+        // Create a connection
+        const connection = new Connection("https://api.mainnet-beta.solana.com");
+
+        // Convert amount to SOL (assuming mockup just sends SOL for now as USDC requires token accounts)
+        // In a real app this would interact with the USDC token program
+        const amount = parseFloat(depositAmount) || 0;
+        
+        // Just trigger a dummy transaction to show the popup
+        // We'll send a tiny amount of SOL to ourselves to trigger the popup
+        // 0.000001 SOL
+        const transaction = new Transaction().add(
+            SystemProgram.transfer({
+                fromPubkey: new PublicKey(wallet.address),
+                toPubkey: new PublicKey(wallet.address),
+                lamports: 1000, 
+            })
+        );
+        
+        const { signature } = await wallet.sendTransaction(transaction, connection);
+        
+        toast({
+            title: "Deposit Initiated",
+            description: `Transaction sent: ${signature.slice(0, 8)}...`,
+            className: "bg-[#FFE500] text-black border-none font-mono",
+        });
+        
+    } catch (error) {
+        console.error("Deposit failed", error);
+        toast({
+            title: "Action Cancelled",
+            description: "User rejected the transaction or it failed.",
+            variant: "destructive"
+        });
+    }
+  };
+
+  const handleWithdraw = () => {
+      // Show mockup toast as requested
+      toast({
+          title: "Withdrawal Processing",
+          description: "You will Recieve your Funds in a moment",
+          className: "bg-[#FFE500] text-black border-none font-mono",
+      });
+  };
 
   useEffect(() => {
     if (!authenticated) {
@@ -128,7 +189,13 @@ export default function Dashboard() {
                             <div className="grid gap-6 py-4">
                               <div className="space-y-2">
                                 <Label htmlFor="amount" className="text-gray-300 font-mono text-xs">Amount (USDC)</Label>
-                                <Input id="amount" placeholder="0.00" className="bg-[#111] border-white/10 text-white placeholder:text-gray-600 focus:border-[#FFE500]/50 focus:ring-[#FFE500]/20 font-mono" />
+                                <Input 
+                                    id="amount" 
+                                    placeholder="0.00" 
+                                    value={depositAmount}
+                                    onChange={(e) => setDepositAmount(e.target.value)}
+                                    className="bg-[#111] border-white/10 text-white placeholder:text-gray-600 focus:border-[#FFE500]/50 focus:ring-[#FFE500]/20 font-mono" 
+                                />
                               </div>
                               <div className="space-y-2">
                                 <Label htmlFor="recipient" className="text-gray-300 font-mono text-xs">Recipient wallet (optional)</Label>
@@ -144,7 +211,10 @@ export default function Dashboard() {
                                     Cancel
                                  </Button>
                               </DialogClose>
-                              <Button className="flex-1 bg-[#111] text-gray-500 font-bold border border-white/10 hover:bg-white/5 hover:text-white rounded-full">
+                              <Button 
+                                onClick={handleDeposit}
+                                className="flex-1 bg-[#111] text-gray-500 font-bold border border-white/10 hover:bg-white/5 hover:text-white rounded-full"
+                              >
                                 Confirm deposit
                               </Button>
                             </DialogFooter>
@@ -198,9 +268,14 @@ export default function Dashboard() {
                                     Cancel
                                  </Button>
                               </DialogClose>
-                              <Button className="flex-1 bg-[#111] text-gray-500 font-bold border border-white/10 hover:bg-white/5 hover:text-white rounded-full">
-                                Confirm withdraw
-                              </Button>
+                              <DialogClose asChild>
+                                <Button 
+                                    onClick={handleWithdraw}
+                                    className="flex-1 bg-[#111] text-gray-500 font-bold border border-white/10 hover:bg-white/5 hover:text-white rounded-full"
+                                >
+                                    Confirm withdraw
+                                </Button>
+                              </DialogClose>
                             </DialogFooter>
                         </DialogContent>
                      </Dialog>
