@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fluxal Wallet Connect</title>
+</head>
+<body style="background:black;color:white;font-family:Arial;padding:40px;">
+    <h1>Fluxal Wallet Test</h1>
+    <button onclick="connectWallet()" style="padding:12px 22px;font-size:18px;border-radius:8px;background:#ffb300;color:black;font-weight:bold;">
+        CONNECT WALLET
+    </button>
+
+<script type="module">
+  import { createModal } from "https://esm.sh/@walletconnect/modal";
+  import { SolanaAdapter } from "https://esm.sh/@walletconnect/solana-adapter";
+
+  const adapter = new SolanaAdapter({
+    network: "mainnet",
+    appMetadata: {
+      name: "Fluxal",
+    }
+  });
+
+  const modal = createModal({
+    projectId: "9258364bbfb36e1882eb3fb863ef3b287",
+    solanaAdapters: [adapter],
+  });
+
+  window.connectWallet = async () => {
+    const session = await modal.open();
+    console.log("Connected wallet:", session);
+  };
+</script>
+</body>
+</html>
