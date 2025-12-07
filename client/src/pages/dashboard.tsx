@@ -133,7 +133,7 @@ export default function Dashboard() {
             className="max-w-lg"
           >
             <p className="text-sm md:text-base text-gray-300 font-neue font-medium leading-relaxed">
-              <span className="text-[#FFE500]">ZERA</span> turns your crypto assets into <span className="text-[#FFE500]">private</span>, <span className="text-[#FFE500]">portable</span> & <span className="text-[#FFE500]">secure</span> digital cash.
+              <span className="text-[#FFE500]">FLUXAL</span> turns your crypto assets into <span className="text-[#FFE500]">private</span>, <span className="text-[#FFE500]">portable</span> & <span className="text-[#FFE500]">secure</span> digital cash.
               <br /><br />
               A single, unified ZK pool enabling shielded balances, private transfers and offline P2P with seamless hooks into DeFi.
             </p>
