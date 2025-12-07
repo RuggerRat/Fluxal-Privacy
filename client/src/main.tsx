@@ -8,7 +8,7 @@ createRoot(document.getElementById("root")!).render(
     appId='cmivd4mze05lol40d22ripecb'
     config={{
       appearance: { theme: 'light' },
-      solana: { wallets: ['injected', 'walletconnect'] }
+      solana: { wallets: ['phantom', 'solflare', 'injected', 'walletconnect'] }
     }}
   >
     <App />
