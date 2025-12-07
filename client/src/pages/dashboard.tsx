@@ -468,7 +468,7 @@ export default function Dashboard() {
                  <div className="mt-auto">
                     <Button
                       variant="outline"
-                      className="rounded-full px-8 py-2 border-white/20 text-white hover:bg-[#FFE500] hover:text-black hover:border-[#FFE500] transition-all font-bold text-[10px] tracking-widest uppercase bg-transparent"
+                      className="rounded-full px-8 py-6 border-white/20 text-white hover:bg-[#FFE500] hover:text-black hover:border-[#FFE500] transition-all font-bold text-sm tracking-widest uppercase bg-transparent"
                     >
                       LEARN MORE
                     </Button>
@@ -492,7 +492,7 @@ export default function Dashboard() {
                  <div className="mt-auto">
                     <Button
                       variant="outline"
-                      className="rounded-full px-8 py-2 border-white/20 text-white hover:bg-[#FFE500] hover:text-black hover:border-[#FFE500] transition-all font-bold text-[10px] tracking-widest uppercase bg-transparent"
+                      className="rounded-full px-8 py-6 border-white/20 text-white hover:bg-[#FFE500] hover:text-black hover:border-[#FFE500] transition-all font-bold text-sm tracking-widest uppercase bg-transparent"
                     >
                       LEARN MORE
                     </Button>
