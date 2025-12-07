@@ -11,17 +11,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       config={{
         loginMethods: ['wallet'],
         supportedChains: ['solana' as any],
-        defaultChain: 'solana' as any,
-
-        externalWallets: {
-          solana: {
-            connectors: [],
-          },
-        },
-
-        solana: {
-          wallets: ['injected', 'walletconnect'],
-        },
       }}
     >
       <App />
