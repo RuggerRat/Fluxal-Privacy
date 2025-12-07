@@ -5,11 +5,24 @@ import "./index.css";
 
 createRoot(document.getElementById("root")!).render(
   <PrivyProvider
-    appId='cmivd4mze05lol40d22ripecb'
+    appId="cmivd4mze05lol40d22ripecb"
     config={{
       loginMethods: ['wallet'],
+
+      // supportedChains: ['solana'],     // Commented out: Causes runtime error (expects Chain objects)
+      // defaultChain: 'solana',          // Commented out: Causes runtime error
+
       solana: {
-        wallets: ['injected', 'walletconnect']   // Enables Phantom, Backpack, Solflare
+        wallets: ['injected', 'walletconnect'], 
+      },
+
+      embeddedWallets: {
+        createOnLogin: 'users-without-wallets', // Updated to valid value
+      },
+      
+      appearance: {
+        walletList: ['phantom'],
+        showWalletLoginFirst: true
       }
     }}
   >
