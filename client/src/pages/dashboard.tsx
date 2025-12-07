@@ -170,7 +170,7 @@ export default function Dashboard() {
       </div>
 
       {/* Features Section */}
-      <div className="relative z-20 w-full bg-black/90 py-20 px-8 md:px-20 border-t border-[#FFE500]/20">
+      <div className="relative z-20 w-full bg-transparent py-20 px-8 md:px-20 border-t border-[#FFE500]/20">
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-16">
