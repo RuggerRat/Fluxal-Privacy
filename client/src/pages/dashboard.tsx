@@ -243,33 +243,33 @@ export default function Dashboard() {
                     Report a Bug
                 </Button>
               </DialogTrigger>
-              <DialogContent className="bg-[#1e1e24] border-white/10 text-white sm:max-w-[425px]">
+              <DialogContent className="bg-black border border-white/10 text-white sm:max-w-[425px]">
                 <DialogHeader>
                   <DialogTitle className="text-xl font-bold font-neue">Report a Bug</DialogTitle>
                 </DialogHeader>
                 <div className="grid gap-4 py-4">
                   <div className="grid gap-2">
                     <Label htmlFor="name" className="text-gray-300 font-neue">Name</Label>
-                    <Input id="name" placeholder="Your Name" className="bg-[#2b2b30] border-white/10 text-white placeholder:text-gray-500" />
+                    <Input id="name" placeholder="Your Name" className="bg-[#111] border-white/10 text-white placeholder:text-gray-600 focus:border-[#FFE500]/50 focus:ring-[#FFE500]/20" />
                   </div>
                   <div className="grid gap-2">
                     <Label htmlFor="email" className="text-gray-300 font-neue">Email</Label>
-                    <Input id="email" placeholder="your.email@example.org" className="bg-[#2b2b30] border-white/10 text-white placeholder:text-gray-500" />
+                    <Input id="email" placeholder="your.email@example.org" className="bg-[#111] border-white/10 text-white placeholder:text-gray-600 focus:border-[#FFE500]/50 focus:ring-[#FFE500]/20" />
                   </div>
                   <div className="grid gap-2">
                     <Label htmlFor="description" className="text-gray-300 font-neue">Description (required)</Label>
-                    <Textarea id="description" placeholder="What's the bug? What did you expect?" className="bg-[#2b2b30] border-white/10 text-white placeholder:text-gray-500 min-h-[100px]" />
+                    <Textarea id="description" placeholder="What's the bug? What did you expect?" className="bg-[#111] border-white/10 text-white placeholder:text-gray-600 min-h-[100px] focus:border-[#FFE500]/50 focus:ring-[#FFE500]/20" />
                   </div>
-                  <Button variant="outline" className="w-full bg-transparent border-white/10 text-white hover:bg-white/5 hover:text-white">
+                  <Button variant="outline" className="w-full bg-transparent border-white/10 text-gray-400 hover:bg-white/5 hover:text-white hover:border-white/20">
                     Add a screenshot
                   </Button>
                 </div>
                 <DialogFooter className="flex-col gap-2 sm:flex-col sm:space-x-0">
-                  <Button className="w-full bg-[#5865F2] hover:bg-[#4752c4] text-white font-bold">
+                  <Button className="w-full bg-[#FFE500] hover:bg-[#FF8C00] text-black font-bold border-none">
                     Send Bug Report
                   </Button>
                   <DialogClose asChild>
-                     <Button variant="ghost" className="w-full text-gray-400 hover:text-white hover:bg-transparent">
+                     <Button variant="ghost" className="w-full text-gray-500 hover:text-white hover:bg-transparent">
                         Cancel
                      </Button>
                   </DialogClose>
