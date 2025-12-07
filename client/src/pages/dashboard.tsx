@@ -6,7 +6,7 @@ import { Copy, MoveRight, WifiOff, Shield, Link, Lock, Ban, Zap } from "lucide-r
 import { useToast } from "@/hooks/use-toast";
 import fluxalTitle from "@assets/Untitled_design__62_-removebg-preview_1765006354328.png";
 import fluxalLogoY from "@assets/image_1765082701286.png";
-import fluxalCard from "@assets/image_(68)_1765084807154.png";
+import fluxalEngine from "@assets/image_1765087318769.png";
 
 export default function Dashboard() {
   const { toast } = useToast();
@@ -412,7 +412,7 @@ export default function Dashboard() {
                 FOR USERS
               </p>
               <h3 className="text-2xl md:text-3xl font-neue font-bold text-[#FFE500] uppercase tracking-wider">
-                FLUXAL WALLET
+                FLUXAL ENGINE
               </h3>
             </div>
 
@@ -420,8 +420,8 @@ export default function Dashboard() {
               <div className="relative w-64 h-80 md:w-80 md:h-96 mb-8 group">
                 <div className="absolute inset-0 bg-[#FFE500]/20 blur-[60px] rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
                 <img 
-                  src={fluxalCard} 
-                  alt="FLUXAL Wallet Card" 
+                  src={fluxalEngine} 
+                  alt="FLUXAL Engine" 
                   className="w-full h-full object-contain relative z-10 drop-shadow-2xl transform group-hover:scale-105 transition-transform duration-500" 
                 />
               </div>
