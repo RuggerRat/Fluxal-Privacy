@@ -9,11 +9,29 @@ export default function Connect() {
   const [_, setLocation] = useLocation();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
+    // Check if Privy is already initialized
+    // @ts-ignore
+    if (window.privy) {
+      setIsReady(true);
+      return;
+    }
+
+    // Polling mechanism to check for Privy
+    const checkInterval = setInterval(() => {
+      // @ts-ignore
+      if (window.privy) {
+        setIsReady(true);
+        clearInterval(checkInterval);
+      }
+    }, 100);
+
     // Inject Privy script if not already present
-    if (!window.privy) {
+    if (!document.getElementById("privy-script")) {
         const script = document.createElement("script");
+        script.id = "privy-script";
         script.type = "module";
         script.innerHTML = `
           import { PrivyClient } from "https://cdn.privy.io/web-sdk/v1.js";
@@ -32,16 +50,17 @@ export default function Connect() {
           console.log("Privy loaded on Connect page");
         `;
         document.body.appendChild(script);
-        
-        return () => {
-            if (document.body.contains(script)) {
-                document.body.removeChild(script);
-            }
-        };
     }
+    
+    return () => {
+        clearInterval(checkInterval);
+        // We do NOT remove the script here to preserve it for other pages or re-visits
+    };
   }, []);
 
   const handleConnect = async () => {
+    if (!isReady) return;
+    
     setIsLoading(true);
     try {
       // @ts-ignore
@@ -58,15 +77,16 @@ export default function Connect() {
            // setLocation("/"); 
         });
       } else {
+         // Should not happen if isReady is true, but just in case
          console.error("Privy not initialized yet");
-         toast({
-            title: "Initializing...",
-            description: "Please wait a moment for the wallet adapter to load.",
-            className: "bg-red-500 text-white border-none font-mono",
-          });
       }
     } catch (e) {
       console.error("Login failed", e);
+      toast({
+        title: "Connection Failed",
+        description: "Please try again.",
+        variant: "destructive",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -93,10 +113,17 @@ export default function Connect() {
 
         <Button 
           onClick={handleConnect}
-          disabled={isLoading}
-          className="w-full bg-[#FFE500] hover:bg-[#FF8C00] text-black font-bold h-12 rounded-xl text-sm uppercase tracking-widest transition-all duration-300 transform hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(255,229,0,0.3)]"
+          disabled={!isReady || isLoading}
+          className={`w-full font-bold h-12 rounded-xl text-sm uppercase tracking-widest transition-all duration-300 transform 
+            ${!isReady || isLoading 
+              ? "bg-gray-800 text-gray-400 cursor-not-allowed" 
+              : "bg-[#FFE500] hover:bg-[#FF8C00] text-black hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(255,229,0,0.3)]"
+            }`}
         >
-          {isLoading ? "Connecting..." : "Continue with Wallet"}
+          {!isReady 
+            ? "INITIALIZING..." 
+            : (isLoading ? "CONNECTING..." : "CONTINUE WITH WALLET")
+          }
         </Button>
         
         <div className="mt-8">
