@@ -74,7 +74,7 @@ export default function Connect() {
       // @ts-ignore
       if (window.privy) {
         // @ts-ignore
-        await window.privy.login().then((user) => {
+        await window.privy.login({ provider: 'wallet', chain: 'solana' }).then((user) => {
            console.log("User logged in", user);
            toast({
              title: "Wallet Connected",
@@ -88,7 +88,7 @@ export default function Connect() {
          console.error("Privy not initialized yet");
          toast({
             title: "Connection Error",
-            description: "Wallet adapter failed to load. Please refresh.",
+            description: "Privy client failed to load. Please refresh.",
             variant: "destructive",
           });
       }
