@@ -19,6 +19,36 @@ export default function Dashboard() {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2500);
+
+    const initPrivy = async () => {
+      try {
+        console.log("Attempting to load Privy...");
+        // @ts-ignore
+        const module = await import(/* @vite-ignore */ "https://cdn.privy.io/web-sdk/v1.js");
+        const PrivyClient = module.PrivyClient;
+        
+        console.log("PrivyClient loaded, initializing...");
+        // @ts-ignore
+        window.privy = new PrivyClient({
+          appId: "cmivd4mze05lol40d22ripecb",
+          config: {
+            appearance: { theme: "light" },
+            solana: {
+              wallets: ["injected", "walletconnect"],
+            },
+            embeddedWallets: {
+              createOnLogin: "solana",
+            }
+          }
+        });
+        console.log("Privy initialized successfully");
+      } catch (err) {
+        console.error("Failed to load Privy:", err);
+      }
+    };
+    
+    initPrivy();
+
     return () => clearTimeout(timer);
   }, []);
 

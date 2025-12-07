@@ -22,22 +22,6 @@
   </head>
   <body>
     <div id="root"></div>
-    <script type="module">
-      import { PrivyClient } from "https://cdn.privy.io/web-sdk/v1.js";
-    
-      window.privy = new PrivyClient({
-        appId: "cmivd4mze05lol40d22ripecb",
-        config: {
-          appearance: { theme: "light" },
-          solana: {
-            wallets: ["injected", "walletconnect"],
-          },
-          embeddedWallets: {
-            createOnLogin: "solana",
-          }
-        }
-      });
-    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
