@@ -29,9 +29,11 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#0a0a00] via-black to-black text-white overflow-hidden relative font-neue selection:bg-[#FFE500] selection:text-black">
-      <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_0%,_rgba(255,229,0,0.03),_transparent_70%)] pointer-events-none" />
-      <div className="fixed inset-0 bg-[radial-gradient(circle_at_80%_20%,_rgba(255,140,0,0.02),_transparent_50%)] pointer-events-none" />
+    <div className="min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#0d0d04] via-black to-black text-white overflow-hidden relative font-neue selection:bg-[#FFE500] selection:text-black">
+      {/* Background Gradients - Enhanced for visibility */}
+      <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_0%,_rgba(255,229,0,0.15),_transparent_70%)] pointer-events-none mix-blend-screen" />
+      <div className="fixed inset-0 bg-[radial-gradient(circle_at_80%_20%,_rgba(255,140,0,0.1),_transparent_50%)] pointer-events-none mix-blend-screen" />
+      <div className="fixed inset-0 bg-[linear-gradient(to_bottom,rgba(255,229,0,0.02),transparent)] pointer-events-none" />
       
       <AnimatePresence>
         {isLoading && (
