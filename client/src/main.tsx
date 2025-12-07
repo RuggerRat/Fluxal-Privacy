@@ -7,7 +7,7 @@ import { PrivyProvider } from '@privy-io/react-auth'
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <PrivyProvider
-      appId="client-WY6TQMYDyGwwsd7RcVjbbkBAT5zSAbvyFAJcozyaJhDi"
+      appId="cmivd4mze05lol40d22ripecb"
       config={{
         loginMethods: ['wallet'],
         supportedChains: ['solana' as any],
