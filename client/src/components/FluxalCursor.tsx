@@ -37,9 +37,9 @@ export default function FluxalCursor() {
             radius: 0.1
           },
           bloom: {
-            strength: 0.4,
+            strength: 0.7,
             threshold: 0.1,
-            radius: 0.05
+            radius: 0.2
           }
         });
 
