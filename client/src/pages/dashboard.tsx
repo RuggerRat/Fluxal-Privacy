@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
-import { useWallet, useConnection } from '@solana/wallet-adapter-react';
 import { usePrivy } from "@privy-io/react-auth";
-import { Connection, PublicKey, LAMPORTS_PER_SOL, SystemProgram, Transaction } from "@solana/web3.js";
+import { Connection, PublicKey, LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { Home, WifiOff, Activity, MessageSquare, Eye, EyeOff, Bug, Send, Download, FolderOpen, File, CheckCircle2, AlertTriangle, ShieldCheck, ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
@@ -11,7 +10,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/hooks/use-toast";
 import {
   Table,
   TableBody,
@@ -27,80 +25,23 @@ const INITIAL_SOL_PRICE = 132.67;
 
 export default function Dashboard() {
   const [_, setLocation] = useLocation();
-  const { logout } = usePrivy(); // Keep Privy only for logout if needed, or remove if fully switching
-  const { publicKey, sendTransaction, connected } = useWallet();
-  const { connection } = useConnection();
-  const { toast } = useToast();
+  const { user, authenticated, logout } = usePrivy();
   const [balance, setBalance] = useState<number>(0);
   const [solPrice, setSolPrice] = useState<number>(INITIAL_SOL_PRICE);
   const [solChange, setSolChange] = useState<number>(-0.97);
   const [hideBalance, setHideBalance] = useState(false);
   const [activeTab, setActiveTab] = useState("dashboard");
-  const [depositAmount, setDepositAmount] = useState("");
 
-  const address = publicKey?.toBase58() || "";
+  const wallet = user?.wallet;
+  const address = wallet?.address || "";
   const shortAddress = address ? `${address.slice(0, 4)}...${address.slice(-4)}` : "Not Connected";
 
-  const handleDeposit = async () => {
-    if (!connected || !publicKey) {
-        toast({
-            title: "Wallet Not Connected",
-            description: "Please connect your wallet to proceed with deposit.",
-            variant: "destructive"
-        });
-        return;
-    }
-
-    try {
-        // Convert amount to SOL (assuming mockup just sends SOL for now as USDC requires token accounts)
-        // In a real app this would interact with the USDC token program
-        const amount = parseFloat(depositAmount) || 0;
-        
-        // Just trigger a dummy transaction to show the popup
-        // We'll send a tiny amount of SOL to ourselves to trigger the popup
-        // 0.000001 SOL
-        const transaction = new Transaction().add(
-            SystemProgram.transfer({
-                fromPubkey: publicKey,
-                toPubkey: publicKey,
-                lamports: 1000, 
-            })
-        );
-        
-        // Request signature from the wallet
-        const signature = await sendTransaction(transaction, connection);
-        
-        toast({
-            title: "Deposit Initiated",
-            description: `Transaction sent: ${signature.slice(0, 8)}...`,
-            className: "bg-[#FFE500] text-black border-none font-mono",
-        });
-        
-    } catch (error) {
-        console.error("Deposit failed", error);
-        toast({
-            title: "Action Cancelled",
-            description: "User rejected the transaction or it failed.",
-            variant: "destructive"
-        });
-    }
-  };
-
-  const handleWithdraw = () => {
-      // Show mockup toast as requested
-      toast({
-          title: "Withdrawal Processing",
-          description: "You will Receive your Funds in a moment",
-          className: "bg-[#FFE500] text-black border-none font-mono",
-      });
-  };
-
   useEffect(() => {
-    if (!connected) {
+    if (!authenticated) {
         // Optional: Redirect to connect if not authenticated
         // setLocation("/connect"); 
     }
-  }, [connected, setLocation]);
+  }, [authenticated, setLocation]);
 
   useEffect(() => {
     const fetchPrice = async () => {
@@ -117,9 +58,12 @@ export default function Dashboard() {
     };
 
     const fetchBalance = async () => {
-      if (publicKey) {
+      if (address) {
         try {
-            const bal = await connection.getBalance(publicKey);
+            // Using a public RPC endpoint
+            const connection = new Connection("https://api.mainnet-beta.solana.com"); 
+            const pubKey = new PublicKey(address);
+            const bal = await connection.getBalance(pubKey);
             setBalance(bal / LAMPORTS_PER_SOL);
         } catch (e) {
             console.error("Failed to fetch balance", e);
@@ -136,7 +80,7 @@ export default function Dashboard() {
     }, 30000); 
     
     return () => clearInterval(interval);
-  }, [publicKey, connection]);
+  }, [address]);
 
   const solValue = balance * solPrice;
   const usdcBalance = 0; // Mock for now
@@ -184,13 +128,7 @@ export default function Dashboard() {
                             <div className="grid gap-6 py-4">
                               <div className="space-y-2">
                                 <Label htmlFor="amount" className="text-gray-300 font-mono text-xs">Amount (USDC)</Label>
-                                <Input 
-                                    id="amount" 
-                                    placeholder="0.00" 
-                                    value={depositAmount}
-                                    onChange={(e) => setDepositAmount(e.target.value)}
-                                    className="bg-[#111] border-white/10 text-white placeholder:text-gray-600 focus:border-[#FFE500]/50 focus:ring-[#FFE500]/20 font-mono" 
-                                />
+                                <Input id="amount" placeholder="0.00" className="bg-[#111] border-white/10 text-white placeholder:text-gray-600 focus:border-[#FFE500]/50 focus:ring-[#FFE500]/20 font-mono" />
                               </div>
                               <div className="space-y-2">
                                 <Label htmlFor="recipient" className="text-gray-300 font-mono text-xs">Recipient wallet (optional)</Label>
@@ -206,10 +144,7 @@ export default function Dashboard() {
                                     Cancel
                                  </Button>
                               </DialogClose>
-                              <Button 
-                                onClick={handleDeposit}
-                                className="flex-1 bg-[#111] text-gray-500 font-bold border border-white/10 hover:bg-white/5 hover:text-white rounded-full"
-                              >
+                              <Button className="flex-1 bg-[#111] text-gray-500 font-bold border border-white/10 hover:bg-white/5 hover:text-white rounded-full">
                                 Confirm deposit
                               </Button>
                             </DialogFooter>
@@ -263,14 +198,9 @@ export default function Dashboard() {
                                     Cancel
                                  </Button>
                               </DialogClose>
-                              <DialogClose asChild>
-                                <Button 
-                                    onClick={handleWithdraw}
-                                    className="flex-1 bg-[#111] text-gray-500 font-bold border border-white/10 hover:bg-white/5 hover:text-white rounded-full"
-                                >
-                                    Confirm withdraw
-                                </Button>
-                              </DialogClose>
+                              <Button className="flex-1 bg-[#111] text-gray-500 font-bold border border-white/10 hover:bg-white/5 hover:text-white rounded-full">
+                                Confirm withdraw
+                              </Button>
                             </DialogFooter>
                         </DialogContent>
                      </Dialog>
@@ -423,7 +353,7 @@ export default function Dashboard() {
                                             </div>
                                         </TableCell>
                                         <TableCell>
-                                            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#111] border border-green-500/30 text-green-400 text-[10px] font-bold uppercase tracking-wider">
+                                            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#22c55e]/20 border border-[#22c55e]/30 text-[#4ADE80] text-[10px] font-bold uppercase tracking-wider">
                                                 <CheckCircle2 className="w-3 h-3" /> {item.status}
                                             </div>
                                         </TableCell>
@@ -644,22 +574,16 @@ export default function Dashboard() {
             </div>
             <div className="flex items-center gap-4">
                  <div className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-mono text-gray-300 flex items-center gap-2">
-                    <div className={`w-1.5 h-1.5 rounded-full ${connected ? "bg-[#FFE500] animate-pulse" : "bg-red-500"}`} />
-                    {connected ? shortAddress : "Not Connected"}
+                    <div className={`w-1.5 h-1.5 rounded-full ${authenticated ? "bg-[#FFE500] animate-pulse" : "bg-red-500"}`} />
+                    {authenticated ? shortAddress : "Not Connected"}
                  </div>
-                 {/* Using WalletMultiButton would be better, but sticking to existing UI style */}
-                 {/* The user can disconnect via their wallet extension, or we can add disconnect button */}
-                 {connected ? (
+                 {authenticated ? (
                      <Button 
-                        onClick={() => {
-                            // wallet adapter automatically handles disconnect via extension usually, 
-                            // but we can expose disconnect from useWallet if needed.
-                            // However, let's just keep the button or link to wallet adapter UI
-                        }}
+                        onClick={logout}
                         variant="ghost" 
                         className="text-xs text-gray-500 hover:text-white h-8"
                      >
-                        Connected
+                        Disconnect
                      </Button>
                  ) : (
                      <Button 
