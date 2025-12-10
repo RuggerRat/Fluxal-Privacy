@@ -480,11 +480,11 @@ export default function Dashboard() {
 
                 {/* Assets Section */}
                 <div>
-                    <h3 className="text-lg font-bold mb-6">Assets</h3>
+                    <h3 className="text-xl font-bold mb-8 font-neue">Assets</h3>
                     
                     <div className="w-full">
                         {/* Table Header */}
-                        <div className="grid grid-cols-5 gap-4 text-xs font-mono text-gray-500 uppercase tracking-wider mb-4 px-4">
+                        <div className="grid grid-cols-5 gap-4 text-xs font-mono text-gray-500 uppercase tracking-wider mb-6 px-6">
                             <div className="col-span-2">Name</div>
                             <div className="text-right">Price</div>
                             <div className="text-right">Amount</div>
@@ -493,23 +493,23 @@ export default function Dashboard() {
                         </div>
 
                         {/* Divider */}
-                        <div className="h-px w-full bg-white/5 mb-4" />
+                        <div className="h-px w-full bg-white/5 mb-6" />
 
                         {/* Asset Row: Wrapped SOL */}
-                        <div className="group grid grid-cols-5 gap-4 items-center px-4 py-4 rounded-xl hover:bg-white/5 transition-colors cursor-pointer border border-transparent hover:border-white/5">
-                            <div className="col-span-2 flex items-center gap-3">
-                                <div className="w-8 h-8 rounded-full bg-black border border-white/10 flex items-center justify-center shrink-0">
-                                    <img src="https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png" alt="SOL" className="w-5 h-5" />
+                        <div className="group grid grid-cols-5 gap-4 items-center px-6 py-6 rounded-2xl hover:bg-white/5 transition-colors cursor-pointer border border-transparent hover:border-white/5">
+                            <div className="col-span-2 flex items-center gap-4">
+                                <div className="w-10 h-10 rounded-full bg-black border border-white/10 flex items-center justify-center shrink-0">
+                                    <img src="https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png" alt="SOL" className="w-6 h-6" />
                                 </div>
                                 <div>
-                                    <div className="font-bold text-sm">Wrapped SOL</div>
-                                    <div className="text-xs text-gray-500">SOL</div>
+                                    <div className="font-bold text-base text-white">Wrapped SOL</div>
+                                    <div className="text-xs text-gray-500 font-mono mt-0.5">SOL</div>
                                 </div>
                             </div>
-                            <div className="text-right font-mono text-sm text-gray-300">
+                            <div className="text-right font-mono text-sm text-gray-300 font-medium">
                                 ${solPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                             </div>
-                            <div className="text-right font-mono text-sm text-gray-300">
+                            <div className="text-right font-mono text-sm text-gray-300 font-medium">
                                 {hideBalance ? "•••" : balance.toLocaleString(undefined, { maximumFractionDigits: 4 })}
                             </div>
                             <div className="text-right font-mono text-sm text-white font-bold">
@@ -518,22 +518,22 @@ export default function Dashboard() {
                         </div>
 
                          {/* Asset Row: USDC */}
-                         <div className="group grid grid-cols-5 gap-4 items-center px-4 py-4 rounded-xl hover:bg-white/5 transition-colors cursor-pointer border border-transparent hover:border-white/5 mt-2">
-                            <div className="col-span-2 flex items-center gap-3">
-                                <div className="w-8 h-8 rounded-full bg-black border border-white/10 flex items-center justify-center shrink-0">
-                                     <div className="w-5 h-5 rounded-full bg-[#2775CA] flex items-center justify-center text-[8px] font-bold text-white">
+                         <div className="group grid grid-cols-5 gap-4 items-center px-6 py-6 rounded-2xl hover:bg-white/5 transition-colors cursor-pointer border border-transparent hover:border-white/5 mt-2">
+                            <div className="col-span-2 flex items-center gap-4">
+                                <div className="w-10 h-10 rounded-full bg-black border border-white/10 flex items-center justify-center shrink-0">
+                                     <div className="w-6 h-6 rounded-full bg-[#2775CA] flex items-center justify-center text-[10px] font-bold text-white">
                                         $
                                      </div>
                                 </div>
                                 <div>
-                                    <div className="font-bold text-sm">USDC</div>
-                                    <div className="text-xs text-gray-500">USDC</div>
+                                    <div className="font-bold text-base text-white">USDC</div>
+                                    <div className="text-xs text-gray-500 font-mono mt-0.5">USDC</div>
                                 </div>
                             </div>
-                            <div className="text-right font-mono text-sm text-gray-300">
+                            <div className="text-right font-mono text-sm text-gray-300 font-medium">
                                 $1.00
                             </div>
-                            <div className="text-right font-mono text-sm text-gray-300">
+                            <div className="text-right font-mono text-sm text-gray-300 font-medium">
                                 {hideBalance ? "•••" : usdcBalance.toLocaleString(undefined, { maximumFractionDigits: 2 })}
                             </div>
                             <div className="text-right font-mono text-sm text-white font-bold">
