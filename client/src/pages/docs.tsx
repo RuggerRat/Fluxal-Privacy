@@ -322,7 +322,7 @@ export default function Docs() {
 
         <div className="mt-12 flex items-center justify-between gap-6 flex-wrap">
           <p className="text-xs text-gray-500 font-mono tracking-widest" data-testid="text-footer-copyright">
-            © 2026 FLUXAL LABS. ALL RIGHTS RESERVED.
+            © 2026 FLUXAL. ALL RIGHTS RESERVED.
           </p>
           <a
             data-testid="link-footer-x"

@@ -420,7 +420,7 @@ export default function Landing() {
              </div>
 
              <p className="text-xs text-gray-400 font-mono text-center md:text-right font-bold">
-                © 2026 FLUXAL LABS. ALL RIGHTS RESERVED.
+                © 2026 FLUXAL. ALL RIGHTS RESERVED.
              </p>
            </div>
 
