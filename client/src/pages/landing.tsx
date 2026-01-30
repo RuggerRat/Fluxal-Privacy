@@ -82,7 +82,7 @@ export default function Landing() {
       </div>
 
       {/* Main Hero Section */}
-      <div id="home" className="relative z-10 flex flex-col md:flex-row min-h-screen pt-52 px-8 md:px-20 items-center">
+      <div id="home" className="relative z-10 flex flex-col md:flex-row min-h-screen pt-44 px-8 md:px-20 items-center">
         
         {/* Left Content */}
         <div className="flex-1 flex flex-col justify-center space-y-8">
