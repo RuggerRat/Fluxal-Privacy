@@ -55,7 +55,7 @@ export default function Landing() {
             <a data-testid="link-nav-home" href="#home" className="hover:text-[#FFE500] transition-colors">HOME</a>
             <a data-testid="link-nav-features" href="#features" className="hover:text-[#FFE500] transition-colors">FEATURES</a>
             <a data-testid="link-nav-products" href="#products" className="hover:text-[#FFE500] transition-colors">PRODUCTS</a>
-            <a data-testid="link-nav-docs" href="#docs" className="hover:text-[#FFE500] transition-colors">DOCS</a>
+            <a data-testid="link-nav-docs" href="/docs" className="hover:text-[#FFE500] transition-colors">DOCS</a>
           </div>
 
           <Button 
@@ -412,12 +412,12 @@ export default function Landing() {
              <div className="hidden md:block" /> {/* Empty Left Column */}
              
              <div className="flex justify-center gap-12 text-xs text-gray-500 font-mono tracking-widest">
-                <a href="#" className="hover:text-[#FFE500] flex items-center gap-2 group">
+                <a data-testid="link-footer-x" href="https://x.com/FluxalAI" target="_blank" rel="noreferrer" className="hover:text-[#FFE500] flex items-center gap-2 group">
                   <svg viewBox="0 0 24 24" aria-hidden="true" className="w-4 h-4 fill-current group-hover:text-[#FFE500] transition-colors">
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                   </svg>
                 </a>
-                <a data-testid="link-footer-docs" href="#docs" className="hover:text-[#FFE500]">DOCS</a>
+                <a data-testid="link-footer-docs" href="/docs" className="hover:text-[#FFE500]">DOCS</a>
              </div>
 
              <p className="text-xs text-gray-400 font-mono text-center md:text-right font-bold">

@@ -8,12 +8,14 @@ import Landing from "@/pages/landing";
 import Launch from "@/pages/launch";
 import Dashboard from "@/pages/dashboard";
 import Connect from "@/pages/connect";
+import Docs from "@/pages/docs";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/landing" component={Landing} />
+      <Route path="/docs" component={Docs} />
       <Route path="/launch" component={Launch} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/connect" component={Connect} />
