@@ -1,6 +1,6 @@
 import FluxalCursor from "@/components/FluxalCursor";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ExternalLink, ShieldCheck, Layers, Wallet, Cpu, BadgeDollarSign, Zap, Network, LockKeyhole } from "lucide-react";
+import { ArrowLeft, ExternalLink, ShieldCheck, Layers, Wallet, Cpu, BadgeDollarSign, Zap, Network } from "lucide-react";
 import { useLocation } from "wouter";
 
 const sections = [
@@ -133,7 +133,7 @@ export default function Docs() {
                   <div className="mt-4 grid grid-cols-1 gap-2">
                     <Button
                       data-testid="button-open-dashboard"
-                      onClick={() => setLocation("/dashboard")}
+                      onClick={() => setLocation("/connect")}
                       className="rounded-full bg-[#FFE500] text-black hover:bg-[#FF8C00] uppercase tracking-widest font-neue font-black"
                     >
                       Open Dashboard
@@ -317,15 +317,6 @@ export default function Docs() {
               <Bullet title="Where do I start?" body="Connect a wallet in the dashboard, explore the flows, and read the docs section-by-section." />
             </div>
 
-            <div className="mt-6 rounded-2xl border border-white/10 bg-black/40 p-6">
-              <div className="flex items-center gap-3">
-                <LockKeyhole className="h-5 w-5 text-[#FFE500]" />
-                <p className="text-xs font-neue font-black uppercase tracking-widest" data-testid="text-disclaimer-title">Prototype disclaimer</p>
-              </div>
-              <p className="mt-3 text-sm text-gray-300 leading-relaxed font-neue" data-testid="text-disclaimer-body">
-                This is a UI prototype built to communicate the product vision and flows. It does not implement backend protocol logic in this environment.
-              </p>
-            </div>
           </section>
         </div>
 
