@@ -2,8 +2,7 @@ import FluxalLoader from "@/components/FluxalLoader";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { Copy, MoveRight, WifiOff, Shield, Link, Lock, Ban, Zap, Layers, Database } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { MoveRight, WifiOff, Shield, Link, Lock, Ban, Zap, Layers, Database } from "lucide-react";
 import fluxalTitle from "@assets/Untitled_design__62_-removebg-preview_1765006354328.png";
 import fluxalLogoY from "@assets/image_1765082701286.png";
 import fluxalEngine from "@assets/image_1765087318769.png";
@@ -13,7 +12,6 @@ import { useLocation } from "wouter";
 
 export default function Landing() {
   const [_, setLocation] = useLocation();
-  const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -25,14 +23,6 @@ export default function Landing() {
     return () => clearTimeout(timer);
   }, []);
 
-  const copyAddress = () => {
-    navigator.clipboard.writeText("8avjtJHAHfqp4g2RR9ALAGBpSTqKPZR8nRbzStWFLUX");
-    toast({
-      title: "Address Copied",
-      description: "Contract address copied to clipboard",
-      className: "bg-[#FFE500] text-black border-none font-mono",
-    });
-  };
 
   return (
     <div className="min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#0d0d04] via-black to-black text-white overflow-hidden relative font-neue selection:bg-[#FFE500] selection:text-black">
@@ -132,27 +122,43 @@ export default function Landing() {
             </p>
           </motion.div>
 
-          {/* Contract Address Box */}
+          {/* $FLUX Utility */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 items-start sm:items-center"
+            className="max-w-xl"
           >
-            <div 
-              onClick={copyAddress}
-              className="group cursor-pointer flex items-center gap-3 px-4 py-2 rounded-full border border-[#FFE500]/30 bg-[#FFE500]/5 hover:bg-[#FFE500]/10 transition-all duration-300"
-            >
-              <span className="font-mono text-xs text-[#FFE500]">8avjtJ...StWFLUX</span>
-              <Copy className="w-3 h-3 text-[#FFE500]/70 group-hover:text-[#FFE500] transition-colors" />
+            <div className="rounded-2xl border border-[#FFE500]/25 bg-[#FFE500]/5 p-5 md:p-6">
+              <div className="flex items-center gap-3">
+                <div className="h-8 w-8 rounded-full bg-[#FFE500] text-black font-neue font-black grid place-items-center">
+                  $
+                </div>
+                <h3 className="font-neue font-black tracking-widest text-sm md:text-base uppercase text-[#FFE500]">
+                  $FLUX $FLUX
+                </h3>
+              </div>
+
+              <p className="mt-3 text-gray-300 text-sm md:text-base leading-relaxed font-neue">
+                <span className="text-[#FFE500]">$FLUX</span> is used by the protocol to pay for privacy-related computation and infrastructure on Solana.
+              </p>
+
+              <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="rounded-xl border border-white/10 bg-black/30 p-4">
+                  <p className="text-xs font-neue font-black tracking-widest uppercase text-white" data-testid="text-protocol-fees-title">Protocol Fees</p>
+                  <p className="mt-2 text-xs md:text-sm text-gray-400 leading-relaxed font-neue" data-testid="text-protocol-fees-body">
+                    Certain privacy-preserving actions require payment in <span className="text-[#FFE500]">$FLUX</span>, covering proof generation, verification, and relayer services.
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-white/10 bg-black/30 p-4">
+                  <p className="text-xs font-neue font-black tracking-widest uppercase text-white" data-testid="text-resource-metering-title">Resource Metering</p>
+                  <p className="mt-2 text-xs md:text-sm text-gray-400 leading-relaxed font-neue" data-testid="text-resource-metering-body">
+                    <span className="text-[#FFE500]">$FLUX</span> is used to rate-limit and meter access to privacy features, preventing abuse and aligning usage with computational cost.
+                  </p>
+                </div>
+              </div>
             </div>
-            
-            <Button 
-              variant="outline" 
-              className="rounded-full px-6 py-2 border-[#FFE500]/30 text-white hover:bg-[#FFE500] hover:text-black hover:border-[#FFE500] transition-all font-bold text-xs tracking-widest uppercase"
-            >
-              LEARN MORE
-            </Button>
           </motion.div>
 
         </div>
@@ -285,23 +291,29 @@ export default function Landing() {
               </ul>
             </div>
 
-            {/* Card 2: USDC/USDT */}
+            {/* Card 2: Privacy-Preserving Transfers */}
             <div className="p-8 rounded-2xl border border-white/20 bg-white/5 flex flex-col h-full relative overflow-hidden hover:bg-white/10 transition-colors duration-300">
-              <h3 className="text-2xl font-bold font-neue text-white mb-1">USDC/USDT/SOL + OTHERS</h3>
-              <p className="text-gray-400 text-sm uppercase tracking-wider mb-6">PRIVATE DIGITAL CASH</p>
+              <h3 className="text-2xl font-bold font-neue text-white mb-1">PRIVACY-PRESERVING TRANSFERS</h3>
+              <p className="text-gray-400 text-sm uppercase tracking-wider mb-6">SUPPORTED SOLANA ASSETS</p>
+
+              <p className="text-gray-300 text-sm leading-relaxed font-neue mb-6" data-testid="text-privacy-transfers-intro">
+                The protocol enables private transfers for supported Solana assets.
+              </p>
               
               <ul className="space-y-4 flex-1">
                 {[
-                  "Any stablecoin or token with privacy",
-                  "Complete transaction anonymity",
-                  "Offline payment capability",
-                  "Zero-knowledge proof transfers"
+                  { title: "Hidden Amounts", body: "Transaction values are concealed using cryptographic commitments." },
+                  { title: "Verifiable State Transitions", body: "Zero-knowledge proofs ensure balances remain correct without revealing private data." },
+                  { title: "Solana Execution Model", body: "Proofs are verified by Solana programs, with heavy computation performed off-chain." }
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3 text-sm text-gray-300">
-                     <div className="mt-1 w-4 h-4 rounded-full border border-white flex items-center justify-center shrink-0">
+                    <div className="mt-1 w-4 h-4 rounded-full border border-white flex items-center justify-center shrink-0">
                       <div className="w-2 h-2 bg-white rounded-full" />
                     </div>
-                    {item}
+                    <div>
+                      <p className="font-neue font-black tracking-wide text-white" data-testid={`text-privacy-bullet-title-${i}`}>{item.title}</p>
+                      <p className="text-gray-400 text-xs md:text-sm leading-relaxed font-neue" data-testid={`text-privacy-bullet-body-${i}`}>{item.body}</p>
+                    </div>
                   </li>
                 ))}
               </ul>
