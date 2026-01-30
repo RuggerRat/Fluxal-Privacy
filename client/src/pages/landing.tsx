@@ -55,7 +55,7 @@ export default function Landing() {
             <a data-testid="link-nav-home" href="#home" className="hover:text-[#FFE500] transition-colors">HOME</a>
             <a data-testid="link-nav-features" href="#features" className="hover:text-[#FFE500] transition-colors">FEATURES</a>
             <a data-testid="link-nav-products" href="#products" className="hover:text-[#FFE500] transition-colors">PRODUCTS</a>
-            <a data-testid="link-nav-docs" href="/docs" className="hover:text-[#FFE500] transition-colors">DOCS</a>
+            <a data-testid="link-nav-try" href="/connect" className="hover:text-[#FFE500] transition-colors">TRY</a>
           </div>
 
           <Button 
@@ -73,11 +73,12 @@ export default function Landing() {
           <span className="text-white">Dashboard is live</span> <span className="text-white mx-2">—</span> The FLUXAL dashboard is now live on Solana mainnet and available to all users.
         </p>
         <Button 
+          data-testid="button-try-here"
           variant="outline" 
           onClick={() => setLocation("/connect")}
           className="hidden md:flex h-6 text-[10px] px-4 rounded-full border-[#FFE500]/30 text-[#FFE500] hover:bg-[#FFE500] hover:text-black uppercase tracking-widest bg-transparent font-bold"
         >
-          Read more & Try it here
+          Try it here
         </Button>
       </div>
 
@@ -417,7 +418,7 @@ export default function Landing() {
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                   </svg>
                 </a>
-                <a data-testid="link-footer-docs" href="/docs" className="hover:text-[#FFE500]">DOCS</a>
+                <a data-testid="link-footer-try" href="/connect" className="hover:text-[#FFE500]">TRY</a>
              </div>
 
              <p className="text-xs text-gray-400 font-mono text-center md:text-right font-bold">
