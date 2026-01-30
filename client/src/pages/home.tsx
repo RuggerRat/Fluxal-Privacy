@@ -90,8 +90,10 @@ export default function Home() {
             </Button>
             
             <Button 
+              data-testid="button-open-docs"
               variant="outline"
               size="lg"
+              onClick={() => setLocation('/docs')}
               className="relative group overflow-hidden border border-[#FFE500]/50 text-[#FFE500] hover:bg-[#FFE500]/10 hover:text-[#FFE500] hover:border-[#FFE500] hover:scale-105 transition-all duration-300 text-lg font-bold px-10 py-7 rounded-none uppercase tracking-wider transform -skew-x-12 bg-transparent backdrop-blur-sm"
               style={{ clipPath: "polygon(15% 0, 100% 0, 100% 70%, 85% 100%, 0 100%, 0 30%)" }}
             >
