@@ -62,12 +62,12 @@ export default function Landing() {
 
         <div className="flex items-center gap-8">
           <div className="hidden md:flex items-center gap-8 font-neue text-xs text-gray-400 tracking-widest font-bold">
-            <a href="#" className="hover:text-[#FFE500] transition-colors">HOME</a>
-            <a href="#" className="hover:text-[#FFE500] transition-colors">FEATURES</a>
-            <a href="#" className="hover:text-[#FFE500] transition-colors">PRODUCTS</a>
-            <a href="#" className="hover:text-[#FFE500] transition-colors">NEWS</a>
-            <a href="#" className="hover:text-[#FFE500] transition-colors">DOCS</a>
-            <a href="#" className="hover:text-[#FFE500] transition-colors">FAQ</a>
+            <a data-testid="link-nav-home" href="#home" className="hover:text-[#FFE500] transition-colors">HOME</a>
+            <a data-testid="link-nav-features" href="#features" className="hover:text-[#FFE500] transition-colors">FEATURES</a>
+            <a data-testid="link-nav-products" href="#products" className="hover:text-[#FFE500] transition-colors">PRODUCTS</a>
+            <a data-testid="link-nav-news" href="#news" className="hover:text-[#FFE500] transition-colors">NEWS</a>
+            <a data-testid="link-nav-docs" href="#docs" className="hover:text-[#FFE500] transition-colors">DOCS</a>
+            <a data-testid="link-nav-faq" href="#faq" className="hover:text-[#FFE500] transition-colors">FAQ</a>
           </div>
 
           <Button 
@@ -94,7 +94,7 @@ export default function Landing() {
       </div>
 
       {/* Main Hero Section */}
-      <div className="relative z-10 flex flex-col md:flex-row min-h-screen pt-52 px-8 md:px-20 items-center">
+      <div id="home" className="relative z-10 flex flex-col md:flex-row min-h-screen pt-52 px-8 md:px-20 items-center">
         
         {/* Left Content */}
         <div className="flex-1 flex flex-col justify-center space-y-8">
@@ -165,7 +165,7 @@ export default function Landing() {
       </div>
 
       {/* Features Section */}
-      <div className="relative z-20 w-full bg-transparent py-20 px-8 md:px-20 border-t border-[#FFE500]/20">
+      <div id="features" className="relative z-20 w-full bg-transparent py-20 px-8 md:px-20 border-t border-[#FFE500]/20">
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-16">
@@ -397,7 +397,7 @@ export default function Landing() {
           </div>
 
           {/* FLUXAL WALLET Product Section */}
-          <div className="mt-32 mb-32">
+          <div id="products" className="mt-32 mb-32">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-5xl font-neue font-bold text-white mb-4 uppercase tracking-wide">
                 PRODUCTS
@@ -445,7 +445,7 @@ export default function Landing() {
           </div>
 
            {/* FLUXAL SDK & INFRA Section */}
-           <div className="mt-32 mb-32 border-t border-[#FFE500]/10 pt-32">
+           <div id="docs" className="mt-32 mb-32 border-t border-[#FFE500]/10 pt-32">
              <div className="text-center mb-20">
               <p className="text-gray-400 text-sm font-bold uppercase tracking-widest mb-2">
                 FOR DEVELOPERS
@@ -490,7 +490,7 @@ export default function Landing() {
            </div>
 
            {/* Footer */}
-           <div className="border-t border-[#FFE500]/20 pt-12 pb-12 grid grid-cols-1 md:grid-cols-3 items-center gap-8">
+           <div id="faq" className="border-t border-[#FFE500]/20 pt-12 pb-12 grid grid-cols-1 md:grid-cols-3 items-center gap-8">
              <div className="hidden md:block" /> {/* Empty Left Column */}
              
              <div className="flex justify-center gap-12 text-xs text-gray-500 font-mono tracking-widest">

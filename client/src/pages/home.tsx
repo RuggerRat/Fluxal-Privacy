@@ -69,7 +69,7 @@ export default function Home() {
             transition={{ delay: 0.4, duration: 0.6 }}
             className="mt-6 text-xl md:text-2xl text-neutral-400 font-rajdhani tracking-[0.2em] uppercase font-medium"
           >
-            Privacy Layer for Solana
+            
           </motion.p>
 
           {/* Action Buttons */}
