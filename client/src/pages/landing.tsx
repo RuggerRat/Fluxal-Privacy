@@ -122,44 +122,6 @@ export default function Landing() {
             </p>
           </motion.div>
 
-          {/* $FLUX Utility */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-            className="max-w-xl"
-          >
-            <div className="rounded-2xl border border-[#FFE500]/25 bg-[#FFE500]/5 p-5 md:p-6">
-              <div className="flex items-center gap-3">
-                <div className="h-8 w-8 rounded-full bg-[#FFE500] text-black font-neue font-black grid place-items-center">
-                  $
-                </div>
-                <h3 className="font-neue font-black tracking-widest text-sm md:text-base uppercase text-[#FFE500]">
-                  $FLUX $FLUX
-                </h3>
-              </div>
-
-              <p className="mt-3 text-gray-300 text-sm md:text-base leading-relaxed font-neue">
-                <span className="text-[#FFE500]">$FLUX</span> is used by the protocol to pay for privacy-related computation and infrastructure on Solana.
-              </p>
-
-              <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="rounded-xl border border-white/10 bg-black/30 p-4">
-                  <p className="text-xs font-neue font-black tracking-widest uppercase text-white" data-testid="text-protocol-fees-title">Protocol Fees</p>
-                  <p className="mt-2 text-xs md:text-sm text-gray-400 leading-relaxed font-neue" data-testid="text-protocol-fees-body">
-                    Certain privacy-preserving actions require payment in <span className="text-[#FFE500]">$FLUX</span>, covering proof generation, verification, and relayer services.
-                  </p>
-                </div>
-
-                <div className="rounded-xl border border-white/10 bg-black/30 p-4">
-                  <p className="text-xs font-neue font-black tracking-widest uppercase text-white" data-testid="text-resource-metering-title">Resource Metering</p>
-                  <p className="mt-2 text-xs md:text-sm text-gray-400 leading-relaxed font-neue" data-testid="text-resource-metering-body">
-                    <span className="text-[#FFE500]">$FLUX</span> is used to rate-limit and meter access to privacy features, preventing abuse and aligning usage with computational cost.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
 
         </div>
 
@@ -273,22 +235,26 @@ export default function Landing() {
             <div className="p-8 rounded-2xl border border-[#FFE500]/30 bg-[#FFE500]/5 flex flex-col h-full hover:bg-[#FFE500]/10 transition-colors duration-300">
               <h3 className="text-2xl font-bold font-neue text-[#FFE500] mb-1">$FLUX</h3>
               <p className="text-gray-400 text-sm uppercase tracking-wider mb-6">THE UTILITY TOKEN</p>
-              
-              <ul className="space-y-4 flex-1">
-                {[
-                  "Governance and protocol decisions",
-                  "Programmatic buy-back and burns",
-                  "Access gates for premium features",
-                  "Early access to new products"
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm text-gray-300">
-                    <div className="mt-1 w-4 h-4 rounded-full border border-[#FFE500] flex items-center justify-center shrink-0">
-                      <div className="w-2 h-2 bg-[#FFE500] rounded-full" />
-                    </div>
-                    {item}
-                  </li>
-                ))}
-              </ul>
+
+              <p className="text-gray-300 text-sm leading-relaxed font-neue mb-6" data-testid="text-flux-utility-intro">
+                <span className="text-[#FFE500]">$FLUX</span> is used by the protocol to pay for privacy-related computation and infrastructure on Solana.
+              </p>
+
+              <div className="space-y-4 flex-1">
+                <div className="rounded-xl border border-white/10 bg-black/30 p-4">
+                  <p className="text-xs font-neue font-black tracking-widest uppercase text-white" data-testid="text-protocol-fees-title">Protocol Fees</p>
+                  <p className="mt-2 text-xs md:text-sm text-gray-400 leading-relaxed font-neue" data-testid="text-protocol-fees-body">
+                    Certain privacy-preserving actions require payment in <span className="text-[#FFE500]">$FLUX</span>, covering proof generation, verification, and relayer services.
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-white/10 bg-black/30 p-4">
+                  <p className="text-xs font-neue font-black tracking-widest uppercase text-white" data-testid="text-resource-metering-title">Resource Metering</p>
+                  <p className="mt-2 text-xs md:text-sm text-gray-400 leading-relaxed font-neue" data-testid="text-resource-metering-body">
+                    <span className="text-[#FFE500]">$FLUX</span> is used to rate-limit and meter access to privacy features, preventing abuse and aligning usage with computational cost.
+                  </p>
+                </div>
+              </div>
             </div>
 
             {/* Card 2: Privacy-Preserving Transfers */}
