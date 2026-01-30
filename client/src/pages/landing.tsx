@@ -286,55 +286,6 @@ export default function Landing() {
             </div>
           </div>
 
-          {/* Cryptographic Innovation Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-neue font-bold text-white mb-2 uppercase tracking-wide">
-              CRYPTOGRAPHIC <span className="text-[#FFE500]">INNOVATION</span>
-            </h2>
-            <p className="text-gray-400 text-sm md:text-base uppercase tracking-widest">
-              LAYERED PRIVACY. SCALABLE TRUST.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Text */}
-            <div className="space-y-12">
-              <div>
-                <h3 className="text-xl font-bold font-neue text-[#FFE500] mb-4 uppercase tracking-wider">PEDERSEN COMMITMENTS</h3>
-                <p className="text-gray-400 text-sm leading-relaxed font-mono">
-                  Our system uses <strong className="text-white">Pedersen commitments</strong> to hide transaction amounts while maintaining mathematical verifiability. Each commitment (vG + rH) cryptographically binds to a value without revealing it.
-                </p>
-              </div>
-              
-              <div>
-                <h3 className="text-xl font-bold font-neue text-[#FFE500] mb-4 uppercase tracking-wider">ZERO-KNOWLEDGE PROOFS</h3>
-                <p className="text-gray-400 text-sm leading-relaxed font-mono">
-                  zk-SNARKs generate compact proofs that verify transaction validity without exposing any sensitive information. Prove you have funds, prove amounts balance, and keep everything private.
-                </p>
-              </div>
-            </div>
-
-            {/* Right Code Block */}
-            <div className="rounded-xl border border-white/10 bg-[#1e1e1e] p-6 font-mono text-xs md:text-sm text-gray-300 relative overflow-hidden group hover:border-[#FFE500]/30 transition-colors duration-300">
-               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#FFE500] to-[#FF8C00]" />
-               <pre className="overflow-x-auto whitespace-pre-wrap leading-relaxed">
-{`// Pedersen Commitment
-`}
-<span className="text-[#9cdcfe]">commitment</span> <span className="text-[#d4d4d4]">=</span> <span className="text-[#9cdcfe]">v</span> <span className="text-[#d4d4d4]">*</span> <span className="text-[#569cd6]">G</span> <span className="text-[#d4d4d4]">+</span> <span className="text-[#9cdcfe]">r</span> <span className="text-[#d4d4d4]">*</span> <span className="text-[#569cd6]">H</span>
-{`
-// Zero-Knowledge Proof
-`}
-<span className="text-[#9cdcfe]">proof</span> <span className="text-[#d4d4d4]">=</span> <span className="text-[#dcdcaa]">zk_prove</span><span className="text-[#d4d4d4]">(</span> <span className="text-[#9cdcfe]">statement</span><span className="text-[#d4d4d4]">:</span> <span className="text-[#ce9178]">"I know v, r such that C = vG + rH"</span><span className="text-[#d4d4d4]">,</span>
-  <span className="text-[#9cdcfe]">witness</span><span className="text-[#d4d4d4]">:</span> <span className="text-[#da70d6]">{`{ v, r }`}</span><span className="text-[#d4d4d4]">,</span> 
-  <span className="text-[#9cdcfe]">public</span><span className="text-[#d4d4d4]">:</span> <span className="text-[#da70d6]">{`{ C }`}</span> 
-<span className="text-[#d4d4d4]">)</span>
-{`
-// Nullifier Generation
-`}
-<span className="text-[#9cdcfe]">nullifier</span> <span className="text-[#d4d4d4]">=</span> <span className="text-[#dcdcaa]">hash</span><span className="text-[#d4d4d4]">(</span> <span className="text-[#9cdcfe]">private_key</span><span className="text-[#d4d4d4]">,</span> <span className="text-[#9cdcfe]">commitment</span> <span className="text-[#d4d4d4]">)</span>
-               </pre>
-            </div>
-          </div>
 
           {/* FLUXAL IS TRUSTWARE Section */}
           <div className="mt-32 mb-16">
