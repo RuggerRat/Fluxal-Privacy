@@ -65,9 +65,7 @@ export default function Landing() {
             <a data-testid="link-nav-home" href="#home" className="hover:text-[#FFE500] transition-colors">HOME</a>
             <a data-testid="link-nav-features" href="#features" className="hover:text-[#FFE500] transition-colors">FEATURES</a>
             <a data-testid="link-nav-products" href="#products" className="hover:text-[#FFE500] transition-colors">PRODUCTS</a>
-            <a data-testid="link-nav-news" href="#news" className="hover:text-[#FFE500] transition-colors">NEWS</a>
             <a data-testid="link-nav-docs" href="#docs" className="hover:text-[#FFE500] transition-colors">DOCS</a>
-            <a data-testid="link-nav-faq" href="#faq" className="hover:text-[#FFE500] transition-colors">FAQ</a>
           </div>
 
           <Button 
@@ -385,10 +383,11 @@ export default function Landing() {
                   <h3 className="text-xl md:text-2xl font-bold font-neue text-white mb-4">Token-agnostic by design – built to run across chains & providers</h3>
                   <div className="space-y-6 text-gray-400 text-sm md:text-base leading-relaxed font-neue">
                     <p>
-                      The <span className="text-[#FFE500]">$FLUX</span> Protocol is token-native: you deposit the assets you already hold - no synthetic pegs, no IOUs—directly into the privacy layer. One model, familiar UX, same guarantees.
+                      The <span className="text-[#FFE500]">$FLUX</span> Protocol is token-native.
+                      Users deposit the assets they already hold directly into the privacy layer, no synthetic assets, no IOUs. The result is a familiar user experience with on-chain privacy guarantees enforced by cryptography.
                     </p>
                     <p>
-                      The same cryptographic core ports cleanly via modular adapters, preserving UX and assurances across Ethereum, Bitcoin, Polygon, Solana, and beyond the crypto stack - think AMEX, VISA, or even your local bank. The math is provider-agnostic by design.
+                      The protocol’s cryptographic core is designed to be modular, allowing it to be adapted across different execution environments. This approach enables consistent privacy guarantees on Solana today, with a clear path to supporting additional chains over time.
                     </p>
                   </div>
                 </div>
@@ -427,17 +426,12 @@ export default function Landing() {
                   Available for Desktop, iOS & Android.
                 </p>
                 <div className="flex gap-4 justify-center">
-                    <Button
-                      variant="outline"
-                      className="rounded-full border-white/20 text-white hover:bg-white hover:text-black uppercase tracking-widest font-bold text-xs px-8 py-2"
-                    >
-                      Waitlist
-                    </Button>
                      <Button
                       onClick={() => setLocation("/connect")}
+                      data-testid="button-try-now"
                       className="rounded-full bg-[#FFE500] text-black hover:bg-[#FF8C00] uppercase tracking-widest font-bold text-xs px-8 py-2 border-none"
                     >
-                      Try Beta
+                      Try Now
                     </Button>
                 </div>
               </div>
@@ -494,11 +488,11 @@ export default function Landing() {
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                   </svg>
                 </a>
-                <a href="#" className="hover:text-[#FFE500]">GITHUB</a>
+                <a data-testid="link-footer-docs" href="#docs" className="hover:text-[#FFE500]">DOCS</a>
              </div>
 
              <p className="text-xs text-gray-400 font-mono text-center md:text-right font-bold">
-                © 2025 FLUXAL LABS. ALL RIGHTS RESERVED.
+                © 2026 FLUXAL LABS. ALL RIGHTS RESERVED.
              </p>
            </div>
 
