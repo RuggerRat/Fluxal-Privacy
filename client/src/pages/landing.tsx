@@ -467,9 +467,6 @@ export default function Landing() {
                         Integrate privacy into your dApps with a few lines of code. 
                         Shielded transfers, private swaps, and ZK-identity hooks.
                     </p>
-                    <Button variant="link" className="text-[#FFE500] hover:text-white uppercase tracking-widest text-xs font-bold">
-                        Read Docs &rarr;
-                    </Button>
                 </div>
 
                 {/* INFRA Column */}
@@ -480,11 +477,9 @@ export default function Landing() {
                     </div>
                     <h4 className="text-xl font-bold font-neue text-white mb-4 uppercase tracking-wide">FLUXAL INFRA</h4>
                     <p className="text-gray-400 text-sm font-mono leading-relaxed mb-6 max-w-sm">
-                        Run your own provers and relayers. Participate in the decentralized privacy network and earn $FLUX.
+                        Run your own provers and relayers.
+                        Support a decentralized privacy network on Solana, where $FLUX is used for network fees, access to privacy features, and protocol governance.
                     </p>
-                     <Button variant="link" className="text-[#FFE500] hover:text-white uppercase tracking-widest text-xs font-bold">
-                        View Node Specs &rarr;
-                    </Button>
                 </div>
             </div>
            </div>
